@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">施工管理</string>
+    <string name="chat1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan </string>
+    <string name="chat2">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
+    <string name="ea">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="declaration">免责条款及使用\n
+    一、职员：查看个人工勤、工资、处罚等状况
+职员：查看个人工勤、工资、处罚等状况职员：查看个人工勤、工资、处罚等状况职员：查看个人工勤、工资、处罚等状况
+
+二、职员：查看个人工勤、工资、处罚等状况
+职员：查看个人工勤、工资、处罚等状况职员：查看个人工勤、工资、处罚等状况职员：查看个人工勤、工资、处罚等状况
+
+</string>
+    <string name="title_activity_project_main">ProjectMainActivity</string>
+    <string name="title_activity_porject_app_main">PorjectAppMainActivity</string>
+    <string name="title_activity_contractor_main">ContractorMainActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</string>
+</resources>

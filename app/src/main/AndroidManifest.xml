@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 这个权限用于访问系统接口提供的卫星定位信息 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_config"
+        android:theme="@style/Theme.Porject"
+        tools:targetApi="31">
+        <activity
+            android:name=".SignaTureActivity"
+            android:theme="@style/Theme.PorjectNoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ElectronicActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.ProjectCommunicationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <activity
+            android:name=".home.CreateSinglePlanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarRed" />
+        <activity
+            android:name=".home.CreateProjectScheduleActivity2"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarRed" />
+        <activity
+            android:name=".home.CreateProjectScheduleActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarRed" />
+        <activity
+            android:name=".home.SheetMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+        <activity
+            android:name=".home.RepostStatisActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+        <activity
+            android:name=".home.MaterialRatioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+        <activity
+            android:name=".home.RetrunOrderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+        <activity
+            android:name=".home.InventoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+        <activity
+            android:name=".home.OutOrderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" /> <!-- <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service> -->
+        <activity
+            android:name=".home.OutInButActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarGray" />
+        <activity
+            android:name=".home.ProgressActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.OutInActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.ChangePhoneActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.JobMarketActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.ExamBamkActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.WorkManageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".contractor.WorkerInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".contractor.ui.ContractorLeaderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.SupervisorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".AnnoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.EASorceActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.EmployeeEvaluationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.StatementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.EmployeeManagementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".contractor.ContractorMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_contractor_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.AddContractorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.CreateProjectActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".projectmain.PorjectAppMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_porject_app_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".projectmain.ProjectMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_project_main" />
+        <activity
+            android:name=".home.SwitchAccountsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.FeedbackActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.VersionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.WorkCardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.SafetyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.ChangePWActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.CMActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.AttendanceActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.MyBillActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.WorkerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".home.MaterialHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.AdvancedMaterialFormActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".home.MyCenterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+        <activity
+            android:name=".ui.login.ForgotPwActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".ui.login.RegisterContractorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".ui.login.ProjectRegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".ui.login.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar"/>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="RfvL2v54XUACkCotWh52nqo5yfbWltGT" />
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="320" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="570" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PorjectNoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+    </application>
+
+</manifest>

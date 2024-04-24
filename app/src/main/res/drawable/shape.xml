@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 设置内部填充颜色为透明 -->
+    <solid android:color="@android:color/transparent" />
+
+    <!-- 设置边框颜色和宽度 -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/orange" />
+
+    <!-- 设置四个角的圆角半径，可根据需要调整 -->
+    <corners android:radius="0dp" />
+
+    <!-- 分别设置每条边的宽度，这里底边的宽度为0 -->
+    <padding
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="0dp" />
+</shape>

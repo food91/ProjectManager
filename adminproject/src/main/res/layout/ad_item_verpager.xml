@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvProjectTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="内蒙古金兴机械 涡轮设计生产项目"
+        android:textSize="15sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvLabelNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="编号："
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tvProjectTitle"
+        app:layout_constraintStart_toStartOf="@id/tvProjectTitle"
+        />
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MM025635"
+        android:textSize="12sp"
+        app:layout_constraintTop_toTopOf="@id/tvLabelNumber"
+        app:layout_constraintStart_toEndOf="@id/tvLabelNumber"
+        />
+
+    <TextView
+        android:id="@+id/tvLabelRegistrationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册时间："
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tvNumber"
+        app:layout_constraintStart_toStartOf="@id/tvProjectTitle"
+        />
+
+    <TextView
+        android:id="@+id/tvRegistrationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2015-02-08"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/tvLabelRegistrationTime"
+        app:layout_constraintTop_toTopOf="@id/tvLabelRegistrationTime"
+        />
+
+    <TextView
+        android:id="@+id/tvCompanyStatus"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:text="公司 3  开通 0"
+        android:background="#ff3300"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:padding="2dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tvProjectTitle"
+       app:layout_constraintEnd_toEndOf="parent"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCompanyStatus"
+        android:layout_marginTop="15dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:background="@color/logincolor"
+    tools:context=".ui.login.LoginActivity">
+
+    <TextView
+        android:id="@+id/tv_m_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="管理员登录"
+        android:textColor="@color/white"
+        android:padding="8dp"
+        />
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="150dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginBottom="337dp"
+        android:src="@drawable/login"
+        />
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="施工人员管理"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="243dp"
+            android:layout_marginBottom="304dp"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            />
+
+    <EditText
+        android:id="@+id/ed_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="25dp"
+        android:textSize="13sp"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingBottom="5dp"
+        android:hint="请输入账号"
+        android:background="@drawable/edittext_border"/>
+    <EditText
+        android:id="@+id/ed_ps"
+        app:layout_constraintTop_toBottomOf="@+id/ed_user"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="13sp"
+        android:layout_margin="25dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:inputType="textPassword"
+        android:hint="请输入密码"
+        android:background="@drawable/edittext_border"/>
+
+    <TextView
+        android:id="@+id/bt_regist"
+        app:layout_constraintTop_toBottomOf="@+id/ed_ps"
+        app:layout_constraintStart_toStartOf="@+id/ed_user"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toStartOf="@+id/bt_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/button_white_border"
+        />
+
+    <TextView
+        android:id="@+id/bt_login"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/ed_ps"
+        app:layout_constraintStart_toEndOf="@+id/bt_regist"
+        app:layout_constraintEnd_toEndOf="@+id/ed_user"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="0dp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_textview_background"
+        android:text="登陆"
+        />
+
+    <TextView
+        android:id="@+id/bt_for_pw"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:gravity="end"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="忘记密码"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/bt_login"
+        app:layout_constraintTop_toBottomOf="@+id/bt_login" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 当视图被点击时的样式 -->
+    <item
+        android:drawable="@drawable/border_style"
+       />
+    <!-- 默认状态的样式 -->
+
+</selector>

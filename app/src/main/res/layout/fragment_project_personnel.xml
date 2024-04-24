@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".home.fragment.ProjectPersonnelFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 工具栏布局 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- 返回图标 -->
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/tvTitle_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人员管理"
+                android:textSize="13dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <!-- 标题 -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目人员"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/orange"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 项目管理组布局 -->
+        <LinearLayout
+            android:id="@+id/llProjectManagement"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="#ff0000"
+            app:layout_constraintTop_toBottomOf="@id/clToolbar"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="8dp"
+            android:paddingBottom="5dp"
+            android:gravity="center_vertical">
+
+            <!-- 下拉箭头 -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/arrow_down_float"
+                android:layout_marginStart="10sp" />
+
+            <!-- 项目管理组标题 -->
+            <TextView
+
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                android:layout_marginStart="4dp"
+                android:text="项目方管理组(3人)" />
+
+            <!-- 技工按钮 -->
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="一键技工"
+                android:textColor="@color/white"
+                android:background="#1e98d7"
+                android:layout_marginStart="121dp"
+                android:gravity="center"
+                android:shadowRadius="5" />
+            <com.xk.porject.ui.custom.XTextView
+                android:layout_width="70dp"
+                android:layout_height="48dp"
+                android:text="一键记工"
+                android:background="#1e98d7"
+                android:textSize="13dp"
+                android:layout_marginStart="82dp"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+        <!-- 项目人员列表 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProjectPersonnel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/llProjectManagement"
+            android:layout_marginTop="4dp" />
+
+        <!-- 承包方管理组布局 -->
+        <LinearLayout
+            android:id="@+id/llContractorManagement"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="#ff0000"
+            app:layout_constraintTop_toBottomOf="@id/rvProjectPersonnel"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center_vertical">
+
+            <!-- 下拉箭头 -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/arrow_down_float"
+                android:layout_marginStart="10sp" />
+
+            <!-- 承包方管理组标题 -->
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                android:layout_marginStart="4dp"
+                android:text="1-承包方管理组" />
+
+            <!-- 技工按钮 -->
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="一键技工"
+                android:textColor="@color/white"
+                android:background="#1e98d7"
+                android:layout_marginStart="121dp"
+                android:gravity="center"
+                android:shadowRadius="5" />
+
+        </LinearLayout>
+
+        <!-- 承包方人员列表 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvContractorPersonnel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/llContractorManagement"
+            android:layout_marginTop="4dp" />
+
+        <!-- 项目土建部布局 -->
+        <LinearLayout
+            android:id="@+id/llCivilEngineering"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="#ff0000"
+            app:layout_constraintTop_toBottomOf="@id/rvContractorPersonnel"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center_vertical">
+
+            <!-- 下拉箭头 -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/arrow_down_float"
+                android:layout_marginStart="10sp" />
+
+            <!-- 项目土建部标题 -->
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                android:layout_marginStart="4dp"
+                android:text="1-1项目土建部" />
+
+            <!-- 技工按钮 -->
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="一键技工"
+                android:textColor="@color/white"
+                android:background="#1e98d7"
+                android:layout_marginStart="121dp"
+                android:gravity="center"
+                android:shadowRadius="5" />
+
+        </LinearLayout>
+
+        <!-- 项目土建部人员列表 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCivilEngineeringPersonnel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/llCivilEngineering"
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="4dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

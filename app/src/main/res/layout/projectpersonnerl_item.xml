@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+ <LinearLayout
+     android:id="@+id/ll_start"
+     android:layout_width="wrap_content"
+     android:layout_height="100dp"
+     android:orientation="horizontal"
+     android:layout_marginTop="13dp"
+     >
+   <ImageView
+       android:id="@+id/iv_img"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:src="@drawable/work_icon"
+
+       />
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+   android:orientation="vertical"
+   >
+   <TextView
+       android:id="@+id/tv_name"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="14dp"
+       android:text="项目经理-王大风"
+       android:textColor="#ff0000"
+       app:layout_constraintTop_toTopOf="@+id/iv_img"
+       app:layout_constraintStart_toEndOf="@+id/iv_img"
+       />
+   <TextView
+       android:id="@+id/tv_no"
+       android:layout_width="wrap_content"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:textSize="10dp"
+       android:text="编号:001"
+       app:layout_constraintStart_toStartOf="@id/tv_name"
+       app:layout_constraintTop_toBottomOf="@id/tv_name"
+       android:layout_marginTop="4dp"
+       />
+   <TextView
+       android:id="@+id/tv_like"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="10dp"
+       android:text="信誉分:58"
+       app:layout_constraintStart_toStartOf="@id/tv_name"
+       app:layout_constraintTop_toBottomOf="@id/tv_no"
+
+       />
+   <TextView
+       android:id="@+id/tv_safe"
+       android:layout_width="wrap_content"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:textSize="10dp"
+       android:text="安全分:87"
+       app:layout_constraintStart_toStartOf="@id/tv_name"
+       app:layout_constraintTop_toBottomOf="@id/tv_like"
+
+       />
+   <TextView
+       android:id="@+id/tv_work"
+       android:layout_width="wrap_content"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:textSize="10dp"
+       android:text="工勤:45"
+       app:layout_constraintStart_toStartOf="@id/tv_name"
+       app:layout_constraintTop_toBottomOf="@id/tv_safe"
+
+       />
+   <TextView
+       android:id="@+id/tv_count"
+       android:layout_width="wrap_content"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:textSize="10dp"
+       android:text="计件:45"
+       app:layout_constraintStart_toStartOf="@id/tv_name"
+       app:layout_constraintTop_toBottomOf="@id/tv_work"
+
+       />
+  </LinearLayout>
+ </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在职"
+        android:textSize="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/orange"
+        />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/manage_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/ll_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/orange"
+        android:text="技工处罚"
+        android:textColor="@color/white"
+        android:gravity="center"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@android:color/transparent"/> <!-- 透明背景 -->
+    <stroke android:width="2dp" android:color="#FFFFFF"/> <!-- 白色边框 -->
+    <size android:width="100dp" android:height="100dp"/> <!-- 定义大小，但通常不需要在这里设置 -->
+</shape>

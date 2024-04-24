@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/projectConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/projectTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+
+        android:text="内蒙古金兴涡轮设计生产项目"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="10dp"
+        />
+
+    <TextView
+        android:id="@+id/selectTextView"
+        android:layout_width="48dp"
+        android:layout_height="27dp"
+        android:padding="5dp"
+        android:background="#1e98d7"
+        android:text="选择"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        android:gravity="center"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="48dp"
+        />
+    <LinearLayout
+        android:id="@+id/mainInfoLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/fundingLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/fundingLabelTextView"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="承包资金："
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/fundingAmountTextView"
+                android:layout_width="match_parent"
+                android:textSize="20dp"
+                android:textColor="#333333"
+                android:gravity="end"
+                android:layout_height="wrap_content"
+                android:text="81，0000.00 元"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/paymentLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/paymentLabelTextView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:text="付款："/>
+
+            <TextView
+                android:id="@+id/paymentAmountTextView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:gravity="end"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:text="45，2600.00 元"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/paymentRatioLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/paymentRatioLabelTextView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:text="付款比例："/>
+
+            <TextView
+                android:id="@+id/paymentRatioTextView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:gravity="end"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:text="56%"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/totalStaffLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totalStaffLabelTextView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textSize="13dp"
+                android:layout_height="wrap_content"
+                android:text="职工总数："/>
+
+            <TextView
+                android:id="@+id/totalStaffTextView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:gravity="end"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:text="108人"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/reminderFrequencyLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal"/>
+    </LinearLayout>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="194dp"
+        />
+    <TextView
+        android:id="@+id/statusChangeLabelTextView"
+        android:layout_width="wrap_content"
+        android:textSize="13dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="210dp"
+        android:text="更改状态："/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/statusChangeSpinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="202dp"
+        android:layout_width="200dp"
+        android:layout_height="26dp"
+        android:autofillHints="请选择"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:textSize="13dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="245dp"
+        android:text="提示频率："/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="238dp"
+        android:layout_width="200dp"
+        android:layout_height="26dp"
+        android:autofillHints="请选择"/>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="476dp"
+        android:background="@drawable/rounded_red_border"
+        android:text="保存"
+        android:textColor="#ff3300"
+        android:gravity="center"
+        android:textSize="16dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

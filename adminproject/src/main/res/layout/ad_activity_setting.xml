@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="10dp"
+            />
+        <View
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/orange"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="56dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/tv_tip_time"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:gravity="start|center_vertical"
+                android:textSize="13dp"
+                android:text="设置开始提示时间"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/down_arrow"
+                android:layout_marginStart="155dp"
+                />
+
+        </LinearLayout>
+
+
+            <!-- 分隔线 -->
+            <View
+                android:id="@+id/divider_security_questions"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_lice"
+                android:layout_marginTop="5dp"/>
+
+            <!-- 消息提示设置 -->
+            <LinearLayout
+                android:id="@+id/ll_notification_settings"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="23dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_notification_prompt"
+                    android:layout_width="122dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13dp"
+                    android:text="注册时间后"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sw_notification_prompt"
+                    android:layout_width="200dp"
+                    android:layout_marginStart="115dp"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/switch_thumb_selector"
+                    android:track="@drawable/switch_track_selector"
+                    />
+
+            </LinearLayout>
+
+            <!-- 分隔线 -->
+            <View
+                android:id="@+id/divider_notification_settings"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_lice"
+
+                />
+            <TextView
+                android:id="@+id/tv_add_oil"
+                android:layout_width="305dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="8dp"
+                android:textSize="13dp"
+                android:gravity="start|center_vertical"
+                android:text="管理员加油"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_lice"
+                />
+
+                <TextView
+                    android:id="@+id/tv_tip"
+                    android:layout_width="305dp"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="13dp"
+                    android:gravity="start|center_vertical"
+                    android:text="提示内容"/>
+
+
+            <!-- 分隔线 -->
+            <View
+                android:id="@+id/divider_before_push_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_lice"
+                />
+
+            <TextView
+                android:id="@+id/tv_adjust_manage"
+                android:layout_width="305dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="8dp"
+                android:textSize="13dp"
+                android:gravity="start|center_vertical"
+                android:text="审核管理"/>
+
+            <View
+                android:id="@+id/divider_after_push_notifications_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_lice"
+                />
+
+            <!-- 如果需要重复这个布局结构，记得更改ID来保持唯一性 -->
+            <LinearLayout
+                android:id="@+id/ll_push_notifications_container_2"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:gravity="start|center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/tv_push_notifications_label_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13dp"
+                    android:text="规避身份证关键字(4-6位)"/>
+
+                <EditText
+                    android:id="@+id/sw_enable_push_notifications_2"
+                    android:layout_width="141dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="25dp"
+                    android:textSize="13dp"
+                    android:background="@drawable/rounded_gray_border"
+                    />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider_after_push_notifications_2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_lice"
+                />
+
+
+
+            <!-- 工作卡设置 -->
+            <TextView
+                android:id="@+id/tv_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:gravity="start|center_vertical"
+                android:layout_marginTop="46dp"
+                android:text="检查版本更新"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <!-- 检测版本更新 -->
+            <TextView
+                android:id="@+id/tv_add_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start|center_vertical"
+                android:text="续费"/>
+                <TextView
+                    android:id="@+id/tv_time_show"
+                    android:layout_width="198dp"
+                    android:layout_height="15dp"
+                    android:gravity="center_vertical"
+                    android:textSize="13dp"
+                    android:layout_marginStart="105dp"
+                    android:layout_marginTop="10dp"
+                    android:text="到期提示：2025年11月20日到期"/>
+            </LinearLayout>
+            <!-- 分隔线 -->
+            <View
+                android:id="@+id/divider_check_for_updates"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="33dp"/>
+
+            <TextView
+                android:id="@+id/btn_logout"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:text="退出当前账号"
+                android:textColor="@color/orange"
+               />
+            <!-- 分隔线 -->
+            <View
+                android:id="@+id/divider_related_apps"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="14dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

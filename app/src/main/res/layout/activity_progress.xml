@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.ProgressActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/back_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工程进度单"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/linear_layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+     >
+
+        <TextView
+            android:id="@+id/text_view_create_progress_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="创建工程进度单"
+            android:padding="16dp"
+            android:textSize="14dp"
+            />
+
+        <View
+            android:id="@+id/view_separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/text_view_create_contact_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="创建工程联系单"
+            android:padding="16dp"
+            android:textSize="14dp"
+            />
+
+        <View
+            android:id="@+id/view_separator_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/text_view_create_project_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="创建工程计划表"
+            android:padding="16dp"
+            android:textSize="14dp"
+            />
+
+        <View
+            android:id="@+id/view_separator_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/text_view_electronic_seal_library"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="电子印章库"
+            android:padding="16dp"
+            android:textSize="14dp"
+            />
+
+        <View
+            android:id="@+id/view_separator_4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/text_view_signature_template"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="签名模版"
+            android:padding="16dp"
+            android:textSize="14dp"
+            />
+
+        <View
+            android:id="@+id/view_separator_5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

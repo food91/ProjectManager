@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_user_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/chat2"
+        android:scaleType="center"
+        app:shapeAppearance="@style/CircleStyle"
+        app:strokeColor="@color/white"
+        app:strokeWidth="4dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/text_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名称"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="6dp"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        />
+
+    <TextView
+        android:id="@+id/text_user_department_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="所在部门 担任的职位"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="28dp"
+        android:textSize="12dp"
+        />
+
+    <TextView
+        android:id="@+id/text_user_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在岗中"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="230dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="17dp"
+        android:textSize="12dp"
+        />
+
+    <ImageView
+        android:id="@+id/icon_note"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/note1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="270dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

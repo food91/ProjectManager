@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/navigation_project_home">
+
+    <fragment
+        android:id="@+id/navigation_project_home"
+        android:name="com.xk.porject.projectmain.ui.ProjectManageFragment"
+        android:label="主页"
+        tools:layout="@layout/fragment_manage" >
+        <action
+            android:id="@+id/action_startFragment_to_projectPersonnelFragment"
+            app:destination="@id/navigation_persionner" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_persionner"
+        android:name="com.xk.porject.home.fragment.PersonnelFragment"
+        android:label="管理"
+        tools:layout="@layout/fragment_personnel" />
+    <fragment
+        android:id="@+id/navigation_project_manage"
+        android:name="com.xk.porject.home.fragment.ProjectPersonnelFragment"
+        android:label="管理"
+        tools:layout="@layout/fragment_project_personnel" />
+
+    <fragment
+        android:id="@+id/navigation_project_notifications"
+        android:name="com.xk.porject.home.fragment.NotificationsFragment"
+        android:label="消息"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_project_money"
+        android:name="com.xk.porject.home.fragment.MoneyFragment"
+        android:label="工资"
+        tools:layout="@layout/fragment_money" />
+    <fragment
+        android:id="@+id/navigation_project_settings"
+        android:name="com.xk.porject.home.fragment.SettingsFragment"
+        android:label="设置"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

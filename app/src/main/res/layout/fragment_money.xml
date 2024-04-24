@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <!-- 顶部操作按钮栏 -->
+    <LinearLayout
+        android:id="@+id/top_buttons_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/back_icon"-->
+<!--            android:layout_width="15dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:layout_marginStart="6dp"-->
+<!--            android:src="@drawable/b_back"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_goneMarginStart="5dp"-->
+<!--            />-->
+
+        <!-- 右侧的操作按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/button_fund"
+                android:layout_width="98dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="项目资金"
+                android:background="@drawable/rect1"
+                />
+
+            <TextView
+                android:id="@+id/button_report"
+                android:layout_width="98dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="项目资金"
+                android:background="@drawable/rect2"
+                />
+
+            <TextView
+                android:id="@+id/button_export"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="导出 excel"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:background="@drawable/rounded_red_border"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/top_buttons_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fillViewport="true">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/top_buttons_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="65dp"
+        />
+    </HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
