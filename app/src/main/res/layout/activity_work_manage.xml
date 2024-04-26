@@ -52,6 +52,7 @@
             android:id="@+id/add"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/icon_add"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,6 +80,7 @@
             android:layout_height="wrap_content"
             android:text="/"
             android:textSize="15dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toTopOf="parent"
            android:layout_marginTop="10dp"
             />
@@ -90,6 +92,7 @@
             android:layout_height="20dp"
             app:layout_constraintTop_toTopOf="parent"
           android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             />
         <TextView
             android:id="@+id/tv_all"
@@ -100,21 +103,22 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_up"
             />
         <CheckBox
-            android:layout_width="20dp"
-            android:layout_height="16dp"
-            app:layout_constraintTop_toTopOf="@+id/tv_all"
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_all"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_marginTop="8dp"
-        android:paddingTop="20dp"
+        android:paddingStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cl_top"
         />
     <TextView
+        android:id="@+id/tv_move"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="移动"
@@ -133,6 +137,7 @@
         android:layout_marginBottom="4dp"
         />
     <TextView
+        android:id="@+id/tv_rename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,6 +156,7 @@
         android:layout_marginBottom="4dp"
         />
     <TextView
+        android:id="@+id/tv_delete"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

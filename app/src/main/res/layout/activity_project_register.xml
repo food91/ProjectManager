@@ -261,12 +261,11 @@
 
                 <EditText
                     android:id="@+id/edManagePhone"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="80dp"
                     android:textSize="13dp"
-                    app:layout_constraintStart_toEndOf="@id/tvManagePhone"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
                     app:layout_constraintBaseline_toBaselineOf="@id/tvManagePhone" />
 
 
@@ -288,6 +287,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="80dp"
                     android:layout_marginEnd="10dp"
+                    android:lines="1"
                     android:textSize="13dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

@@ -1,33 +1,38 @@
 package com.xk.porject.home.fragment;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xk.porject.R;
+import com.kongzue.dialogx.dialogs.PopTip;
+import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.xk.base.data.GroupInfo;
+import com.xk.base.log.X;
+import com.xk.base.net.ApiClient;
+import com.xk.base.net.ApiService;
+import com.xk.base.ui.BaseFrament;
 import com.xk.porject.adapter.OnBindDataListener;
 import com.xk.porject.adapter.ProjectPersonnelAdapter;
 import com.xk.porject.data.ProjectPersonnel;
 import com.xk.porject.databinding.FragmentProjectPersonnelBinding;
-import com.xk.porject.databinding.ProjectpersonnerlItemBinding;
 import com.xk.porject.home.WorkManageActivity;
-import com.xk.porject.home.adaoter.CommonAdapter;
-import com.xk.porject.home.adaoter.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectPersonnelFragment extends Fragment {
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class ProjectPersonnelFragment extends BaseFrament {
 
     private ProjectPersonnelViewModel mViewModel;
     private FragmentProjectPersonnelBinding binding;
@@ -41,7 +46,76 @@ public class ProjectPersonnelFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentProjectPersonnelBinding.inflate(getLayoutInflater());
         initdata();
+        onclick();
+        getProjectPersonData();
         return binding.getRoot();
+    }
+
+    private void getProjectPersonData(){
+        ApiClient.getClient().create(ApiService.class)
+                .getgroup("0").subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<GroupInfo>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        WaitDialog.show("加载中");
+                    }
+
+                    @Override
+                    public void onNext(GroupInfo response) {
+                        WaitDialog.dismiss();
+                        X.L(response.toString());
+                        if(response.getCode()==200){
+
+                        }else{
+                            PopTip.show(response.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        WaitDialog.dismiss();
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void onclick(){
+        binding.llProjectManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.rvProjectPersonnel.getVisibility()==View.VISIBLE){
+                    binding.rvProjectPersonnel.setVisibility(View.GONE);
+            }else{
+                binding.rvProjectPersonnel.setVisibility(View.VISIBLE);
+            }
+            }
+        });
+        binding.llContractorManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.rvContractorPersonnel.getVisibility()==View.VISIBLE){
+                    binding.rvContractorPersonnel.setVisibility(View.GONE);
+            }else{
+                binding.rvContractorPersonnel.setVisibility(View.VISIBLE);
+            }
+                }
+        });
+        binding.llCivilEngineering.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (binding.rvCivilEngineeringPersonnel.getVisibility() == View.VISIBLE) {
+                    binding.rvCivilEngineeringPersonnel.setVisibility(View.GONE);
+                } else {
+                    binding.rvCivilEngineeringPersonnel.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     void initdata(){

@@ -63,11 +63,7 @@ dependencies {
     //okhttp
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     //retrofit
-    var dialogx_version = "0.0.50.beta11"
-    implementation ("com.github.kongzue.DialogX:DialogX:${dialogx_version}")
-    implementation ("com.github.kongzue.DialogXSample:AlbumDialog:0.0.13")
-    implementation ("com.github.kongzue.DialogXSample:DatePicker:0.0.13")
-    implementation ("com.github.gcacace:signature-pad:1.3.1")
+
     implementation(files("libs/BaiduLBS_Android.jar"))
 
     implementation(project(":adminproject"))

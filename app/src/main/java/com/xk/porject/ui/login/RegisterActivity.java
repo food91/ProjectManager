@@ -3,12 +3,16 @@ package com.xk.porject.ui.login;
 import android.content.Intent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.databinding.ActivityRegisterBinding;
 
+import java.util.List;
+
 public class RegisterActivity extends BaseActivityPortrait<ActivityRegisterBinding> {
+
 
 
     @Override

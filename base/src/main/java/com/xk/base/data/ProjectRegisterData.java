@@ -1,4 +1,4 @@
-// ProjectPartyData.java
+// ProjectRegisterData.java
 
 // YApi QuickType插件生成，具体参考文档:https://plugins.jetbrains.com/plugin/18847-yapi-quicktype/documentation
 
@@ -7,16 +7,16 @@ import java.util.List;
 
 import java.time.OffsetDateTime;
 
-public class ProjectPartyData {
+public class ProjectRegisterData {
     private String project;
     private String remark;
     private String section;
-    private String updateTime;
+    private OffsetDateTime updateTime;
     private long biddingPrice;
     private Params params;
     private String createBy;
     private String adminPhone;
-    private String createTime;
+    private OffsetDateTime createTime;
     private String phone;
     private String updateBy;
     private String company;
@@ -32,8 +32,8 @@ public class ProjectPartyData {
     public String getSection() { return section; }
     public void setSection(String value) { this.section = value; }
 
-    public String getUpdateTime() { return updateTime; }
-    public void setUpdateTime(String value) { this.updateTime = value; }
+    public OffsetDateTime getUpdateTime() { return updateTime; }
+    public void setUpdateTime(OffsetDateTime value) { this.updateTime = value; }
 
     public long getBiddingPrice() { return biddingPrice; }
     public void setBiddingPrice(long value) { this.biddingPrice = value; }
@@ -47,8 +47,8 @@ public class ProjectPartyData {
     public String getAdminPhone() { return adminPhone; }
     public void setAdminPhone(String value) { this.adminPhone = value; }
 
-    public String getCreateTime() { return createTime; }
-    public void setCreateTime(String value) { this.createTime = value; }
+    public OffsetDateTime getCreateTime() { return createTime; }
+    public void setCreateTime(OffsetDateTime value) { this.createTime = value; }
 
     public String getPhone() { return phone; }
     public void setPhone(String value) { this.phone = value; }
@@ -68,8 +68,5 @@ public class ProjectPartyData {
     }
 }
 
-// Params.java
-
-// YApi QuickType插件生成，具体参考文档:https://plugins.jetbrains.com/plugin/18847-yapi-quicktype/documentation
 
 

@@ -56,6 +56,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:dividerColor="#ff6600"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -66,24 +73,29 @@
         android:text="账号/手机号"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="33dp" />
 
     <EditText
         android:id="@+id/phone_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textSize="13dp"
         app:layout_constraintTop_toBottomOf="@id/username_label"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="19dp" />
 
     <EditText
         android:id="@+id/code_input"
         android:layout_width="225dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textSize="13dp"
         app:layout_constraintTop_toBottomOf="@id/phone_input"
         app:layout_constraintBaseline_toBaselineOf="@+id/code_label"
-        android:layout_marginTop="43dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp" />
 
 
 
@@ -92,7 +104,7 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:gravity="center"
-        android:text="获取验证码"
+        android:text="获取密码"
         android:background="@drawable/orange_rounded_corner"
         app:layout_constraintTop_toBottomOf="@id/code_label"
         app:layout_constraintStart_toStartOf="parent"

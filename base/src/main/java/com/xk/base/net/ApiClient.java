@@ -2,6 +2,13 @@ package com.xk.base.net;
 
 
 
+import com.kongzue.dialogx.dialogs.PopTip;
+import com.xk.base.Intercept.TokenInterceptor;
+import com.xk.base.data.Response;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -11,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static final String     BASE_URL = "http://szjjy1.natappl.ce:80/";
+    private static final String     BASE_URL = "https://szjjytest.mynatapp.cc";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
@@ -20,6 +27,7 @@ public class ApiClient {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient client = new OkHttpClient.Builder()
                     .addNetworkInterceptor(loggingInterceptor)
+                    .addInterceptor(new TokenInterceptor())
                     .build();
 
 
@@ -31,5 +39,31 @@ public class ApiClient {
                     .build();
         }
         return retrofit;
+    }
+    public interface ResponseCallback {
+        void onSuccess(Response response);
+        void onError(Throwable e);
+    }
+
+    public static Disposable requestCode(String phone, ResponseCallback callback) {
+        Disposable disposable= ApiClient.getClient().create(ApiService.class)
+                .getCode(phone)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        response -> {
+                            if (response.getCode() == 200) {
+                                callback.onSuccess(response);
+                            } else {
+                                PopTip.show(response.getMsg());
+                            }
+                        },
+                        throwable -> {
+                            throwable.printStackTrace();
+                            PopTip.show("验证码获取失败");
+                            callback.onError(throwable);
+                        }
+                );
+        return disposable;
     }
 }

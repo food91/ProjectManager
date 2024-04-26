@@ -11,12 +11,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.xk.base.ui.BaseFrament;
 import com.xk.civilengineering.home.vm.DashboardViewModel;
 import com.xk.porject.R;
 import com.xk.porject.databinding.FragmentContractorManageBinding;
 import com.xk.porject.databinding.FragmentManageBinding;
 
-public class ContractorManageFragment extends Fragment {
+public class ContractorManageFragment extends BaseFrament {
 
     private FragmentContractorManageBinding binding;
 

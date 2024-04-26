@@ -56,4 +56,10 @@ dependencies {
     api ("io.reactivex.rxjava2:rxandroid:2.1.1")
     api ("com.guolindev.permissionx:permissionx:1.7.1")
     implementation ("org.conscrypt:conscrypt-openjdk-uber:1.1.3")
+    api ("com.tencent:mmkv:1.3.5")
+    var dialogx_version = "0.0.50.beta11"
+    api ("com.github.kongzue.DialogX:DialogX:${dialogx_version}")
+    api ("com.github.kongzue.DialogXSample:AlbumDialog:0.0.13")
+    api ("com.github.kongzue.DialogXSample:DatePicker:0.0.13")
+    api ("com.github.gcacace:signature-pad:1.3.1")
 }

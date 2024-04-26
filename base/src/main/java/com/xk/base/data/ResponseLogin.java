@@ -8,6 +8,16 @@ public class ResponseLogin {
     private long code;
     private String token;
 
+    private int  Authorizat;
+
+    public int getAuthorizat() {
+        return Authorizat;
+    }
+
+    public void setAuthorizat(int authorizat) {
+        Authorizat = authorizat;
+    }
+
     public String getMsg() { return msg; }
     public void setMsg(String value) { this.msg = value; }
 

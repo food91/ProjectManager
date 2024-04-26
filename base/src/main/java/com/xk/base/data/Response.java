@@ -6,17 +6,26 @@ package com.xk.base.data;
 import java.util.List;
 
 public class Response {
+    private String url ;
     private String msg;
     private long code;
-    private Data data;
+    private String data;
 
     @Override
     public String toString() {
         return "Response{" +
                 "msg='" + msg + '\'' +
                 ", code=" + code +
-                ", data=" + data +
+                ", data='" + data + '\'' +
                 '}';
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getMsg() { return msg; }
@@ -25,10 +34,8 @@ public class Response {
     public long getCode() { return code; }
     public void setCode(long value) { this.code = value; }
 
-    public Data getData() { return data; }
-    public void setData(Data value) { this.data = value; }
-    class Data {
-    }
+    public String getData() { return data; }
+    public void setData(java.lang.String value) { this.data = value; }
 
 }
 

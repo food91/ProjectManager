@@ -18,29 +18,7 @@ public class ProjectRegisterViewModel extends ViewModel {
 
     public void CreatePorjectParty(String type, String code, ProjectPartyData data){
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        apiService.PostProjectPartyData(type,code,data).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
 
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
 

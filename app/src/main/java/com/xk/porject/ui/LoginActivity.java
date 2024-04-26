@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.tencent.mmkv.MMKV;
+import com.xk.base.data.Identity;
+import com.xk.base.data.LoginData;
 import com.xk.base.data.ResponseLogin;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
@@ -33,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        MMKV.defaultMMKV().putString("token","");
         layoutBinding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(layoutBinding.getRoot());
         initializeUi();
@@ -63,11 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 String user = edUser.getText().toString();
                 String pw = edPs.getText().toString();
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 假设登陆成功后跳转到MainActivity
-                    startActivity(intent);
-                    WaitDialog.dismiss(); // 假设的WaitDialog类和方法，需要具体实现
-                    finish();
-              ApiClient.getClient().create(ApiService.class).login(user,pw).subscribeOn(
+                LoginData data = new LoginData();
+                data.setUsername(user);
+                data.setPassword(pw);
+              ApiClient.getClient().create(ApiService.class).login(data).subscribeOn(
                       Schedulers.io()).
                       observeOn(AndroidSchedulers.mainThread())
                       .subscribe(new Observer<ResponseLogin>() {
@@ -78,13 +81,28 @@ public class LoginActivity extends AppCompatActivity {
 
                           @Override
                           public void onNext(ResponseLogin s) {
+                              WaitDialog.dismiss();
                               if(s.getCode()==200){
-                                  PopTip.show("登录成功");
+                                  MMKV.defaultMMKV().putString("token",s.getToken());
+                                  if(s.getAuthorizat()==Identity.PROJECT_PARTY_ID){
+                                      Intent intent = new Intent(LoginActivity.this, PorjectAppMainActivity.class); // 假设登陆成功后跳转到MainActivity
+                                      startActivity(intent);
+                                      finish();
+                                  }else if(s.getAuthorizat()==Identity.CONTRACTOR_PARTY_ID){
+                                      Intent intent = new Intent(LoginActivity.this, ContractorMainActivity.class); // 假设登陆成功后跳转到MainActivity
+                                      startActivity(intent);
+                                      finish();
+                                  }else{
+                                      Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 假设登陆成功后跳转到MainActivity
+                                      startActivity(intent);
+                                      finish();
+                                  }
+
+
                               }else{
                                   PopTip.show("登录失败");
                               }
-                            login();
-                            WaitDialog.dismiss();
+
                           }
 
                           @Override
@@ -131,14 +149,10 @@ public class LoginActivity extends AppCompatActivity {
 //                }
 //            }, 500);
 //        } else if(user.equals("xm")&&pw.equals("123")){
-//            Intent intent = new Intent(LoginActivity.this, PorjectAppMainActivity.class); // 假设登陆成功后跳转到MainActivity
-//            startActivity(intent);
-//            WaitDialog.dismiss(); // 假设的WaitDialog类和方法，需要具体实现
+
 //            finish();
 //        } else if(user.equals("cb")&&pw.equals("123")){
-//            Intent intent = new Intent(LoginActivity.this, ContractorMainActivity.class); // 假设登陆成功后跳转到MainActivity
-//            startActivity(intent);
-//            WaitDialog.dismiss();
+
 //            finish();
 //        }
 //        else {

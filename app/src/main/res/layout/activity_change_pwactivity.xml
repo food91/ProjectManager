@@ -65,10 +65,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14dp"
             android:text="当前密码"/>
 
 
             <EditText
+                android:id="@+id/ed_old_pw"
                 android:layout_marginTop="10dp"
                 android:layout_width="295dp"
                 android:layout_height="34dp"
@@ -81,10 +84,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14dp"
             android:text="新密码"/>
 
             <EditText
-
+                android:id="@+id/ed_new_pw"
                 android:layout_marginTop="10dp"
                 android:layout_width="295dp"
                 android:layout_height="34dp"
@@ -99,10 +104,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14dp"
             android:text="重新输入新密码"/>
 
 
             <EditText
+                android:id="@+id/ed_new_pw2"
                 android:layout_marginTop="10dp"
                 android:layout_width="295dp"
                 android:layout_height="34dp"
@@ -115,12 +123,15 @@
 
 
         <TextView
+            android:id="@+id/tv_commit"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="57dp"
             android:background="@drawable/rounded_red_border"
             android:gravity="center"
+            android:textSize="14dp"
+            android:textColor="#ff6600"
             android:text="确认"
             />
     </LinearLayout>

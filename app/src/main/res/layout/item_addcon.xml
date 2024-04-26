@@ -1,70 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".home.AddContractorActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="6dp"
-            android:src="@drawable/back"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_goneMarginStart="5dp" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加承包方"
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/orange"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="65dp"
-        app:layout_constraintStart_toStartOf="parent"
-        >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-    <LinearLayout
-        android:id="@+id/ll_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        >
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -233,39 +172,4 @@
             />
     </LinearLayout>
 
-    </LinearLayout>
-
-
-    <com.xk.porject.ui.custom.XTextView
-        android:id="@+id/tv_add"
-        android:layout_width="86dp"
-        android:layout_height="29dp"
-        android:text="增加标段"
-        android:background="#1e98d7"
-        android:textColor="@color/white"
-        android:layout_marginTop="77dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_main"
-        android:gravity="center"
-        android:padding="2dp"
-        app:cornerRadius="5dp"
-        />
-    <com.xk.porject.ui.custom.XTextView
-        android:id="@+id/tv_add2"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
-        android:text="确定添加"
-        android:padding="2dp"
-        android:background="#f96f09"
-        android:textColor="@color/white"
-        android:layout_marginTop="163dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_main"
-        android:gravity="center"
-        app:cornerRadius="5dp"
-        />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

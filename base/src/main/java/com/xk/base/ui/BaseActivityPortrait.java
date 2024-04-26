@@ -9,6 +9,8 @@ import com.orhanobut.logger.Logger;
 
 public abstract class BaseActivityPortrait<T extends ViewBinding> extends BaseActivity<T> {
 
+
+
     protected abstract void initPortraitView();
     @Override
     protected void initView() {

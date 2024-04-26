@@ -1,5 +1,7 @@
 package com.xk.porject.home;
 
+import android.view.View;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.xk.base.ui.BaseActivityPortrait;
@@ -60,6 +62,12 @@ public class SwitchAccountsActivity extends BaseActivityPortrait<ActivitySwitchA
             }
         };
         bind.rv.setAdapter(commonAdapter);
+        bind.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

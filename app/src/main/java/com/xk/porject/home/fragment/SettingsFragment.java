@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.kongzue.dialogx.dialogs.BottomMenu;
 import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
+import com.xk.base.ui.BaseFrament;
 import com.xk.porject.R;
 import com.xk.porject.databinding.FragmentSettingsBinding;
 import com.xk.porject.home.ChangePWActivity;
@@ -25,7 +26,7 @@ import com.xk.porject.home.VersionActivity;
 import com.xk.porject.home.WorkCardActivity;
 
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends BaseFrament {
 
     FragmentSettingsBinding bind;
     @Nullable

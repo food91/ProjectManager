@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.xk.base.ui.BaseFrament;
 import com.xk.civilengineering.home.vm.DashboardViewModel;
 import com.xk.porject.R;
 import com.xk.porject.databinding.FragmentManageBinding;
@@ -19,7 +20,7 @@ import com.xk.porject.databinding.FragmentProjectmanageBinding;
 import com.xk.porject.home.AddContractorActivity;
 import com.xk.porject.home.CreateProjectActivity;
 
-public class ProjectManageFragment extends Fragment {
+public class ProjectManageFragment extends BaseFrament {
 
     private FragmentProjectmanageBinding binding;
 
