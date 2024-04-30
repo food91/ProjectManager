@@ -222,7 +222,7 @@
             android:background="@color/gray"
             />
     </LinearLayout>
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:id="@+id/add_project_person"
         android:layout_width="151dp"
         android:layout_height="40dp"
@@ -235,7 +235,7 @@
         android:layout_marginTop="490dp"
         android:padding="2dp"
         />
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:id="@+id/delete_project_person"
         android:layout_width="151dp"
         android:layout_height="40dp"

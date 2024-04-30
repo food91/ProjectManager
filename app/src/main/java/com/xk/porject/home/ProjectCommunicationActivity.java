@@ -5,10 +5,10 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import com.xk.base.adapter.CommonAdapter;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.databinding.ActivityProjectCommunicationBinding;
 import com.xk.porject.databinding.ItemPcBinding;
-import com.xk.porject.home.adaoter.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

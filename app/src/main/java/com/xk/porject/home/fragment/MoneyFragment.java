@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.xk.base.adapter.CommonAdapter;
 import com.xk.porject.data.TableItem;
 import com.xk.porject.databinding.FragmentMoneyBinding;
 import com.xk.porject.databinding.FragmentMoneyListBinding;
-import com.xk.porject.home.adaoter.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

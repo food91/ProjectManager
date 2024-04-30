@@ -8,7 +8,6 @@
     tools:context=".home.fragment.ProjectPersonnelFragment">
     <ScrollView
         android:layout_width="match_parent"
-        android:paddingBottom="70dp"
         android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -106,7 +105,7 @@
                 android:layout_marginStart="121dp"
                 android:gravity="center"
                 android:shadowRadius="5" />
-            <com.xk.porject.ui.custom.XTextView
+            <com.xk.base.ui.XTextView
                 android:layout_width="70dp"
                 android:layout_height="48dp"
                 android:text="一键记工"
@@ -219,9 +218,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCivilEngineeringPersonnel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/llCivilEngineering"
-            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="4dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

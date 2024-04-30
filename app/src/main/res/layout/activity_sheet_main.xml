@@ -365,7 +365,7 @@
         android:layout_marginStart="230dp"
         android:textColor="#999999"
         />
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:text="发布"
@@ -379,7 +379,7 @@
         android:textColor="@color/white"
         android:background="#ff9900"
         />
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:text="保存"

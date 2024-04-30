@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 />
-            <com.xk.porject.ui.custom.XTextView
+            <com.xk.base.ui.XTextView
                 android:id="@+id/tv_commit"
                 android:text="提交"
                 android:layout_width="117dp"

@@ -65,10 +65,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="24dp"
         />
-    <EditText
+    <com.xk.base.ui.spinner.NiceSpinner
+        android:id="@+id/sp_name"
         android:layout_width="230dp"
         android:layout_height="40dp"
-        android:textColor="#666666"
         android:textSize="13dp"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_cp"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,12 +95,15 @@
             android:layout_marginTop="13dp"
             />
         <EditText
+            android:id="@+id/ed_name"
             android:layout_width="236dp"
             android:layout_height="wrap_content"
             android:textColor="#666666"
+            android:backgroundTint="@android:color/darker_gray"
             android:textSize="13dp"
-            android:text="选择"
-            android:gravity="center"
+            android:hint="选择"
+            android:gravity="start"
+            android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_pn"
             android:layout_marginStart="76dp"
@@ -119,12 +122,16 @@
             android:layout_marginTop="48dp"
             />
         <EditText
+            android:id="@+id/project_plane_time"
             android:layout_width="230dp"
+            android:inputType="number"
             android:layout_height="wrap_content"
             android:textColor="#666666"
             android:textSize="13dp"
-            android:text="天"
-            android:gravity="center"
+            android:backgroundTint="@android:color/darker_gray"
+            android:hint="天"
+            android:gravity="start"
+            android:padding="8dp"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_t"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="76dp"
@@ -140,27 +147,34 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="89dp"
             />
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fl_t1"
             android:layout_width="230dp"
             android:layout_height="25dp"
             android:textColor="#666666"
-            android:textSize="13dp"
-            android:text="选择"
-            android:gravity="center"
-            android:background="@drawable/edittext_border_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="81dp"
             android:layout_marginTop="85dp"
             >
+            <TextView
+                android:id="@+id/tv_show_date_start"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|bottom"
+                android:paddingStart="8dp"
+                android:background="@drawable/edittext_border_black"
+                />
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/normal_u4"
-                android:layout_gravity="end|center_vertical"
+              app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,7 +186,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="125dp"
             />
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fl_t2"
             android:layout_width="230dp"
             android:layout_height="25dp"
@@ -180,19 +194,31 @@
             android:textSize="13dp"
             android:text="选择"
             android:gravity="center"
-            android:background="@drawable/edittext_border_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="81dp"
             android:layout_marginTop="120dp"
             >
+            <TextView
+                android:id="@+id/tv_show_date_end"
+                android:paddingStart="8dp"
+                android:textSize="14dp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|bottom"
+                android:background="@drawable/edittext_border_black"
+                />
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/normal_u4"
                 android:layout_gravity="end|center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -227,6 +253,7 @@
             android:layout_marginTop="184dp"
             />
         <com.xk.porject.base.SwitchButton
+            android:id="@+id/sw_manage"
             android:layout_width="59dp"
             android:layout_height="39dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -254,7 +281,8 @@
         android:layout_marginTop="589dp"
         android:background="@color/white"
         >
-        <com.xk.porject.ui.custom.XTextView
+        <com.xk.base.ui.XTextView
+            android:id="@+id/tv_sure"
             android:layout_width="114dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -267,7 +295,8 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="25dp"
             />
-        <com.xk.porject.ui.custom.XTextView
+        <com.xk.base.ui.XTextView
+            android:id="@+id/tv_cancel"
             android:layout_width="114dp"
             android:layout_height="40dp"
             android:gravity="center"

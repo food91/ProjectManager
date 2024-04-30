@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
-        <com.xk.porject.ui.custom.XTextView
+        <com.xk.base.ui.XTextView
             android:id="@+id/tv_jobmarket"
             android:layout_width="69dp"
             android:layout_height="23dp"
@@ -50,7 +50,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
-        <com.xk.porject.ui.custom.XTextView
+        <com.xk.base.ui.XTextView
             android:id="@+id/tv_commit_data"
             android:layout_width="69dp"
             android:layout_height="26dp"

@@ -24,7 +24,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="15dp"
             android:text="title"
             android:textStyle="bold"/>
 
@@ -32,6 +32,7 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="13dp"
             android:text="text"
             />
     </LinearLayout>
@@ -39,7 +40,7 @@
         android:id="@+id/bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_textview_background"
+       android:background="#34db0c"
         android:text="记工"
         android:visibility="gone"
         />

@@ -21,15 +21,23 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/Theme.Porject"
         tools:targetApi="31">
         <activity
-            android:name=".SignaTureActivity"
-            android:theme="@style/Theme.PorjectNoActionBar"
+            android:name=".home.AddInformationActivity"
+            android:theme="@style/Theme.PorjectNoActionBarOrage"
             android:exported="false" />
+        <activity
+            android:name=".home.JobInformationActivity"
+            android:theme="@style/Theme.PorjectNoActionBarOrage"
+            android:exported="false" />
+        <activity
+            android:name=".SignaTureActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
         <activity
             android:name=".ui.ElectronicActivity"
             android:exported="false"
@@ -99,7 +107,8 @@
         <activity
             android:name=".home.JobMarketActivity"
             android:exported="false"
-            android:theme="@style/Theme.PorjectNoActionBarOrage" />
+            android:theme="@style/Theme.PorjectNoActionBarOrage"
+            />
         <activity
             android:name=".home.ExamBamkActivity"
             android:exported="false"
@@ -113,7 +122,7 @@
             android:exported="false"
             android:theme="@style/Theme.PorjectNoActionBar" />
         <activity
-            android:name=".contractor.ui.ContractorLeaderActivity"
+            android:name=".teamleader.ui.ContractorLeaderActivity"
             android:exported="false"
             android:theme="@style/Theme.PorjectNoActionBar" />
         <activity
@@ -235,7 +244,11 @@
         <activity
             android:name=".ui.login.RegisterActivity"
             android:exported="false"
-            android:theme="@style/Theme.PorjectNoActionBar"/>
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".teamleader.ContractorLeaderMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBarOrage" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

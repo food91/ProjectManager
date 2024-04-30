@@ -187,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
-        <com.xk.porject.ui.custom.XTextView
+        <com.xk.base.ui.XTextView
             android:id="@+id/bt_contractor"
             android:layout_width="108dp"
             android:layout_height="31dp"

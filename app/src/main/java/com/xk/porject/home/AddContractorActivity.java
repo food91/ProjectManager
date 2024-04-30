@@ -36,7 +36,6 @@ public class AddContractorActivity extends BaseActivityPortrait<ActivityContract
     @Override
     protected void initData() {
         editTexts = new ArrayList<>();
-
     }
     private void registerSubmit(){
         List<AddContractData> list = new ArrayList<>();

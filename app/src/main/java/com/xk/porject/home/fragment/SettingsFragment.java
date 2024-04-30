@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.kongzue.dialogx.dialogs.BottomMenu;
 import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
+import com.tencent.mmkv.MMKV;
 import com.xk.base.ui.BaseFrament;
 import com.xk.porject.R;
 import com.xk.porject.databinding.FragmentSettingsBinding;
@@ -24,6 +25,7 @@ import com.xk.porject.home.SafetyActivity;
 import com.xk.porject.home.SwitchAccountsActivity;
 import com.xk.porject.home.VersionActivity;
 import com.xk.porject.home.WorkCardActivity;
+import com.xk.porject.ui.LoginActivity;
 
 
 public class SettingsFragment extends BaseFrament {
@@ -69,6 +71,11 @@ public class SettingsFragment extends BaseFrament {
                                if(index==0){
                                    Intent intent =new Intent(getActivity(), SwitchAccountsActivity.class);
                                    startActivity(intent);
+                               }else if(index==1){
+                                   Intent intent =new Intent(getActivity(), LoginActivity.class);
+                                   startActivity(intent);
+                                   MMKV.defaultMMKV().putString("token","");
+                                   getActivity().finish();
                                }
                                 return false;
                             }

@@ -48,7 +48,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginStart="10dp"
         />
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:text="签"
@@ -62,7 +62,7 @@
         android:layout_marginTop="53dp"
         android:layout_marginStart="191dp"
         />
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:text="签"
@@ -76,7 +76,7 @@
         android:layout_marginTop="53dp"
         android:layout_marginStart="236dp"
         />
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:gravity="center"

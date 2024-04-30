@@ -12,7 +12,6 @@ public class AddWorker {
     private String bankDeposit;
     private int groupId;
     private String remark;
-    private long idNumber;
     private long delete;
     private long checkoutType;
     private String password;
@@ -20,20 +19,20 @@ public class AddWorker {
     private String familyName;
     private long rank;
     private String bankAccountNumber;
-    private long id;
+
     private long ebJob;
     private long wage;
     private long wageType;
     private long pieceworkWage;
     private String founder;
     private long sex;
-    private OffsetDateTime updateTime;
+    private String updateTime;
     private String employId;
     private Params params;
     private String userName;
     private String createBy;
-    private OffsetDateTime onbordTime;
-    private OffsetDateTime createTime;
+    private String onbordTime;
+    private String createTime;
     private String name;
     private long age;
 
@@ -49,8 +48,6 @@ public class AddWorker {
     public String getRemark() { return remark; }
     public void setRemark(String value) { this.remark = value; }
 
-    public long getidNumber() { return idNumber; }
-    public void setidNumber(long value) { this.idNumber = value; }
 
     public long getDelete() { return delete; }
     public void setDelete(long value) { this.delete = value; }
@@ -73,8 +70,7 @@ public class AddWorker {
     public String getBankAccountNumber() { return bankAccountNumber; }
     public void setBankAccountNumber(String value) { this.bankAccountNumber = value; }
 
-    public long getid() { return id; }
-    public void setid(long value) { this.id = value; }
+
 
     public long getEbJob() { return ebJob; }
     public void setEbJob(long value) { this.ebJob = value; }
@@ -94,8 +90,8 @@ public class AddWorker {
     public long getSex() { return sex; }
     public void setSex(long value) { this.sex = value; }
 
-    public OffsetDateTime getUpdateTime() { return updateTime; }
-    public void setUpdateTime(OffsetDateTime value) { this.updateTime = value; }
+    public String getUpdateTime() { return updateTime; }
+    public void setUpdateTime(String value) { this.updateTime = value; }
 
     public String getEmployId() { return employId; }
     public void setEmployId(String value) { this.employId = value; }
@@ -109,11 +105,11 @@ public class AddWorker {
     public String getCreateBy() { return createBy; }
     public void setCreateBy(String value) { this.createBy = value; }
 
-    public OffsetDateTime getOnbordTime() { return onbordTime; }
-    public void setOnbordTime(OffsetDateTime value) { this.onbordTime = value; }
+    public String getOnbordTime() { return onbordTime; }
+    public void setOnbordTime(String value) { this.onbordTime = value; }
 
-    public OffsetDateTime getCreateTime() { return createTime; }
-    public void setCreateTime(OffsetDateTime value) { this.createTime = value; }
+    public String getCreateTime() { return createTime; }
+    public void setCreateTime(String value) { this.createTime = value; }
 
     public String getName() { return name; }
     public void setName(String value) { this.name = value; }

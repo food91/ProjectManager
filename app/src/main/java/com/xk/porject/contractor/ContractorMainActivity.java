@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.xk.porject.R;
+import com.xk.porject.databinding.ActivityContractorLeaderMainBinding;
 import com.xk.porject.databinding.ActivityContractorMainBinding;
 
 public class ContractorMainActivity extends AppCompatActivity {

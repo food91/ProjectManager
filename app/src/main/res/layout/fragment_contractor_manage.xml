@@ -92,67 +92,11 @@
                 android:src="@android:drawable/ic_search_category_default" />
         </FrameLayout>
 
-
-    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="20dp"
-        android:layout_marginStart="7dp"
-                android:text="风电项目" />
-            <View
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_projectlist"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_marginStart="7dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="光伏项目"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="7dp"
                 />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="办公楼项目"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="7dp"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_marginStart="7dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="公路项目"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="7dp"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_marginStart="7dp"
-                />
-
-
-
         </LinearLayout>
     <ImageView
         android:id="@+id/iv_back"
@@ -183,22 +127,28 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="35dp"
         />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/div"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ll_top"
+        android:background="@color/white"
+        >
         <LinearLayout
             android:id="@+id/ll_top_end"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/div"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ll_top"
-            android:background="@color/white">
-         <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="327dp"
-        android:background="@drawable/contractor"/>
-    <com.xk.porject.ui.custom.XTextView
+           >
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rv_group"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           />
+    <com.xk.base.ui.XTextView
         android:id="@+id/bt_addteam"
         android:layout_width="108dp"
         android:layout_height="31dp"
@@ -211,7 +161,7 @@
         android:layout_marginTop="22dp"
         />
         </LinearLayout>
-
+    </androidx.core.widget.NestedScrollView>
 
 
 

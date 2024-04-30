@@ -10,21 +10,39 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.xk.base.adapter.CommonAdapter;
+import com.xk.base.data.GroupInfo;
+import com.xk.base.data.ResponseFindlist;
+import com.xk.base.log.X;
+import com.xk.base.net.ApiClient;
+import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.ui.BaseFrament;
 import com.xk.civilengineering.home.vm.DashboardViewModel;
 import com.xk.porject.R;
+import com.xk.porject.adapter.TwoLevelAdapter;
 import com.xk.porject.databinding.FragmentContractorManageBinding;
 import com.xk.porject.databinding.FragmentManageBinding;
+import com.xk.porject.databinding.ItemProjectlistBinding;
+import com.xk.porject.viewmodel.ContractorManageViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContractorManageFragment extends BaseFrament {
 
     private FragmentContractorManageBinding binding;
+    private ContractorManageViewModel contractorManageViewModel;
+    private CommonAdapter<ItemProjectlistBinding, ResponseFindlist.Datum> adapterProjectlist;
+    private TwoLevelAdapter adapterGrouplist;
+    private List<ResponseFindlist.Datum> projectlistdata;
+    private List<GroupInfo.Datum> grouplistdata;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+         contractorManageViewModel =
+                new ViewModelProvider(this).get(ContractorManageViewModel.class);
 
         binding = FragmentContractorManageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -48,7 +66,35 @@ public class ContractorManageFragment extends BaseFrament {
                 navController.navigate(R.id.action_home_v3);
             }
         });
+        initdata();
         return root;
+    }
+
+    private void initdata(){
+        binding.rvProjectlist.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapterProjectlist = new CommonAdapter<ItemProjectlistBinding, ResponseFindlist.Datum>(new ArrayList<>()) {
+            @Override
+            protected void show(ItemProjectlistBinding holder, int position, ResponseFindlist.Datum responseFindlist) {
+                holder.tvName.setText(responseFindlist.getProjectName());
+            }
+        };
+        binding.rvGroup.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapterGrouplist = new TwoLevelAdapter(new ArrayList<>());
+        binding.rvProjectlist.setAdapter(adapterProjectlist);
+        binding.rvGroup.setAdapter(adapterGrouplist);
+        contractorManageViewModel.initdata();
+        contractorManageViewModel.getProjectListLiveData().observe(getViewLifecycleOwner(), responseFindlist -> {
+                // 更新适配器数据
+                 projectlistdata = responseFindlist.getData();
+            X.L(projectlistdata.toString());
+                adapterProjectlist.setData(projectlistdata); // 假设getRows()返回Datum列表
+        });
+        contractorManageViewModel.getGroupListLiveData().observe(getViewLifecycleOwner(), GroupInfoListLiveData -> {
+            // 更新适配器数据
+            grouplistdata = GroupInfoListLiveData.getData();
+            adapterProjectlist.setData(projectlistdata); // 假设getRows()返回Datum列表
+        });
+
     }
 
     @Override

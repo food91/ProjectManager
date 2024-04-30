@@ -46,7 +46,7 @@
         android:layout_marginStart="41dp" />
 
     <!-- 切换按钮 -->
-    <com.xk.porject.ui.custom.XTextView
+    <com.xk.base.ui.XTextView
         android:id="@+id/tv_switch_button"
         android:layout_width="50dp"
         android:layout_height="30dp"

@@ -5,6 +5,7 @@ package com.xk.base.net;
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.xk.base.Intercept.TokenInterceptor;
 import com.xk.base.data.Response;
+import com.xk.base.data.StockData;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -44,6 +45,7 @@ public class ApiClient {
         void onSuccess(Response response);
         void onError(Throwable e);
     }
+
 
     public static Disposable requestCode(String phone, ResponseCallback callback) {
         Disposable disposable= ApiClient.getClient().create(ApiService.class)

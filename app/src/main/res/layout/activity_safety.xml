@@ -72,9 +72,11 @@
         android:id="@+id/spinner"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tv_time"
-        app:layout_constraintStart_toEndOf="@+id/tv_time"
-        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/cl_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/cl_toolbar"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="90dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_time"
         />
 
     <TextView
@@ -91,11 +93,9 @@
         android:id="@+id/ed_title"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_test_title"
-        app:layout_constraintTop_toTopOf="@id/tv_test_title"
-        app:layout_constraintStart_toEndOf="@+id/tv_test_title"
-        android:layout_marginStart="6dp"
-        android:gravity="bottom"
+        app:layout_constraintStart_toStartOf="@+id/cl_toolbar"
+        android:layout_marginStart="90dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_test_title"
         />
    <LinearLayout
        android:layout_width="match_parent"
@@ -140,20 +140,17 @@
            android:background="@drawable/rounded_gray_border"
            android:gravity="left|top"
            />
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          />
        <TextView
+           android:id="@+id/add_rv1"
            android:layout_width="261dp"
            android:layout_height="30dp"
-           android:layout_marginTop="18dp"
-           android:textSize="15dp"
-           android:background="@drawable/rounded_gray_border"
-           android:text="请输入选择内容"
-           android:textColor="#cccccc"
-           android:gravity="center"
-           />
-       <TextView
-           android:layout_width="261dp"
-           android:layout_height="30dp"
-           android:layout_marginTop="18dp"
+           android:layout_marginTop="10dp"
            android:textSize="15dp"
            android:background="@drawable/rounded_gray_border"
            android:text="＋ 添加选择内容"
@@ -201,4 +198,106 @@
            android:background="@color/orange"
            />
    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="461dp"
+        android:gravity="center"
+        >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginTop="9dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:textColor=" #ff0000"
+            android:text="请在正确答案后对应勾选，所有题目为单选。"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginTop="6dp"
+            />
+
+        <EditText
+            android:hint="输入题目内容"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:paddingStart="10dp"
+            android:paddingTop="11dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/rounded_gray_border"
+            android:gravity="left|top"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:layout_width="261dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:background="@drawable/rounded_gray_border"
+            android:text="＋ 添加选择内容"
+            android:textColor="#ff0000"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="135dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:background="@drawable/rounded_red_border"
+                android:text="保存"/>
+            <TextView
+                android:layout_width="135dp"
+                android:layout_height="40dp"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="发布"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="end|center_vertical"
+            android:textColor="#ff0000"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:text="总分值：100分"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/orange"
+            />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

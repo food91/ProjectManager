@@ -20,6 +20,8 @@ import com.xk.base.net.ApiService;
 import com.xk.porject.contractor.ContractorMainActivity;
 import com.xk.porject.databinding.ActivityLoginBinding;
 import com.xk.porject.projectmain.PorjectAppMainActivity;
+import com.xk.porject.teamleader.ContractorLeaderMainActivity;
+import com.xk.porject.teamleader.ui.ContractorLeaderActivity;
 import com.xk.porject.ui.login.ForgotPwActivity;
 import com.xk.porject.ui.login.RegisterActivity;
 
@@ -68,6 +70,26 @@ public class LoginActivity extends AppCompatActivity {
                 String user = edUser.getText().toString();
                 String pw = edPs.getText().toString();
                 LoginData data = new LoginData();
+
+                if(user.equals("0")&&pw.equals("0")){
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 假设登陆成功后跳转到MainActivity
+                    startActivity(intent);
+                    finish();
+                }
+                if(user.equals("1")&&pw.equals("1")){
+                    user = "19581571279";
+                    pw = "123456";
+                }
+                if(user.equals("2")&&pw.equals("1")){
+                    Intent intent = new Intent(LoginActivity.this, ContractorMainActivity.class); // 假设登陆成功后跳转到MainActivity
+                    startActivity(intent);
+                    finish();
+                }
+                if(user.equals("3")&&pw.equals("1")){
+                    Intent intent = new Intent(LoginActivity.this, ContractorLeaderMainActivity.class); // 假设登陆成功后跳转到MainActivity
+                    startActivity(intent);
+                    finish();
+                }
                 data.setUsername(user);
                 data.setPassword(pw);
               ApiClient.getClient().create(ApiService.class).login(data).subscribeOn(

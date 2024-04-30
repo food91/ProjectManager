@@ -106,7 +106,7 @@
             </FrameLayout>
 
         </LinearLayout>
-        <com.xk.porject.ui.custom.XTextView
+        <com.xk.base.ui.XTextView
             android:id="@+id/tv_add"
             android:layout_width="130dp"
             android:layout_height="35dp"

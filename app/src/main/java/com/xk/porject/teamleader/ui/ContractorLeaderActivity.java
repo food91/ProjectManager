@@ -1,8 +1,9 @@
-package com.xk.porject.contractor.ui;
+package com.xk.porject.teamleader.ui;
 
 
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.databinding.ActivityContractorLeaderBinding;
+
 
 public class ContractorLeaderActivity extends BaseActivityPortrait<ActivityContractorLeaderBinding> {
 

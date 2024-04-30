@@ -5,11 +5,11 @@ import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 
+import com.xk.base.adapter.CommonAdapter;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.data.EaData;
 import com.xk.porject.databinding.ActivityEmployeeEvaluationBinding;
 import com.xk.porject.databinding.ItemEa2Binding;
-import com.xk.porject.home.adaoter.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

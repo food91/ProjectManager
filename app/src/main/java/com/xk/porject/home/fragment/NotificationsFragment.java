@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -17,21 +14,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
-import com.orhanobut.logger.Logger;
+import com.xk.base.adapter.CommonAdapter;
 import com.xk.civilengineering.home.vm.NotificationsViewModel;
 import com.xk.porject.R;
 import com.xk.porject.data.AnData;
 import com.xk.porject.data.NoteWorker;
 import com.xk.porject.databinding.ActivityCmactivityBinding;
-import com.xk.porject.databinding.FragmentNotificationsBinding;
 import com.xk.porject.databinding.ItemNoteBinding;
 import com.xk.porject.databinding.LayoutWithTitleAndTextBinding;
-import com.xk.porject.home.CMActivity;
 import com.xk.porject.home.ChatActivity;
 import com.xk.porject.home.EASorceActivity;
 import com.xk.porject.home.EmployeeEvaluationActivity;
 import com.xk.porject.home.EmployeeManagementActivity;
-import com.xk.porject.home.adaoter.CommonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

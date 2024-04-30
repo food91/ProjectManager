@@ -22,6 +22,7 @@ public class App extends Application {
 
     public static Application instance =null;
 
+
     @Override
     public void onCreate() {
         super.onCreate();

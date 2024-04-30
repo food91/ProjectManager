@@ -124,7 +124,7 @@
                 android:background="@color/gray"
                 android:layout_marginStart="7dp"
                 />
-            <com.xk.porject.ui.custom.XTextView
+            <com.xk.base.ui.XTextView
                 android:id="@+id/bt_addproject"
                 android:layout_width="154dp"
                 android:layout_height="31dp"
@@ -195,7 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
             />
-            <com.xk.porject.ui.custom.XTextView
+            <com.xk.base.ui.XTextView
                 android:id="@+id/bt_contractor"
                 android:layout_width="120dp"
                 android:layout_height="31dp"

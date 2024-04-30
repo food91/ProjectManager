@@ -293,12 +293,12 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                     PopTip.show("移动只能选择一个对象");
                     return;
                 }
-                move(deletelist.get(0).getId());
+                move(deletelist.get(0));
             }
         });
     }
 
-    private void move(int id){
+    private void move(GroupInfo.Datum item){
         List<String> strlist = new ArrayList<>();
         strlist.add("移动到父节点");
         List<GroupInfo.Datum> temp = new ArrayList<>();
@@ -322,18 +322,18 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                         PopTip.show("已经在最上层节点");
                         return false;
                     }
-                    remove(id,postionDatum.getGroupValue());
+                    move(item.getId(),postionDatum.getGroupValue());
                 }else{
-                    remove(id,temp.get(i-1).getId()+"");
+                    move(item.getId(),temp.get(i-1).getId()+"");
                 }
                 return false;
             }
         });
     }
 
-    private void remove(int id,String strGroup){
-        performApiCall(ApiClient.getClient().create(ApiService.class).RemoveGroup(
-                id, strGroup
+    private void move(int id,String value){
+        performApiCall(ApiClient.getClient().create(ApiService.class).moveGroup(
+                id, value
         ), new Consumer<Response>() {
             @Override
             public void accept(Response response) throws Exception {
@@ -374,11 +374,11 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                 .show();
     }
 
-    private void httprename(String input, GroupInfo.Datum item){
-        performApiCall(ApiClient.getClient().create(ApiService.class).Rename(item.getId(), input)
-                , new Consumer<GroupInfo>() {
+    private void httprename(String input,GroupInfo.Datum item){
+        performApiCall(ApiClient.getClient().create(ApiService.class).Rename(item.getId(),input)
+                , new Consumer<Response>() {
                     @Override
-                    public void accept(GroupInfo groupInfo) throws Exception {
+                    public void accept(Response groupInfo) throws Exception {
                         if(groupInfo.getCode()==200){
                             item.setGroupName(input);
                             adapter.notifyDataSetChanged();

@@ -30,6 +30,7 @@ import com.xk.base.data.Response;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
+import com.xk.base.utils.MyData;
 import com.xk.porject.R;
 import com.xk.porject.databinding.ActivityWorkerInfoBinding;
 import com.xk.porject.home.WorkManageActivity;
@@ -171,7 +172,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
 
     @Override
     protected void onclick() {
-        ApiClient.getClient().create(ApiService.class).getgroup()
+
         bind.tvChooseGrounp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,7 +254,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             PopTip.show("请选择工种");
             return;
         }
-=
+        addWorker.setEmployId(str_work);
         String str_name = bind.edName.getText().toString();
         if(TextUtils.isEmpty(str_name)){
             PopTip.show("请输入姓名");
@@ -334,10 +335,8 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         String year = bind.spinnerYear.getSelectedItem().toString();
         String month = bind.spinnerMon.getSelectedItem().toString();
         String day = bind.spinnerDay.getSelectedItem().toString();
-        String monthStr = String.format("%02d", month);
-        String dayStr = String.format("%02d", day);
-        String time = year + "-" + monthStr + "-" + dayStr;
-        addWorker.setOnbordTime(time);
+        String time = year + "-" + month + "-" + day;
+        addWorker.setOnbordTime(MyData.getData());
         boolean check = bind.checkboxCheckAuto.isChecked();
         if(check){
         addWorker.setCheckoutType(0);
@@ -351,11 +350,23 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         }
         addWorker.setUserName(phone);
         addWorker.setPassword("123456");
+        boolean unexpected = bind.checkboxUnexpected.isChecked();
+        if(!unexpected){
+            PopTip.show("请勾选意外险");
+            return;
+        }
+        boolean unboducheck = bind.checkboxUnbody.isChecked();
+        if(!unboducheck){
+            PopTip.show("请确认已经体检");
+            return;
+        }
+        addWorker.setCreateTime(MyData.getData());
+        addWorker.setImg(path);
         performApiCall(ApiClient.getClient().create(ApiService.class).addWorker(addWorker), new Consumer<Response>() {
             @Override
             public void accept(Response response) throws Exception {
                 if(response.getCode()==200){
-
+                    PopTip.show("添加成功");
                 }else{
                     PopTip.show(response.getMsg());
                 }
@@ -367,6 +378,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
                 PopTip.show("连接失败");
             }
         });
+
     }
 
     private void initAdapter(){
