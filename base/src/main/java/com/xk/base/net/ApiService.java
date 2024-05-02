@@ -12,6 +12,7 @@ import com.xk.base.data.GroupInfo;
 import com.xk.base.data.JobInfomation;
 import com.xk.base.data.JobPostData;
 import com.xk.base.data.LoginData;
+import com.xk.base.data.PostSafeTest;
 import com.xk.base.data.PostScheduleData;
 import com.xk.base.data.ProjectPartyData;
 import com.xk.base.data.Response;
@@ -19,6 +20,7 @@ import com.xk.base.data.ResponseFindWork;
 import com.xk.base.data.ResponseFindlist;
 import com.xk.base.data.ResponseLogin;
 import com.xk.base.data.ResponseProjectPostInfo;
+import com.xk.base.data.ResponseSafeQuestion;
 import com.xk.base.data.StockData;
 import com.xk.base.data.WithdrawaData;
 
@@ -110,4 +112,17 @@ public interface ApiService {
 
     @POST("/project/withdrawa")
     public Observable<Response> addWithdrawa(@Body WithdrawaData data);
+
+    @POST("/project/topic")
+    public Observable<ResponseSafeQuestion> postSafeTest(@Body List<PostSafeTest> data);
+
+    @GET("/project/examination/list")
+    public Observable<Response> getexamination();
+
+    @GET("/project/wage/list")
+    public Observable<Response> getWage();
+
+    @GET("/project/topic/list")
+    public Observable<Response> gettestlist();
+
 }

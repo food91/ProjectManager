@@ -15,16 +15,26 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.CircleOptions;
+import com.baidu.mapapi.map.DotOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MapViewLayoutParams;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.permissionx.guolindev.PermissionX;
 import com.permissionx.guolindev.callback.RequestCallback;
 
 import com.xk.base.ui.BaseActivityPortrait;
+import com.xk.porject.R;
 import com.xk.porject.databinding.ActivityAttendanceBinding;
 
 import java.util.List;
@@ -39,10 +49,11 @@ public class AttendanceActivity extends BaseActivityPortrait<ActivityAttendanceB
         mBaiduMap.setMyLocationEnabled(true);
         //设置地图放大的倍数
         init();
-
-
         init_location();
-
+        MyLocationConfiguration configuration = new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.FOLLOWING, true, null);
+        mBaiduMap.setMyLocationConfiguration(configuration);
+        mBaiduMap.setMyLocationEnabled(true);
     }
 
     @Override
@@ -125,17 +136,17 @@ public class AttendanceActivity extends BaseActivityPortrait<ActivityAttendanceB
     public class MyLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            //mapView 销毁后不在处理新接收的位置
             if (location == null){
                 return;
             }
-
-            MyLocationConfiguration configuration = new MyLocationConfiguration(
-                    MyLocationConfiguration.LocationMode.COMPASS, false, null, 0xAAFFFF88, 0xAA00FF00);
-            mBaiduMap.setMyLocationConfiguration(configuration);
-
+            MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius())
+                    // 此处设置开发者获取到的方向信息，顺时针0-360
+                    .direction(location.getDirection()).latitude(location.getLatitude())
+                    .longitude(location.getLongitude()).build();
+            // 设置定位数据
+            mBaiduMap.setMyLocationData(locData);
+            LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
             if (ifFrist) {
-                LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll);
                 builder.zoom(18.0f);
@@ -143,6 +154,9 @@ public class AttendanceActivity extends BaseActivityPortrait<ActivityAttendanceB
                 //放大层级
                 ifFrist = false;
             }
+            mBaiduMap.addOverlay(new CircleOptions().center(ll).
+                    radius(200).fillColor(0x00000000).
+                    stroke(new Stroke(1, 0x330000FF)));
         }
     }
   boolean  ifFrist =true;

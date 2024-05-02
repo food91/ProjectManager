@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
 
+import com.kongzue.dialogx.dialogs.PopTip;
 import com.kongzue.dialogx.dialogs.WaitDialog;
 
 import java.lang.reflect.Method;
@@ -49,10 +50,13 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
                 .subscribe(
                         response -> {
                             dismissLoadingDialog();
+
                             onSuccess.accept(response);
                         },
                         throwable -> {
                             dismissLoadingDialog();
+                            PopTip.show("连接失败");
+                            throwable.printStackTrace();
                             onError.accept(throwable);
                         }
                 );

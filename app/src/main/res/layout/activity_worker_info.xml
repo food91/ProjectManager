@@ -140,7 +140,6 @@
                 android:id="@+id/tv_choose_grounp"
                 android:layout_width="200dp"
                 android:layout_height="31dp"
-                android:layout_marginStart="26dp"
                 android:background="@drawable/rounded_gray_border"
                 android:text="请选择"
                 android:gravity="center"
@@ -492,6 +491,7 @@
                 android:layout_height="wrap_content"
                 android:text="密码*："/>
             <com.xk.base.ui.XTextView
+                android:id="@+id/send_phone"
                 android:layout_width="214dp"
                 android:layout_height="27dp"
                 app:cornerRadius = "5dp"

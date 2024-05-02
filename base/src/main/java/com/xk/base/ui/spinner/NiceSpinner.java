@@ -53,6 +53,7 @@ import java.util.List;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 public class NiceSpinner extends AppCompatTextView {
 
     private static final int MAX_LEVEL = 10000;
@@ -143,7 +144,6 @@ public class NiceSpinner extends AppCompatTextView {
         Resources resources = getResources();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NiceSpinner);
         int defaultPadding = resources.getDimensionPixelSize(R.dimen.one_and_a_half_grid_unit);
-
         setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
         setPadding(resources.getDimensionPixelSize(R.dimen.three_grid_unit), defaultPadding, defaultPadding,
                 defaultPadding);
@@ -195,7 +195,8 @@ public class NiceSpinner extends AppCompatTextView {
         });
 
         isArrowHidden = typedArray.getBoolean(R.styleable.NiceSpinner_hideArrow, false);
-        arrowDrawableTint = typedArray.getColor(R.styleable.NiceSpinner_arrowTint, getResources().getColor(android.R.color.black));
+        arrowDrawableTint = typedArray.getColor(R.styleable.NiceSpinner_arrowTint,
+                getResources().getColor(android.R.color.black));
         arrowDrawableResId = typedArray.getResourceId(R.styleable.NiceSpinner_arrowDrawable, R.drawable.arrow);
         dropDownListPaddingBottom =
                 typedArray.getDimensionPixelSize(R.styleable.NiceSpinner_dropDownListPaddingBottom, 0);

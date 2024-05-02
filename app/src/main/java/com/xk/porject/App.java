@@ -21,6 +21,8 @@ import java.util.Locale;
 public class App extends Application {
 
     public static Application instance =null;
+    public static int  ID = 0;
+
 
 
     @Override

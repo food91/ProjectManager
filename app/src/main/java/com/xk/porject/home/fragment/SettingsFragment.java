@@ -13,9 +13,12 @@ import androidx.fragment.app.Fragment;
 import com.kongzue.dialogx.dialogs.BottomMenu;
 import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
 import com.tencent.mmkv.MMKV;
+import com.xk.base.data.Identity;
 import com.xk.base.ui.BaseFrament;
+import com.xk.porject.App;
 import com.xk.porject.R;
 import com.xk.porject.databinding.FragmentSettingsBinding;
+import com.xk.porject.home.AnswerQuestionActivity;
 import com.xk.porject.home.ChangePWActivity;
 import com.xk.porject.home.ChangePhoneActivity;
 import com.xk.porject.home.FeedbackActivity;
@@ -85,8 +88,16 @@ public class SettingsFragment extends BaseFrament {
         bind.tvSecurityQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getActivity(), SafetyActivity.class);
-                startActivity(intent);
+                if(App.ID== Identity.PROJECT_PARTY_ID){
+                    Intent intent =new Intent(getActivity(), SafetyActivity.class);
+                    startActivity(intent);
+                }else if(App.ID == Identity.CONTRACTOR_PARTY_ID){
+                    Intent intent =new Intent(getActivity(), SafetyActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent =new Intent(getActivity(), AnswerQuestionActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         bind.tvChangePassword.setOnClickListener(new View.OnClickListener() {

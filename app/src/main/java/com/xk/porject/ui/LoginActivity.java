@@ -17,6 +17,7 @@ import com.xk.base.data.LoginData;
 import com.xk.base.data.ResponseLogin;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
+import com.xk.porject.App;
 import com.xk.porject.contractor.ContractorMainActivity;
 import com.xk.porject.databinding.ActivityLoginBinding;
 import com.xk.porject.projectmain.PorjectAppMainActivity;
@@ -70,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 String user = edUser.getText().toString();
                 String pw = edPs.getText().toString();
                 LoginData data = new LoginData();
-
                 if(user.equals("0")&&pw.equals("0")){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 假设登陆成功后跳转到MainActivity
                     startActivity(intent);
@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                               WaitDialog.dismiss();
                               if(s.getCode()==200){
                                   MMKV.defaultMMKV().putString("token",s.getToken());
+                                  App.ID = s.getAuthorizat();
                                   if(s.getAuthorizat()==Identity.PROJECT_PARTY_ID){
                                       Intent intent = new Intent(LoginActivity.this, PorjectAppMainActivity.class); // 假设登陆成功后跳转到MainActivity
                                       startActivity(intent);
@@ -122,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                               }else{
-                                  PopTip.show("登录失败");
+                                  PopTip.show(s.getMsg());
                               }
 
                           }

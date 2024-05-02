@@ -7,7 +7,11 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import com.kongzue.dialogx.dialogs.PopTip;
 import com.xk.base.adapter.CommonAdapter;
+import com.xk.base.data.Response;
+import com.xk.base.net.ApiClient;
+import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.data.WorkDayData;
 import com.xk.porject.databinding.ActivityWorkerBinding;
@@ -17,6 +21,8 @@ import com.xk.porject.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.functions.Consumer;
+
 
 public class WorkerActivity extends BaseActivityPortrait<ActivityWorkerBinding> {
 
@@ -25,6 +31,21 @@ public class WorkerActivity extends BaseActivityPortrait<ActivityWorkerBinding> 
     private CommonAdapter<ItemworkBinding,WorkDayData> commonAdapter;
     @Override
     protected void initData() {
+        performApiCall(ApiClient.getClient().create(ApiService.class).getWage(), new Consumer<Response>() {
+            @Override
+            public void accept(Response response) throws Exception {
+                if(response.getCode()==200){
+
+                }else{
+                    PopTip.show(response.getMsg());
+                }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                throwable.printStackTrace();
+            }
+        });
         mode = getIntent().getStringExtra("count");
         data=new ArrayList<>();
         int sum = Utils.getAllDayMon();

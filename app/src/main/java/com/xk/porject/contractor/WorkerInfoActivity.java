@@ -173,6 +173,13 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
     @Override
     protected void onclick() {
 
+        bind.sendPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         bind.tvChooseGrounp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
