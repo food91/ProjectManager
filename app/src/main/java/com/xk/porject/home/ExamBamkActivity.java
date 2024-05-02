@@ -1,9 +1,15 @@
 package com.xk.porject.home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
@@ -86,7 +92,7 @@ public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBindi
                             PopTip.show("请选择试题截止时候后再发布");
                             return;
                         }
-
+                       start();
                     }
                 });
                 holder.tvEdit.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +104,25 @@ public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBindi
             }
         };
         bind.rv.setAdapter(commonAdapter);
+    }
+
+    private void start(){
+        Intent intent=new Intent(c, ChooseWorkerActivity.class);
+        startActivityForResult.launch(intent);
+    }
+    private ActivityResultLauncher<Intent> startActivityForResult;
+    private void register(){
+        startActivityForResult = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+
+                        }
+                    }
+                });
     }
 
     @Override

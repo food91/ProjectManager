@@ -15,7 +15,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:visibility="gone"
-            android:src="@drawable/normal_u15"
+            android:src="@drawable/normal_switch"
             />
     <ImageView
         android:id="@+id/iv1"

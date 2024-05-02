@@ -3,7 +3,6 @@
 // YApi QuickType插件生成，具体参考文档:https://plugins.jetbrains.com/plugin/18847-yapi-quicktype/documentation
 
 package com.xk.base.data;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class ResponseFindlist {
@@ -24,7 +23,7 @@ public class ResponseFindlist {
     public static class Datum {
         private String creatTiem;
         private long companyProject;
-        private long id;
+        private int id;
         private String projectName;
         private long projectPrice;
 
@@ -34,8 +33,8 @@ public class ResponseFindlist {
         public long getCompanyProject() { return companyProject; }
         public void setCompanyProject(long value) { this.companyProject = value; }
 
-        public long getid() { return id; }
-        public void setid(long value) { this.id = value; }
+        public int getid() { return id; }
+        public void setid(long value) { this.id = (int) value; }
 
         public String getProjectName() { return projectName; }
         public void setProjectName(String value) { this.projectName = value; }

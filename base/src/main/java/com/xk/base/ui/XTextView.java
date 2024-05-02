@@ -37,8 +37,8 @@ public class XTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     private void init(Context context, AttributeSet attrs) {
         // 从XML属性中读取圆角大小
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RoundedButton, 0, 0);
-        float cornerRadius = a.getDimension(R.styleable.RoundedButton_cornerRadius, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.XTextView, 0, 0);
+        float cornerRadius = a.getDimension(R.styleable.XTextView_cornerRadius, 0);
         a.recycle();
 
         if (cornerRadius > 0) {

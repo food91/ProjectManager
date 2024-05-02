@@ -93,6 +93,10 @@ public interface ApiService {
     public Observable<Response> PostProjectPartyData(@Body List<ProjectPartyData> data, @Path("type") int type,
                                                      @Path("verificat")String code
                                                      );
+    @GET("/project/projectparty/{id}")
+    public Observable<Response> getProjectDetail(@Path("id") int id);
+    @GET("/project/contract/list")
+    public Observable<Response> getContracttList();
     @POST("/project/contract")
     public Observable<Response> AddContract(@Body AddContractData data);
     @POST("/project/feedback")

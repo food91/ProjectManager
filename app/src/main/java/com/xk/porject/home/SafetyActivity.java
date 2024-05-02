@@ -99,6 +99,7 @@ public class SafetyActivity extends BaseActivityPortrait<com.xk.porject.databind
         postSafeTest.setScore(Integer.parseInt(score));
         postSafeTest.setName(title);
         postSafeTest.setScontent(test);
+        postSafeTest.setRemark(time);
         List<PostSafeTest> postlist = new ArrayList<>();
         postlist.add(postSafeTest);
         PostSafeTest postSafeTest2= new PostSafeTest();

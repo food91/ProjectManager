@@ -19,6 +19,13 @@ public class ProgressActivity extends BaseActivityPortrait<ActivityProgressBindi
 
     @Override
     protected void onclick() {
+        bind.textViewFindProgressTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(c, ProjectScheduleActivity.class);
+                startActivity(intent);
+            }
+        });
         bind.textViewSignatureTemplate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
