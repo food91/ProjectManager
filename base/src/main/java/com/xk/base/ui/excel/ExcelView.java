@@ -25,9 +25,11 @@ public class ExcelView extends ViewGroup {
     private float offsetX;
     private float offsetY;
     private int contentWidth;
-
+    private int contentHeight;
     private int screenWidth=0;
-
+    private int screenHeight=0;
+    private float downy;
+    private int nowy;
     private List<Data> data;
 
 
@@ -116,6 +118,7 @@ public class ExcelView extends ViewGroup {
         }
         contentWidth = measuredWidth-screenWidth;
         Log.d("tag","measuredWidth=="+measuredWidth);
+        contentHeight = measuredHeight-screenHeight+screenHeight/6;
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
     View getVirtualChildAt(int index) {
@@ -127,8 +130,6 @@ public class ExcelView extends ViewGroup {
         int childLeft;
         // Where right end of child should go
         final int width = right - left;
-        int childRight = width - 0;
-        // Space available for child
         int childSpace = width - paddingLeft - 0;
 
         final int count = data.size()+1;
@@ -160,6 +161,7 @@ public class ExcelView extends ViewGroup {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
     }
 
     @Override
@@ -167,6 +169,7 @@ public class ExcelView extends ViewGroup {
         layoutVertical(l,t,r,b);
     }
     private int scrollOffset = 0;
+    private int scrollOffsety = 0;
     private float downX;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -174,28 +177,49 @@ public class ExcelView extends ViewGroup {
             case MotionEvent.ACTION_DOWN:
                 // 记录初始位置和偏移量
                 downX = event.getX();
+                downy = event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
                 // 根据移动的距离更新偏移量
                 float moveX = event.getX();
+                float movey = event.getY();
                 int deltaX = (int) (downX - moveX);
-                // 计算新的偏移量，并确保它在有效范围内
-                if(scrollOffset+deltaX>=contentWidth){
-                deltaX = contentWidth-scrollOffset;
-                scrollOffset = contentWidth;
-                scrollBy(deltaX, 0);
-                return true;
-            }
-                scrollOffset +=deltaX;
-                Log.d("tag",scrollOffset+"");
-                if(scrollOffset<0){
-                    deltaX -=scrollOffset;
-                    scrollOffset=0;
-                    scrollBy(deltaX, 0); // 使用deltaX来滚动内容
+                int deltay = (int) (downy-movey);
+                if(Math.abs(deltay)<Math.abs(deltaX)){
+                    // 计算新的偏移量，并确保它在有效范围内
+                    if(scrollOffset+deltaX>=contentWidth){
+                        deltaX = contentWidth-scrollOffset;
+                        scrollOffset = contentWidth;
+                        scrollBy(deltaX, 0);
+                        return true;
+                    }
+                    scrollOffset +=deltaX;
+                    Log.d("tag",scrollOffset+"");
+                    if(scrollOffset<0){
+                        deltaX -=scrollOffset;
+                        scrollOffset=0;
+                        scrollBy(deltaX, 0); // 使用deltaX来滚动内容
+                    } else{
+                        scrollBy(deltaX, 0); // 使用deltaX来滚动内容
+                    }
+                    downX = moveX;
                 } else{
-                    scrollBy(deltaX, 0); // 使用deltaX来滚动内容
+                    if(scrollOffsety+deltay>=contentHeight){
+                        deltay = contentHeight-scrollOffsety;
+                        scrollOffsety = contentHeight;
+                        scrollBy(0, deltay);
+                        return true;
+                    }
+                    scrollOffsety +=deltay;
+                    if(scrollOffsety<0){
+                        deltay -=scrollOffsety;
+                        scrollOffsety=0;
+                        scrollBy(0, deltay); // 使用deltaX来滚动内容
+                    } else{
+                        scrollBy(0, deltay); // 使用deltaX来滚动内容
+                    }
+                    downy = movey;
                 }
-                downX = moveX;
                 break;
             case MotionEvent.ACTION_UP:
                 // 手指离开屏幕时，可以考虑实现平滑滚动或回弹效果

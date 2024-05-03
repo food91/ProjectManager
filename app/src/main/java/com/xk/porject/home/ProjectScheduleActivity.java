@@ -37,6 +37,15 @@ public class ProjectScheduleActivity extends BaseActivityPortrait<com.xk.porject
         data3.setActualProgress("05/21-06/15  完成：70%");
         dataList.add(data2);
         dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
+        dataList.add(data3);
         bind.excel.setData(dataList);
     }
 
