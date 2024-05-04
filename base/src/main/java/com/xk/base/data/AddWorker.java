@@ -11,6 +11,8 @@ public class AddWorker {
     private String img;
     private String bankDeposit;
     private int groupId;
+
+    private String groupName;
     private String remark;
     private long delete;
     private long checkoutType;
@@ -19,10 +21,10 @@ public class AddWorker {
     private String familyName;
     private long rank;
     private String bankAccountNumber;
-
-    private long ebJob;
+    private int pId;
+    private String ebJob;
     private long wage;
-    private long wageType;
+    private int wageType;
     private long pieceworkWage;
     private String founder;
     private long sex;
@@ -35,6 +37,55 @@ public class AddWorker {
     private String createTime;
     private String name;
     private long age;
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    @Override
+    public String toString() {
+        return "AddWorker{" +
+                "img='" + img + '\'' +
+                ", bankDeposit='" + bankDeposit + '\'' +
+                ", groupId=" + groupId +
+                ", remark='" + remark + '\'' +
+                ", delete=" + delete +
+                ", checkoutType=" + checkoutType +
+                ", password='" + password + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", rank=" + rank +
+                ", bankAccountNumber='" + bankAccountNumber + '\'' +
+                ", pId=" + pId +
+                ", ebJob=" + ebJob +
+                ", wage=" + wage +
+                ", wageType=" + wageType +
+                ", pieceworkWage=" + pieceworkWage +
+                ", founder='" + founder + '\'' +
+                ", sex=" + sex +
+                ", updateTime='" + updateTime + '\'' +
+                ", employId='" + employId + '\'' +
+                ", params=" + params +
+                ", userName='" + userName + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", onbordTime='" + onbordTime + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    public int getpId() {
+        return pId;
+    }
+
+    public void setpId(int pId) {
+        this.pId = pId;
+    }
 
     public String getImg() { return img; }
     public void setImg(String value) { this.img = value; }
@@ -72,14 +123,14 @@ public class AddWorker {
 
 
 
-    public long getEbJob() { return ebJob; }
-    public void setEbJob(long value) { this.ebJob = value; }
+    public String getEbJob() { return ebJob; }
+    public void setEbJob(String value) { this.ebJob = value; }
 
     public long getWage() { return wage; }
     public void setWage(long value) { this.wage = value; }
 
-    public long getWageType() { return wageType; }
-    public void setWageType(long value) { this.wageType = value; }
+    public int getWageType() { return wageType; }
+    public void setWageType(int value) { this.wageType = value; }
 
     public long getPieceworkWage() { return pieceworkWage; }
     public void setPieceworkWage(long value) { this.pieceworkWage = value; }

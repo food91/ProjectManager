@@ -114,8 +114,6 @@ public class ProjectRegisterActivity extends BaseActivityPortrait<ActivityProjec
 
                     }
                 });
-
-
     }
 
     private void getcode(){

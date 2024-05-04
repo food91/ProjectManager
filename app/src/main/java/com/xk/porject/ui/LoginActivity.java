@@ -80,6 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                     user = "19581571279";
                     pw = "123456";
                 }
+                if(user.equals("x")&&pw.equals("x")){
+                    user = "18817066013";
+                    pw = "123456";
+                }
                 if(user.equals("2")&&pw.equals("1")){
                     Intent intent = new Intent(LoginActivity.this, ContractorMainActivity.class); // 假设登陆成功后跳转到MainActivity
                     startActivity(intent);

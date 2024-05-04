@@ -1,5 +1,7 @@
 package com.xk.base.ui.excel;
 
+import java.util.List;
+
 public class Data {
 
     private String text;
@@ -7,6 +9,17 @@ public class Data {
     private String AllProgress;
     private int Actualstart;
     private int Actualend;
+
+    private List<String> rows;
+
+
+    public List<String> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<String> rows) {
+        this.rows = rows;
+    }
 
     public String getText() {
         return text;

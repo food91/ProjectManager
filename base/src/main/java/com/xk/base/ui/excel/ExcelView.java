@@ -1,25 +1,23 @@
 package com.xk.base.ui.excel;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 import android.widget.Scroller;
 
-import com.orhanobut.logger.Logger;
+import com.xk.base.R;
 
 import java.util.List;
 
 public class ExcelView extends ViewGroup {
     private HeadView headView;
-
+    private NormalHeadView normalHeadView;
     private Scroller scroller;
 
     private float offsetX;
@@ -29,36 +27,46 @@ public class ExcelView extends ViewGroup {
     private int screenWidth=0;
     private int screenHeight=0;
     private float downy;
-    private int nowy;
+    private int model;
     private List<Data> data;
 
 
     public ExcelView(Context context) {
         super(context);
+        init(context,null);
     }
 
     public ExcelView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context,attrs);
     }
 
     public ExcelView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context,attrs);
     }
 
     public ExcelView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(context,attrs);
     }
 
     public void setData(List<Data> list){
         this.data = list;
-        for(int i=0;i<list.size();i++){
-            DataView dataView =new DataView(getContext());
-            dataView.setData(list.get(i));
-            addView(dataView);
+        if(model==0){
+            for(int i=0;i<list.size();i++){
+                NormalDataView dataView =new NormalDataView(getContext());
+                dataView.setData(list.get(i).getRows());
+                addView(dataView);
+            }
+        }else{
+            for(int i=0;i<list.size();i++){
+                DataView dataView =new DataView(getContext());
+                dataView.setData(list.get(i));
+                addView(dataView);
+            }
         }
+
         resetLayout();
     }
 
@@ -90,13 +98,13 @@ public class ExcelView extends ViewGroup {
 
         switch (widthMode) {
             case MeasureSpec.EXACTLY:
-                Logger.d("EXACTLY");
+
                 measuredWidth = widthSize;
                 break;
             case MeasureSpec.AT_MOST:
-                Logger.d("AT_MOST");
+
             case MeasureSpec.UNSPECIFIED:
-                Logger.d("UNSPECIFIED");
+
                 measuredWidth = totalWidth;
                 break;
             default:
@@ -142,8 +150,7 @@ public class ExcelView extends ViewGroup {
             } else if (child.getVisibility() != GONE) {
                 final int childWidth = child.getMeasuredWidth();
                 final int childHeight = child.getMeasuredHeight();
-                childLeft = paddingLeft + (childSpace - childWidth) / 2;
-                setChildFrame(child, childLeft, childTop ,
+                setChildFrame(child, 0, childTop ,
                         childWidth, childHeight);
                 Log.d("tag","childtop=="+childTop);
                 childTop += childHeight ;
@@ -151,15 +158,33 @@ public class ExcelView extends ViewGroup {
         }
     }
 
+    public void setHeadData(List<String> list){
+        if(model==0){
+            normalHeadView.setData(list);
+        }
+    }
+
     private void setChildFrame(View child, int left, int top, int width, int height) {
         child.layout(left, top, left + width, top + height);
     }
-    private void init() {
-        headView = new HeadView(getContext());
-        addView(headView);
+    private void init(Context context, AttributeSet attrs)  {
+        if(attrs==null){
+            model=0;
+        }else{
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExcelView);
+            model = typedArray.getResourceId(R.styleable.ExcelView_ExcelStyle, 0);
+        }
+        if(model==1){
+            headView = new HeadView(getContext());
+            addView(headView);
+        }else{
+            normalHeadView = new NormalHeadView(getContext());
+            addView(normalHeadView);
+        }
         scroller = new Scroller(getContext());
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealMetrics(displayMetrics);
+        ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).
+                getDefaultDisplay().getRealMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
     }

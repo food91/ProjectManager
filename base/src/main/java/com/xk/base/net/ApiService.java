@@ -16,6 +16,7 @@ import com.xk.base.data.PostSafeTest;
 import com.xk.base.data.PostScheduleData;
 import com.xk.base.data.ProjectPartyData;
 import com.xk.base.data.Response;
+import com.xk.base.data.ResponseContractList;
 import com.xk.base.data.ResponseFindWork;
 import com.xk.base.data.ResponseFindlist;
 import com.xk.base.data.ResponseLogin;
@@ -30,8 +31,6 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -48,9 +47,12 @@ public interface ApiService {
 
     @GET("/system/signin/verification/{phone}")
     public Observable<Response> getCode(@Path("phone") String phone);
-    @GET("/project/group/find/{value}")
-    public Observable<GroupInfo> getgroup(@Path("value") String value);
-
+    @GET("/project/evaluation/{id}")
+    public Observable<GroupInfo> getEvaluation(@Path("id") String value);
+    @GET("/project/group/find/{value}/{projectid}")
+    public Observable<GroupInfo> getgroup(@Path("value") String value, @Path("projectid") int id);
+    @GET("/project/group/group/work/{id}")
+    public Observable<GroupInfo> getgroupWork(@Path("id") int value);
     @GET("/project/group/remove/{id}/{name}")
     public Observable<Response> Rename(@Path("id") int id,@Path("name") String targatname);
     @GET("/project/group/remove/{value}")
@@ -93,10 +95,15 @@ public interface ApiService {
     public Observable<Response> PostProjectPartyData(@Body List<ProjectPartyData> data, @Path("type") int type,
                                                      @Path("verificat")String code
                                                      );
-    @GET("/project/projectparty/{id}")
+    @GET("/project/supervisor/find/project/{id}")
+    public Observable<Response> getManageData(@Path("id") int id);
+    @GET("/project/supervisor/find/project/{id}")
     public Observable<Response> getProjectDetail(@Path("id") int id);
-    @GET("/project/contract/list")
-    public Observable<Response> getContracttList();
+
+    @GET("/project/contract/{ids}")
+    public Observable<Response> deleteContract(@Path("ids") String ids);
+    @GET("/project/projects/findlist/contract")
+    public Observable<ResponseContractList> getContracttList();
     @POST("/project/contract")
     public Observable<Response> AddContract(@Body AddContractData data);
     @POST("/project/feedback")

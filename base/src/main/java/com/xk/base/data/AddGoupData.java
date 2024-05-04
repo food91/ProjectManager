@@ -7,6 +7,7 @@ import java.util.List;
 
 public class AddGoupData {
     private String createBy;
+    private int pId;
     private String groupName;
     private String updateBy;
     private String creatId;
@@ -15,6 +16,15 @@ public class AddGoupData {
 
     private Params params;
     private long userId;
+
+
+    public int getPid() {
+        return pId;
+    }
+
+    public void setPid(int pid) {
+        this.pId = pid;
+    }
 
     public String getCreateBy() { return createBy; }
     public void setCreateBy(String value) { this.createBy = value; }

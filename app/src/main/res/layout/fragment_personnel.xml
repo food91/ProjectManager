@@ -76,9 +76,11 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/orange"
-                android:src="@android:drawable/arrow_down_float"
-                android:layout_marginStart="10sp" />
+                android:backgroundTint="@color/orange"
+                android:background="@android:drawable/arrow_down_float"
+                android:layout_marginStart="10sp"
+
+                />
 
             <!-- 项目管理组标题 -->
             <TextView
@@ -125,8 +127,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#ff0000"
-                android:src="@android:drawable/arrow_down_float"
+                android:backgroundTint="@color/orange"
+                android:background="@android:drawable/arrow_down_float"
                 android:layout_marginStart="10sp" />
 
             <!-- 承包方管理组标题 -->
@@ -174,8 +176,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/arrow_down_float"
-                android:background="#ff0000"
+                android:backgroundTint="@color/orange"
+                android:background="@android:drawable/arrow_down_float"
                 android:layout_marginStart="10sp" />
 
             <!-- 项目土建部标题 -->

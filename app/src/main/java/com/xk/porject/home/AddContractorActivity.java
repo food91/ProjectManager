@@ -1,14 +1,18 @@
 package com.xk.porject.home;
 
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
+import com.kongzue.dialogx.dialogs.PopMenu;
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
 import com.xk.base.data.AddContractData;
 import com.xk.base.data.ProjectPartyData;
 import com.xk.base.data.Response;
@@ -32,27 +36,32 @@ public class AddContractorActivity extends BaseActivityPortrait<ActivityContract
 
 
     private List<EditText> editTexts;
+    private List<String> projectName;
+    private List<String> cName;
+    private List<String> phoneName;
 
     @Override
     protected void initData() {
         editTexts = new ArrayList<>();
+        projectName =getIntent().getStringArrayListExtra("project");
+        cName =getIntent().getStringArrayListExtra("cname");
+        phoneName =getIntent().getStringArrayListExtra("cphone");
+        assert projectName != null;
+        bind.spProjectname.attachDataSource(projectName);
     }
     private void registerSubmit(){
         List<AddContractData> list = new ArrayList<>();
         AddContractData projectPartyData =new AddContractData();
-
         projectPartyData.setCreateTime(MyData.getData());
         projectPartyData.setUpdateTime(MyData.getData());
-
-        String name = bind.edPriceName.getText().toString();
-        String addc = bind.edAddc.getText().toString();
-        String conname = bind.edContractorName.getText().toString();
+        String name = bind.spProjectname.getText().toString();
+        String phone = bind.edContractorPhone.getText().toString();
+        String addc = bind.edAddcName.getText().toString();
         String price = bind.edPriceName.getText().toString();
         String pricenum = bind.edPriceSum.getText().toString();
         String company = bind.edSuperviesionCompany.getText().toString();
         if(TextUtils.isEmpty(name)||
                 TextUtils.isEmpty(addc)||
-                TextUtils.isEmpty(conname)||
                 TextUtils.isEmpty(price)||
                 TextUtils.isEmpty(pricenum)||
                 TextUtils.isEmpty(company)
@@ -61,13 +70,13 @@ public class AddContractorActivity extends BaseActivityPortrait<ActivityContract
             return;
         }
         projectPartyData.setProjectName(name);
-        projectPartyData.setContractName(conname);
+        projectPartyData.setContractName(addc);
+        projectPartyData.setContractNumber(phone);
         projectPartyData.setSection(price);
         projectPartyData.setLumpSum(Integer.parseInt(pricenum));
-        projectPartyData.setContractName(company);
+        projectPartyData.setSuperviesionCompany(company);
         list.add(projectPartyData);
         if(!editTexts.isEmpty()){
-
             for(int i=0;i<editTexts.size();i++){
                 AddContractData  projectPartyData2 =new AddContractData();
                 projectPartyData2=projectPartyData;
@@ -101,7 +110,6 @@ public class AddContractorActivity extends BaseActivityPortrait<ActivityContract
                         }else{
                             PopTip.show("注册失败");
                         }
-                        X.L("s="+s.toString());
                     }
 
                     @Override
@@ -119,8 +127,41 @@ public class AddContractorActivity extends BaseActivityPortrait<ActivityContract
 
 
     }
+
     @Override
     protected void onclick() {
+        bind.ivFindCphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] c_phone = phoneName.toArray(new String[0]);
+                PopMenu.show(bind.edContractorPhone,c_phone)
+                        .setOverlayBaseView(true)
+                        .setAlignGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
+                        .setOnMenuItemClickListener(new OnMenuItemClickListener<PopMenu>() {
+                            @Override
+                            public boolean onClick(PopMenu popMenu, CharSequence charSequence, int i) {
+                                bind.edContractorPhone.setText(charSequence);
+                                return false;
+                            }
+                        });
+            }
+        });
+        bind.ivFindContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] c_name = cName.toArray(new String[0]);
+                PopMenu.show(bind.edAddcName,c_name)
+                        .setOverlayBaseView(true)
+                        .setAlignGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
+                        .setOnMenuItemClickListener(new OnMenuItemClickListener<PopMenu>() {
+                            @Override
+                            public boolean onClick(PopMenu popMenu, CharSequence charSequence, int i) {
+                                bind.edAddcName.setText(charSequence);
+                                return false;
+                            }
+                        });
+            }
+        });
         bind.tvAdd2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

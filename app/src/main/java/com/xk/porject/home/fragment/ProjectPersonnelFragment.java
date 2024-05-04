@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.xk.base.data.GroupInfo;
-import com.xk.base.log.X;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseFrament;
@@ -53,7 +52,7 @@ public class ProjectPersonnelFragment extends BaseFrament {
 
     private void getProjectPersonData(){
         ApiClient.getClient().create(ApiService.class)
-                .getgroup("0").subscribeOn(Schedulers.io())
+                .getgroupWork(0).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GroupInfo>() {
                     @Override
@@ -64,7 +63,6 @@ public class ProjectPersonnelFragment extends BaseFrament {
                     @Override
                     public void onNext(GroupInfo response) {
                         WaitDialog.dismiss();
-                        X.L(response.toString());
                         if(response.getCode()==200){
 
                         }else{

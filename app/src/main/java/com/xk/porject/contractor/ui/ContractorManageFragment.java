@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,14 +15,10 @@ import com.xk.base.adapter.CommonAdapter;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.ResponseFindlist;
 import com.xk.base.log.X;
-import com.xk.base.net.ApiClient;
-import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.ui.BaseFrament;
-import com.xk.civilengineering.home.vm.DashboardViewModel;
 import com.xk.porject.R;
 import com.xk.porject.adapter.TwoLevelAdapter;
 import com.xk.porject.databinding.FragmentContractorManageBinding;
-import com.xk.porject.databinding.FragmentManageBinding;
 import com.xk.porject.databinding.ItemProjectlistBinding;
 import com.xk.porject.viewmodel.ContractorManageViewModel;
 
@@ -37,7 +32,7 @@ public class ContractorManageFragment extends BaseFrament {
     private CommonAdapter<ItemProjectlistBinding, ResponseFindlist.Datum> adapterProjectlist;
     private TwoLevelAdapter adapterGrouplist;
     private List<ResponseFindlist.Datum> projectlistdata;
-    private List<GroupInfo.Datum> grouplistdata;
+    private List<GroupInfo.Data> grouplistdata;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -91,7 +86,7 @@ public class ContractorManageFragment extends BaseFrament {
         });
         contractorManageViewModel.getGroupListLiveData().observe(getViewLifecycleOwner(), GroupInfoListLiveData -> {
             // 更新适配器数据
-            grouplistdata = GroupInfoListLiveData.getData();
+
             adapterProjectlist.setData(projectlistdata); // 假设getRows()返回Datum列表
         });
 

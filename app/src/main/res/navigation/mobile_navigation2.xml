@@ -10,6 +10,10 @@
         android:name="com.xk.porject.projectmain.ui.ProjectManageFragment"
         android:label="主页"
         tools:layout="@layout/fragment_manage" >
+        <argument
+            android:name="myArg"
+            app:argType="integer"
+            android:defaultValue="0" />
         <action
             android:id="@+id/action_startFragment_to_projectPersonnelFragment"
             app:destination="@id/navigation_persionner" />

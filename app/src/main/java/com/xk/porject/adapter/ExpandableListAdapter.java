@@ -9,23 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xk.base.data.GroupInfo;
-import com.xk.base.log.X;
 import com.xk.porject.R;
-import com.xk.porject.data.ExpandableListItem;
 
 import java.util.List;
 
 public class ExpandableListAdapter extends RecyclerView.Adapter<ExpandableListAdapter.ViewHolder> {
 
-    private  List<GroupInfo.Datum> dataList;
+    private  GroupInfo.Data data;
     private OnItemBindListener listener;
-    public ExpandableListAdapter(List<GroupInfo.Datum> dataList,OnItemBindListener listener) {
-        this.dataList = dataList;
+    public ExpandableListAdapter(GroupInfo.Data data,OnItemBindListener listener) {
+        this.data = data;
         this.listener = listener;
     }
 
-    public void setData(List<GroupInfo.Datum> dataList){
-        this.dataList = dataList;
+    public void setData(GroupInfo.Data dataList){
+        this.data = dataList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -42,9 +41,14 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<ExpandableListAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        GroupInfo.Datum item = dataList.get(position);
         if (listener != null) {
-            listener.show(holder,item, position);
+            if(position<data.getGroup().size()){
+                GroupInfo.Group item = data.getGroup().get(position);
+                listener.showGroup(holder,item, position);
+            }else{
+                GroupInfo.Worker itemw = data.getWorker().get(position);
+                listener.showWork(holder,itemw, position);
+            }
         }
     }
 
@@ -53,15 +57,26 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<ExpandableListAd
 
     @Override
     public int getItemCount() {
-        if(dataList==null){
+        if(data==null){
             return  0;
         }
 
-        return dataList.size();
+        int worksize=0;
+        int sum=0;
+        if(data.getWorker()!=null){
+            sum +=data.getWorker().size();
+        }else{
+
+        }
+        if(data.getGroup()!=null){
+            sum +=data.getGroup().size();
+        }
+        return sum;
     }
 
     public interface OnItemBindListener {
-        void show(@NonNull ViewHolder holder,GroupInfo.Datum item, int position);
+        void showGroup(@NonNull ViewHolder holder, GroupInfo.Group item, int position);
+        void showWork(@NonNull ViewHolder holder, GroupInfo.Worker item, int position);
     }
 
     // 为列表项持有视图信息

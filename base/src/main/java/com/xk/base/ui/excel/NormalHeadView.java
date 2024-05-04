@@ -11,31 +11,49 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-class HeadView extends View {
+import java.util.ArrayList;
+import java.util.List;
+
+class NormalHeadView extends View {
 
     private int screenWidth;
     Paint paint;
     Paint textPaint;
     Paint monPaint;
+    private int textheight;
+    private int textwidth;
 
-    public HeadView(Context context) {
+    public NormalHeadView(Context context) {
         super(context);
         init(context);
     }
 
-    public HeadView(Context context, @Nullable AttributeSet attrs) {
+    public NormalHeadView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public HeadView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NormalHeadView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
-    public HeadView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NormalHeadView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
+    }
+
+    private List<String> data;
+    private List<Integer> dataWeight;
+
+    public void setData(List<String> dataList){
+        this.data = dataList;
+        dataWeight = new ArrayList<>();
+        for(int i=0;i<data.size();i++){
+             int  h = (int) textPaint.measureText(data.get(i)); // 测量文本的宽度
+            dataWeight.add(h);
+        }
+        requestLayout();
     }
 
     private void init(Context context){
@@ -49,6 +67,9 @@ class HeadView extends View {
         textPaint = new Paint();
         textPaint.setTextSize(spToPx(getContext(), 12)); // 设置字体大小为12sp
         textPaint.setColor(Color.parseColor("#797979"));
+        // 获取字体的度量信息
+        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        textheight = (int) (-fontMetrics.ascent + fontMetrics.descent);
         monPaint = new Paint();
         monPaint.setTextSize(spToPx(getContext(), 12)); // 设置字体大小为12sp
         monPaint.setColor(Color.parseColor("#333333"));
@@ -56,9 +77,9 @@ class HeadView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int desiredWidth = dpToPx(getContext(),104+52*12);
+        int desiredWidth = dpToPx(getContext(),(cell_width*data.size()));
         int newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(desiredWidth, MeasureSpec.EXACTLY);
-        setMeasuredDimension(newWidthMeasureSpec, dpToPx(getContext(),30));
+        setMeasuredDimension(newWidthMeasureSpec, dpToPx(getContext(),cell_height));
     }
 
     @Override
@@ -66,19 +87,23 @@ class HeadView extends View {
         super.onLayout(changed, left, top, right, bottom);
     }
 
+    private int cell_one_width =100;
+    private int cell_width = 100;
+
+    private int cell_height =30;
+
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(0, 0, dpToPx(getContext(),104), dpToPx(getContext(),30), paint);
-        canvas.drawLine(0,0,dpToPx(getContext(),104),dpToPx(getContext(),30),paint);
-        canvas.drawText("日期",dpToPx(getContext(),60),dpToPx(getContext(),15),textPaint);
-        canvas.drawText("名称",dpToPx(getContext(),15),dpToPx(getContext(),26),textPaint);
-        for(int i=0;i<12;i++){
-            canvas.drawRect(dpToPx(getContext(),104+52*i),0, dpToPx(getContext(),
-                    156+52*i), dpToPx(getContext(),30), paint);
-            int mon=i+1;
-            canvas.drawText(mon+"月",dpToPx(getContext(),
-                    117+52*i),dpToPx(getContext(),20),monPaint);
+        for(int i=0;i<data.size();i++){
+            canvas.drawRect(dpToPx(getContext(),cell_width*i),0, dpToPx(getContext(),
+                    cell_width+cell_width+cell_width*i), dpToPx(getContext(),cell_height), paint);
+            int cenX =cell_width*i+cell_width/2;
+            int len = (int) monPaint.measureText(data.get(i))/3; // 测量文本的宽度
+            cenX = cenX-len+5;
+            int ceny = cell_height/2+textheight/5;
+            canvas.drawText(data.get(i),dpToPx(getContext(),
+                    cenX),dpToPx(getContext(),ceny),monPaint);
         }
         Log.d("tag","ondraw");
     }

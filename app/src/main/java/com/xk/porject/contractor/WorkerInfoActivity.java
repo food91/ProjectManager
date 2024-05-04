@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.kongzue.albumdialog.PhotoAlbumDialog;
 import com.kongzue.albumdialog.util.DialogImplCallback;
 import com.kongzue.albumdialog.util.SelectPhotoCallback;
@@ -25,6 +26,7 @@ import com.kongzue.dialogx.dialogs.FullScreenDialog;
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.orhanobut.logger.Logger;
+import com.tencent.mmkv.MMKV;
 import com.xk.base.data.AddWorker;
 import com.xk.base.data.Response;
 import com.xk.base.net.ApiClient;
@@ -33,6 +35,7 @@ import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.utils.MyData;
 import com.xk.porject.R;
 import com.xk.porject.databinding.ActivityWorkerInfoBinding;
+import com.xk.porject.home.ChooseWorkerActivity;
 import com.xk.porject.home.WorkManageActivity;
 
 import java.io.File;
@@ -60,6 +63,8 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
     List<String> type_time = new ArrayList<>();
     ArrayAdapter<String> adapterYear,adapterMonth,adapterDay,adapterTimeType,adapterType;
     ActivityResultContracts.StartActivityForResult contract = new ActivityResultContracts.StartActivityForResult();
+    private int cid;
+    private int pid;
     ActivityResultCallback<ActivityResult> callBack = new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -68,6 +73,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
                 if(data!=null){
                     groupid = data.getIntExtra("id",0);
                     String name = data.getStringExtra("name");
+                    pid = data.getIntExtra("pid",pid);
                     bind.tvChooseGrounp.setText(name);
                     bind.tvChooseGrounp.setTextColor(ResourcesCompat.getColor(getResources(),
                             R.color.purple_500, null));
@@ -165,7 +171,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
     }
     private ActivityResultLauncher<Intent> mActivityBLauncher = registerForActivityResult(contract, callBack);
     private void chooseGroup(){
-        Intent intent = new Intent(c,WorkManageActivity.class);
+        Intent intent = new Intent(c, ChooseWorkerActivity.class);
         intent.putExtra("mode",1);
         mActivityBLauncher.launch(intent);
     }
@@ -202,6 +208,12 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             @Override
             public void onClick(View v) {
                 addWorkCheck();
+            }
+        });
+        bind.tvSorceQuery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                queryScore();
             }
         });
         bind.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -241,6 +253,83 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             }
         });
         initAdapter();
+        resaveData();
+    }
+
+    private void resaveData(){
+        String addWorkerJson = MMKV.defaultMMKV().getString("workinfo", "");
+        if(TextUtils.isEmpty(addWorkerJson)){
+            return;
+        }
+        AddWorker addWorker2 = new Gson().fromJson(addWorkerJson, AddWorker.class);
+        path =addWorker2.getImg();
+        bind.ivAdd.setVisibility(View.GONE);
+        bind.image2.setVisibility(View.VISIBLE);
+        Glide.with(c).load(path).centerCrop().
+                into(bind.image2);
+        bind.tvChooseGrounp.setText(addWorker2.getGroupName());
+        groupid = addWorker2.getGroupId();
+        pid = addWorker2.getpId();
+        bind.edWorkType.setText(addWorker2.getWageType());
+        bind.edName.setText(addWorker2.getName());
+        String sex ="";
+        if(addWorker2.getSex()==0){
+            sex="男";
+        }else{
+            sex="女";
+        }
+        bind.edSex.setText(sex);
+        bind.edNation.setText(addWorker2.getFamilyName());
+        bind.edNation.setText(addWorker2.getFamilyName());
+        bind.edAge.setText(addWorker2.getAge()+"");
+        bind.edIdent.setText(addWorker2.getEmployId());
+        int select =addWorker2.getWageType();
+        bind.spinnerType.setSelection(select);
+        if(  bind.llTypeFinal.getVisibility()==View.VISIBLE){
+            bind.edTypeMoney.setText(addWorker2.getWage()+"");
+        }
+        if(bind.llTypeCount.getVisibility()==View.VISIBLE){
+            bind.edTypeCountMoney.setText(addWorker2.getWage()+"");
+        }
+        bind.edBankAccountNumber.setText(addWorker2.getBankAccountNumber());
+        bind.edBankDeposit.setText(addWorker2.getBankDeposit());
+        String dateTimeString =  addWorker2.getOnbordTime();
+        String[] parts = dateTimeString.split(" ");
+        String datePart = parts[0];
+        String[] dateComponents = datePart.split("-");
+
+        String year = dateComponents[0];
+        String month = dateComponents[1];
+        String day = dateComponents[2];
+        for(int i=0;i<adapterDay.getCount();i++){
+            if(adapterDay.getItem(i).equals(day)){
+                bind.spinnerDay.setSelection(i);
+                break;
+            }
+        }
+        for(int i=0;i<adapterYear.getCount();i++){
+            if(adapterDay.getItem(i).equals(year)){
+                bind.spinnerYear.setSelection(i);
+                break;
+            }
+        }
+        for(int i=0;i<adapterYear.getCount();i++){
+            if(adapterDay.getItem(i).equals(month)){
+                bind.spinnerMon.setSelection(i);
+                break;
+            }
+        }
+        int check = (int) addWorker2.getCheckoutType();
+        if(check==0){
+            bind.checkboxCheckAuto.setChecked(true);
+        }else{
+            bind.checkboxCheckAuto.setChecked(false);
+        }
+        bind.edPhone.setText(addWorker2.getUserName());
+    }
+
+    private void queryScore(){
+       PopTip.show("暂时没有该职员评分");
     }
 
     private void addWorkCheck(){
@@ -255,7 +344,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             return;
         }
         addWorker.setGroupId(groupid);
-
+        addWorker.setGroupName(bind.tvChooseGrounp.getText().toString());
         String str_work = bind.edWorkType.getText().toString();
         if(TextUtils.isEmpty(str_work)){
             PopTip.show("请选择工种");
@@ -275,15 +364,17 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         }
         if(str_sex.equals("女")){
             addWorker.setSex(1);
-        }else{
+        }else if(str_sex.equals("男")){
             addWorker.setSex(0);
+        }else {
+            PopTip.show("请正确填写性别");
+            return;
         }
         String str_home = bind.edHome.getText().toString();
         if(TextUtils.isEmpty(str_home)){
             PopTip.show("请输入籍贯");
             return;
         }
-
         String str_nation = bind.edNation.getText().toString();
         if(TextUtils.isEmpty(str_nation)){
             PopTip.show("请输入民族");
@@ -340,10 +431,16 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         }
         addWorker.setBankDeposit(bankDeposit);
         String year = bind.spinnerYear.getSelectedItem().toString();
-        String month = bind.spinnerMon.getSelectedItem().toString();
-        String day = bind.spinnerDay.getSelectedItem().toString();
-        String time = year + "-" + month + "-" + day;
-        addWorker.setOnbordTime(MyData.getData());
+        String rawMonth = bind.spinnerMon.getSelectedItem().toString();
+        String rawDay = bind.spinnerDay.getSelectedItem().toString();
+        // 确保月份和日期是两位数，如果不是，在前面补零
+        String month = (rawMonth.length() == 1) ? "0" + rawMonth : rawMonth;
+        String day = (rawDay.length() == 1) ? "0" + rawDay : rawDay;
+        String hour = "00";
+        String minute = "00";
+        String second = "00";
+        String dateTimeString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+        addWorker.setOnbordTime(dateTimeString);
         boolean check = bind.checkboxCheckAuto.isChecked();
         if(check){
         addWorker.setCheckoutType(0);
@@ -357,6 +454,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         }
         addWorker.setUserName(phone);
         addWorker.setPassword("123456");
+        addWorker.setpId(pid);
         boolean unexpected = bind.checkboxUnexpected.isChecked();
         if(!unexpected){
             PopTip.show("请勾选意外险");
@@ -374,6 +472,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             public void accept(Response response) throws Exception {
                 if(response.getCode()==200){
                     PopTip.show("添加成功");
+                    MMKV.defaultMMKV().putString("workinfo",new Gson().toJson(addWorker));
                 }else{
                     PopTip.show(response.getMsg());
                 }

@@ -36,9 +36,7 @@
             android:name="adminproject.ContractorListActivity"
             android:exported="false"
             android:theme="@style/Theme.AdminProject" />
-        <activity
-            android:name="adminproject.MainActivity"
-            android:theme="@style/Theme.AdminProject" />
+
         <activity
             android:name="adminproject.LoginActivity"
             android:exported="true"

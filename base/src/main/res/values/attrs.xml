@@ -19,5 +19,13 @@
         <attr name="popupTextAlignment" />
         <attr name="entries" format="reference" />
     </declare-styleable>
+    <attr name="ExcelStyle" format="enum">
+        <enum name="normal" value="0" />
+        <enum name="project_table" value="1" />
+        />
+    </attr>
 
+    <declare-styleable name="ExcelView">
+        <attr name="ExcelStyle" />
+    </declare-styleable>
 </resources>

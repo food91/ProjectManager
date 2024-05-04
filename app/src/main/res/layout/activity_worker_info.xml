@@ -275,6 +275,7 @@
                 android:gravity="start"
                 />
                 <com.xk.base.ui.XTextView
+                    android:id="@+id/tv_sorce_query"
                     android:text="信誉查询"
                     android:background="#ff0000"
                     app:cornerRadius = "5dp"

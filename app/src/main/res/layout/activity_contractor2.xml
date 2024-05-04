@@ -81,13 +81,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <EditText
-                android:id="@+id/ed_projectname"
+            <com.xk.base.ui.spinner.NiceSpinner
+                android:id="@+id/sp_projectname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
+                app:hideArrow="true"
+                android:text="选择项目名称"
+                android:textColor="#999999"
                 />
             <ImageView
+                android:id="@+id/iv_query_projectname"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/add_serch11"
@@ -114,12 +118,13 @@
             android:layout_height="wrap_content"
             >
             <EditText
-                android:id="@+id/ed_addc"
+                android:id="@+id/ed_addc_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 />
             <ImageView
+                android:id="@+id/iv_find_contract"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/add_serch11"
@@ -146,12 +151,14 @@
             android:layout_height="wrap_content"
             >
             <EditText
-                android:id="@+id/ed_contractor_name"
+                android:id="@+id/ed_contractor_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:inputType="number"
                 />
             <ImageView
+                android:id="@+id/iv_find_cphone"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/add_serch11"

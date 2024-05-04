@@ -7,9 +7,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.kongzue.dialogx.dialogs.BottomMenu;
@@ -20,112 +19,131 @@ import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialogx.interfaces.OnInputDialogButtonClickListener;
 import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
-import com.orhanobut.logger.Logger;
 import com.xk.base.data.AddGoupData;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.Response;
-import com.xk.base.log.X;
+import com.xk.base.data.ResponseFindlist;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.adapter.ExpandableListAdapter;
 
 import com.xk.porject.contractor.WorkerInfoActivity;
-import com.xk.porject.data.ExpandableListItem;
 import com.xk.porject.databinding.ActivityWorkManageBinding;
+import com.xk.porject.viewmodel.WorkManageViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageBinding> {
 
-    List<GroupInfo.Datum> data = new ArrayList<>();
-    List<GroupInfo.Datum> path;
-    GroupInfo.Datum postionDatum=new GroupInfo.Datum();
-    List<GroupInfo.Datum> deletelist;
+
+     GroupInfo.Data data = new GroupInfo.Data();
+    List<GroupInfo.Group> path;
+    GroupInfo.Group postionDatum=new GroupInfo.Group();
+    GroupInfo.Data deletelist;
 
     private int mode;
 
+    private WorkManageViewModel viewModel;
+
+    private int id;
+    @Override
+    protected void initPortraitView() {
+        mode=getIntent().getIntExtra("mode",0);
+        id = getIntent().getIntExtra("id",id);
+        deletelist = new GroupInfo.Data();
+        deletelist.init();
+        bind.rv.setLayoutManager(new LinearLayoutManager(this));
+        m_setAdapter();
+        viewModel  = new ViewModelProvider(this).get(WorkManageViewModel.class);
+        viewModel.getProjectListLiveData().observe(this, new Observer<ResponseFindlist>() {
+            @Override
+            public void onChanged(ResponseFindlist responseFindlist) {
+                if(!responseFindlist.getData().isEmpty()){
+                    data = new GroupInfo.Data();
+                    List<GroupInfo.Group> group =new ArrayList<>();
+                    for(int i=0;i<responseFindlist.getData().size();i++){
+                        ResponseFindlist.Datum item = responseFindlist.getData().get(i);
+                        GroupInfo.Group group1 =new GroupInfo.Group();
+                        group1.setid(0);
+                        group1.setGroupValue("-1");
+                        group1.setGroupName(item.getProjectName());
+                        group.add(group1);
+                    }
+                    data.setGroup(group);
+                    adapter.setData(data);
+                    bind.tvPath.setText("/");
+                    path.clear();
+                }
+            }
+        });
+        viewModel.getProjectlist();
+    //    viewModel.getGroupList();
+    }
     @Override
     protected void initData() {
-        mode=getIntent().getIntExtra("mode",0);
+
         path=new ArrayList<>();
-        deletelist = new ArrayList<>();
-        QueryGroup(null);
     }
 
-    private void setAdapter(){
-        adapter = new ExpandableListAdapter(data, new ExpandableListAdapter.OnItemBindListener() {
+    private void m_setAdapter(){
+        adapter = new ExpandableListAdapter(data,new ExpandableListAdapter.OnItemBindListener() {
             @Override
-            public void show(@NonNull ExpandableListAdapter.ViewHolder holder, GroupInfo.Datum item, int position) {
+            public void showGroup(@NonNull ExpandableListAdapter.ViewHolder holder, GroupInfo.Group item, int position) {
                 holder.title.setText(item.getGroupName());
                 holder.checkBox.setChecked(false);
                 holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(mode==1){
-                          showMessage(item);
-                            return;
-                        }
                         if(isChecked){
-                            deletelist.add(item);
+                            deletelist.getGroup().add(item);
                         }else{
-                            deletelist.remove(item);
+                            deletelist.getGroup().remove(item);
                         }
                     }
                 });
                 holder.title.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        QueryGroup(item);
+                        QueryGroup(id,item);
                     }
                 });
             }
+
+            @Override
+            public void showWork(@NonNull ExpandableListAdapter.ViewHolder holder, GroupInfo.Worker item, int position) {
+
+            }
+
         });
         bind.rv.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
-    private void showMessage(GroupInfo.Datum item){
-        MessageDialog.show("选择分组","你确定选择"+item.getGroupName(),"确定","取消")
-                .setOkButton(new OnDialogButtonClickListener<MessageDialog>() {
-                    @Override
-                    public boolean onClick(MessageDialog messageDialog, View view) {
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("id",item.getId());
-                        returnIntent.putExtra("name",item.getGroupName());
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();
-                        return false;
-                    }
-                }).show();
-    }
 
-    private void QueryGroup(GroupInfo.Datum item){
-        String request ="";
-        if(item==null){
-            request="0";
-        }else{
-            request = item.getId()+"";
-        }
-        performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(request),
+
+    private void QueryGroup(int id,GroupInfo.Group item){
+        performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(item.getid()+"",id),
                 new Consumer<GroupInfo>() {
                     @Override
                     public void accept(GroupInfo groupInfo) throws Exception {
-                        postionDatum=item;
-                            data=groupInfo.getData();
-                            if(postionDatum!=null){
+                        if (groupInfo.getCode() == 200) {
+
+                            if (postionDatum != null&&!path.isEmpty()&&
+                            postionDatum.getid()==item.getid()) {
+
+                            }else{
+                                postionDatum = item;
                                 path.add(postionDatum);
                                 setPath();
                             }
-                            setAdapter();
+                            deletelist.getGroup().clear();
+                            data = groupInfo.getData();
+                            adapter.setData(data);
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -143,28 +161,29 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
        }else{
            queryid = path.size()-1;
        }
-        performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(path.get(queryid).getGroupValue()),
-                new Consumer<GroupInfo>() {
-                    @Override
-                    public void accept(GroupInfo groupInfo) throws Exception {
-                        data=groupInfo.getData();
-                        for(int i=0;i<data.size();i++){
-                            if(data.get(i).getId()==Integer.parseInt(postionDatum.getGroupValue())){
-                                postionDatum = data.get(i);
-                            }
-                        }
-                        path.remove(path.size()-1);
-                        setPath();
-                        adapter.setData(data);
-                        adapter.notifyDataSetChanged();
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        throwable.printStackTrace();
-                        WaitDialog.dismiss();
-                    }
-                });
+       String value = path.get(queryid).getGroupValue();
+       if(value.equals("-1")){
+           viewModel.getProjectlist();
+       }else {
+           performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(path.get(queryid).getGroupValue(),id),
+                   new Consumer<GroupInfo>() {
+                       @Override
+                       public void accept(GroupInfo groupInfo) throws Exception {
+                           data=groupInfo.getData();
+                           path.remove(path.size()-1);
+                           postionDatum = path.get(path.size()-1);
+                           setPath();
+                           adapter.setData(data);
+                       }
+                   }, new Consumer<Throwable>() {
+                       @Override
+                       public void accept(Throwable throwable) throws Exception {
+                           throwable.printStackTrace();
+                           WaitDialog.dismiss();
+                       }
+                   });
+       }
+
     }
 
     private void setPath(){
@@ -219,15 +238,17 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
         AddGoupData add_data = new AddGoupData();
         add_data.setGroupName(name);
         if(postionDatum==null){
-            add_data.setGroupValue("0");
+            PopTip.show("该页不能添加分组");
+            return;
         }else{
-            add_data.setGroupValue(postionDatum.getId()+"");
+            add_data.setGroupValue(postionDatum.getid()+"");
         }
+        add_data.setPid(id);
         performApiCall(ApiClient.getClient().create(ApiService.class)
                 .Addgroup(add_data), new Consumer<Response>() {
             @Override
             public void accept(Response response) throws Exception {
-                QueryGroup(postionDatum);
+                QueryGroup(id,postionDatum);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -271,45 +292,54 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
         bind.tvRename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(deletelist==null||deletelist.isEmpty()){
+                int sum = deletelist.getGroup().size()+deletelist.getWorker().size();
+                if(deletelist==null||deletelist.getGroup()==null||deletelist.getGroup().isEmpty()){
                     PopTip.show("请选中重命名对象");
                     return;
                 }
-                if(deletelist.size()>1){
+                if(sum>1){
                     PopTip.show("重命名只能选择一个");
                     return;
                 }
-                reName(deletelist.get(0));
+                if(deletelist.getGroup().get(0).getGroupValue().equals("-1")){
+                    PopTip.show("项目不能重命名");
+                    return;
+                }
+                reName(deletelist.getGroup().get(0));
             }
         });
         bind.tvMove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(deletelist==null||deletelist.isEmpty()){
+                if(deletelist==null||deletelist.getGroup()==null||deletelist.getGroup().isEmpty()){
                     PopTip.show("请选择移动对象");
                     return;
                 }
-                if(deletelist.size()>1){
-                    PopTip.show("移动只能选择一个对象");
+                if(deletelist.getGroup().size()>1){
+                    PopTip.show("移动分组为单项选择");
                     return;
                 }
-                move(deletelist.get(0));
+                move(deletelist.getGroup().get(0));
             }
         });
     }
 
-    private void move(GroupInfo.Datum item){
+    private void move(GroupInfo.Group item){
+        if(item.getGroupValue().equals("-1")){
+            PopTip.show("项目不允许移动");
+            return;
+        }
         List<String> strlist = new ArrayList<>();
         strlist.add("移动到父节点");
-        List<GroupInfo.Datum> temp = new ArrayList<>();
-        for(int i=0;i<data.size();i++){
-            if(data.get(i).getId()==deletelist.get(0).getId()){
+        List<GroupInfo.Group> temp = new ArrayList<>();
+        for(int i=0;i<data.getGroup().size();i++){
+            if(data.getGroup().get(i).getid()==deletelist.getGroup().get(0).getid()){
                 continue;
             }
             StringBuffer stringBuffer =new StringBuffer();
             stringBuffer.append("移动到");
-            stringBuffer.append(data.get(i).getGroupName());
-            temp.add(data.get(i));
+            stringBuffer.append(data.getGroup().get(i).getGroupName());
+            temp.add(data.getGroup().get(i));
             stringBuffer.append("子节点");
             strlist.add(stringBuffer.toString());
         }
@@ -318,13 +348,13 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
             @Override
             public boolean onClick(BottomMenu bottomMenu, CharSequence charSequence, int i) {
                 if(i==0){
-                    if(postionDatum==null){
+                    if(postionDatum==null||postionDatum.getGroupValue().equals("-1")){
                         PopTip.show("已经在最上层节点");
                         return false;
                     }
-                    move(item.getId(),postionDatum.getGroupValue());
+                    move(item.getid(),postionDatum.getGroupValue()+"");
                 }else{
-                    move(item.getId(),temp.get(i-1).getId()+"");
+                    move(item.getid(),temp.get(i-1).getid()+"");
                 }
                 return false;
             }
@@ -338,15 +368,16 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
             @Override
             public void accept(Response response) throws Exception {
                     if(response.getCode()==200){
-                        data.removeIf(new Predicate<GroupInfo.Datum>() {
+                        data.getGroup().removeIf(new Predicate<GroupInfo.Group>() {
                             @Override
-                            public boolean test(GroupInfo.Datum datum) {
-                                if(datum.getId()==id){
+                            public boolean test(GroupInfo.Group group) {
+                                if(group.getid()==id){
                                     return true;
                                 }
                                 return false;
                             }
                         });
+                        adapter.notifyDataSetChanged();
                     }else{
                         PopTip.show(response.getMsg());
                     }
@@ -360,7 +391,7 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
         });
     }
 
-    private void reName(GroupInfo.Datum item){
+    private void reName(GroupInfo.Group item){
 
         new InputDialog("重命名", "请输入新名称", "确定", "取消", "")
                 .setCancelable(false)
@@ -374,8 +405,8 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                 .show();
     }
 
-    private void httprename(String input,GroupInfo.Datum item){
-        performApiCall(ApiClient.getClient().create(ApiService.class).Rename(item.getId(),input)
+    private void httprename(String input,GroupInfo.Group item){
+        performApiCall(ApiClient.getClient().create(ApiService.class).Rename(item.getid(),input)
                 , new Consumer<Response>() {
                     @Override
                     public void accept(Response groupInfo) throws Exception {
@@ -396,33 +427,38 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
     }
 
     private void deleteGroup(){
-        if(deletelist.size()>1){
-            PopTip.show("分组不能批量删除");
-            return;
-        }
-        if(deletelist.isEmpty()){
-            PopTip.show("请选择删除的组");
-            return;
-        }
-        performApiCall(ApiClient.getClient().create(ApiService.class).deletegroup(deletelist.get(0).getId()+""), new Consumer<Response>() {
+       for(int i=0;i<deletelist.getGroup().size();i++){
+           if(deletelist.getGroup().get(i).getGroupValue().equals("-1")){
+               PopTip.show(deletelist.getGroup().get(i).getGroupName()+"不能删除，它是一个项目");
+               continue;
+           }
+            httpdeleteGroup(deletelist.getGroup().get(i).getid()+"");
+       }
+
+    }
+
+    private void httpdeleteGroup(String id){
+        performApiCall(ApiClient.getClient().create(ApiService.class).deletegroup(id), new Consumer<Response>() {
             @Override
             public void accept(Response response) throws Exception {
-                    if(response.getCode()==200){
-                        PopTip.show("删除成功");
-                        data.remove(deletelist.get(0));
-                        deletelist.clear();
-                        adapter.notifyDataSetChanged();
-                    }else{
-                        PopTip.show(response.getMsg());
-                    }
+                if(response.getCode()==200){
+                    PopTip.show("删除成功");
+                    data.getGroup().remove(deletelist.getGroup().get(0));
+                    deletelist.getGroup().clear();
+                    adapter.notifyDataSetChanged();
+                }else{
+                    PopTip.show(response.getMsg());
+                }
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                    throwable.printStackTrace();
+                throwable.printStackTrace();
             }
         });
     }
+
+
 
     private void Deletelist(){
         String commaSeparatedIds = String.join(",", deletelist.toString());
@@ -432,7 +468,6 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                 if (groupInfo.getCode() == 200) {
                     PopTip.show("删除成功");
                     adapter.notifyDataSetChanged();
-                    deletelist.clear();
                 } else {
                     PopTip.show(groupInfo.getMsg());
                 }
@@ -445,9 +480,5 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
         });
     }
 
-    @Override
-    protected void initPortraitView() {
-        bind.rv.setLayoutManager(new LinearLayoutManager(this));
 
-    }
 }
