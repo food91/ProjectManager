@@ -98,7 +98,6 @@ public class ExcelView extends ViewGroup {
 
         switch (widthMode) {
             case MeasureSpec.EXACTLY:
-
                 measuredWidth = widthSize;
                 break;
             case MeasureSpec.AT_MOST:
@@ -117,6 +116,8 @@ public class ExcelView extends ViewGroup {
                 measuredHeight = heightSize;
                 break;
             case MeasureSpec.AT_MOST:
+                measuredHeight = totalHeight;
+                break;
             case MeasureSpec.UNSPECIFIED:
                 measuredHeight = totalHeight;
                 break;
@@ -125,8 +126,12 @@ public class ExcelView extends ViewGroup {
                 break;
         }
         contentWidth = measuredWidth-screenWidth;
-        Log.d("tag","measuredWidth=="+measuredWidth);
-        contentHeight = measuredHeight-screenHeight+screenHeight/6;
+        Log.d("tag","measuredWidth=="+heightSize);
+        if(measuredHeight>heightSize){
+            contentHeight = measuredHeight-screenHeight+screenHeight/6;
+        }else{
+            contentHeight = measuredHeight;
+        }
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
     View getVirtualChildAt(int index) {
@@ -141,8 +146,6 @@ public class ExcelView extends ViewGroup {
         int childSpace = width - paddingLeft - 0;
 
         final int count = data.size()+1;
-
-
         for (int i = 0; i < count; i++) {
             final View child = getVirtualChildAt(i);
             if (child == null) {
@@ -152,7 +155,6 @@ public class ExcelView extends ViewGroup {
                 final int childHeight = child.getMeasuredHeight();
                 setChildFrame(child, 0, childTop ,
                         childWidth, childHeight);
-                Log.d("tag","childtop=="+childTop);
                 childTop += childHeight ;
             }
         }
@@ -172,7 +174,7 @@ public class ExcelView extends ViewGroup {
             model=0;
         }else{
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExcelView);
-            model = typedArray.getResourceId(R.styleable.ExcelView_ExcelStyle, 0);
+            model = typedArray.getInt(R.styleable.ExcelView_ExcelStyle, 0);
         }
         if(model==1){
             headView = new HeadView(getContext());
@@ -219,7 +221,7 @@ public class ExcelView extends ViewGroup {
                         return true;
                     }
                     scrollOffset +=deltaX;
-                    Log.d("tag",scrollOffset+"");
+
                     if(scrollOffset<0){
                         deltaX -=scrollOffset;
                         scrollOffset=0;
@@ -229,18 +231,25 @@ public class ExcelView extends ViewGroup {
                     }
                     downX = moveX;
                 } else{
+                    Log.d("tag","scrollOffset="+scrollOffsety);
+                    Log.d("tag","deltay="+deltay);
+                    Log.d("tag","contentHeight="+contentHeight);
+                    if(getMeasuredHeight()<=contentHeight){
+                        downy = movey;
+                        return true;
+                    }
                     if(scrollOffsety+deltay>=contentHeight){
                         deltay = contentHeight-scrollOffsety;
                         scrollOffsety = contentHeight;
                         scrollBy(0, deltay);
                         return true;
                     }
-                    scrollOffsety +=deltay;
-                    if(scrollOffsety<0){
-                        deltay -=scrollOffsety;
+                    if(scrollOffsety+deltay<0){
+                        deltay = -scrollOffsety;
                         scrollOffsety=0;
                         scrollBy(0, deltay); // 使用deltaX来滚动内容
                     } else{
+                        scrollOffsety +=deltay;
                         scrollBy(0, deltay); // 使用deltaX来滚动内容
                     }
                     downy = movey;

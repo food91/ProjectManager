@@ -77,7 +77,13 @@ class NormalHeadView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int desiredWidth = dpToPx(getContext(),(cell_width*data.size()));
+        int size=0;
+        if(data==null||data.isEmpty()){
+            size=0;
+        }else{
+            size = cell_width*data.size();
+        }
+        int desiredWidth = dpToPx(getContext(),size);
         int newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(desiredWidth, MeasureSpec.EXACTLY);
         setMeasuredDimension(newWidthMeasureSpec, dpToPx(getContext(),cell_height));
     }
