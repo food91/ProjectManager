@@ -15,6 +15,7 @@ import com.xk.porject.R;
 import com.xk.porject.databinding.FragmentPersonnelBinding;
 import com.xk.porject.databinding.FragmentProjectPersonnelBinding;
 import com.xk.porject.home.WorkManageActivity;
+import com.xk.porject.projectmain.ProjectWorkManageActivity;
 import com.xk.porject.viewmodel.ManageViewModel;
 
 /**
@@ -37,8 +38,9 @@ public class PersonnelFragment extends Fragment {
         fragmentProjectPersonnelBinding.tvPersonManage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), WorkManageActivity.class);
+                Intent intent=new Intent(getActivity(), ProjectWorkManageActivity.class);
                 intent.putExtra("id",projectid);
+                intent.putExtra("projectname",viewModel.projectname);
                 startActivity(intent);
             }
         });

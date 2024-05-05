@@ -11,6 +11,7 @@ import io.reactivex.functions.Consumer;
 public class ManageViewModel extends BaseViewModel {
 
     public int search=0;
+    public String projectname;
     public void getData(int id){
         executeNetworkRequest(ApiClient.getClient().create(ApiService.class).getProjectDetail(id), new Consumer<Response>() {
             @Override

@@ -1,15 +1,12 @@
-package com.xk.porject.contractor;
+package com.xk.porject.projectmain;
 
 import android.app.Activity;
-import android.app.Person;
 import android.content.Intent;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -24,7 +21,6 @@ import com.kongzue.albumdialog.util.DialogImplCallback;
 import com.kongzue.albumdialog.util.SelectPhotoCallback;
 import com.kongzue.dialogx.dialogs.FullScreenDialog;
 import com.kongzue.dialogx.dialogs.PopTip;
-import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.orhanobut.logger.Logger;
 import com.tencent.mmkv.MMKV;
 import com.xk.base.data.AddWorker;
@@ -34,9 +30,9 @@ import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.utils.MyData;
 import com.xk.porject.R;
+import com.xk.porject.databinding.ActivitySuperworkerInfoBinding;
 import com.xk.porject.databinding.ActivityWorkerInfoBinding;
 import com.xk.porject.home.ChooseWorkerActivity;
-import com.xk.porject.home.WorkManageActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,7 +48,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoBinding> {
+public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperworkerInfoBinding> {
 
     private String path;
     private int groupid=0;
@@ -62,26 +58,9 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
     List<String> type = new ArrayList<>();
     List<String> type_time = new ArrayList<>();
     ArrayAdapter<String> adapterYear,adapterMonth,adapterDay,adapterTimeType,adapterType;
-    ActivityResultContracts.StartActivityForResult contract = new ActivityResultContracts.StartActivityForResult();
     private int cid;
     private int pid;
-    ActivityResultCallback<ActivityResult> callBack = new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode()== Activity.RESULT_OK){
-                Intent data = result.getData();
-                if(data!=null){
-                    groupid = data.getIntExtra("id",0);
-                    String name = data.getStringExtra("name");
-                    pid = data.getIntExtra("pid",pid);
-                    bind.tvChooseGrounp.setText(name);
-                    bind.tvChooseGrounp.setTextColor(ResourcesCompat.getColor(getResources(),
-                            R.color.purple_500, null));
-                }
 
-            }
-        }
-    };
 
     @Override
     protected void initData() {
@@ -169,29 +148,11 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
                 })
                 .show(this);
     }
-    private ActivityResultLauncher<Intent> mActivityBLauncher = registerForActivityResult(contract, callBack);
-    private void chooseGroup(){
-        Intent intent = new Intent(c, ChooseWorkerActivity.class);
-        intent.putExtra("mode",1);
-        mActivityBLauncher.launch(intent);
-    }
+
 
     @Override
     protected void onclick() {
 
-        bind.sendPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        bind.tvChooseGrounp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            chooseGroup();
-            }
-        });
         bind.idImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,50 +171,10 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
                 addWorkCheck();
             }
         });
-        bind.tvSorceQuery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                queryScore();
-            }
-        });
-        bind.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if(position==0){
-                        bind.llTypeFinal.setVisibility(View.VISIBLE);
-                        bind.llTypeCount.setVisibility(View.GONE);
-                    }else if(position==1){
-                        bind.llTypeFinal.setVisibility(View.GONE);
-                        bind.llTypeCount.setVisibility(View.VISIBLE);
-                    }else if(position==2){
-                        bind.llTypeFinal.setVisibility(View.VISIBLE);
-                        bind.llTypeCount.setVisibility(View.VISIBLE);
-                    }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        bind.checkboxCheckAuto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    bind.checkboxCheckIn.setChecked(false);
-                }
-            }
-        });
-        bind.checkboxCheckIn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    bind.checkboxCheckAuto.setChecked(false);
-                }
-            }
-        });
         initAdapter();
-        resaveData();
+   //     resaveData();
     }
 
     private void resaveData(){
@@ -267,7 +188,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         bind.image2.setVisibility(View.VISIBLE);
         Glide.with(c).load(path).centerCrop().
                 into(bind.image2);
-        bind.tvChooseGrounp.setText(addWorker2.getGroupName());
         groupid = addWorker2.getGroupId();
         pid = addWorker2.getpId();
         bind.edWorkType.setText(addWorker2.getWageType());
@@ -283,8 +203,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         bind.edNation.setText(addWorker2.getFamilyName());
         bind.edAge.setText(addWorker2.getAge()+"");
         bind.edIdent.setText(addWorker2.getEmployId());
-        int select =addWorker2.getWageType();
-        bind.spinnerType.setSelection(select);
         if(  bind.llTypeFinal.getVisibility()==View.VISIBLE){
             bind.edTypeMoney.setText(addWorker2.getWage()+"");
         }
@@ -319,12 +237,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
                 break;
             }
         }
-        int check = (int) addWorker2.getCheckoutType();
-        if(check==0){
-            bind.checkboxCheckAuto.setChecked(true);
-        }else{
-            bind.checkboxCheckAuto.setChecked(false);
-        }
         bind.edPhone.setText(addWorker2.getUserName());
     }
 
@@ -338,13 +250,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             PopTip.show("请上传图片");
             return;
         }
-        String str_group = bind.tvChooseGrounp.getText().toString();
-        if(TextUtils.isEmpty(str_group)){
-            PopTip.show("请选择分组");
-            return;
-        }
         addWorker.setGroupId(groupid);
-        addWorker.setGroupName(bind.tvChooseGrounp.getText().toString());
         String str_work = bind.edWorkType.getText().toString();
         if(TextUtils.isEmpty(str_work)){
             PopTip.show("请选择工种");
@@ -370,11 +276,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             PopTip.show("请正确填写性别");
             return;
         }
-        String str_home = bind.edHome.getText().toString();
-        if(TextUtils.isEmpty(str_home)){
-            PopTip.show("请输入籍贯");
-            return;
-        }
         String str_nation = bind.edNation.getText().toString();
         if(TextUtils.isEmpty(str_nation)){
             PopTip.show("请输入民族");
@@ -392,12 +293,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             PopTip.show("请输入身份证号");
             return;
         }
-        String selectedItem = (String) bind.spinnerType.getSelectedItem();
-        if(TextUtils.isEmpty(selectedItem)){
-            PopTip.show("请选择工资种类");
-            return;
-        }
-        addWorker.setWageType(bind.spinnerType.getSelectedItemPosition());
         if(  bind.llTypeFinal.getVisibility()==View.VISIBLE){
             String money = bind.edTypeMoney.getText().toString();
             String mon = bind.edTypeDay.getText().toString();
@@ -441,30 +336,19 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         String second = "00";
         String dateTimeString = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
         addWorker.setOnbordTime(dateTimeString);
-        boolean check = bind.checkboxCheckAuto.isChecked();
-        if(check){
-        addWorker.setCheckoutType(0);
-        }else{
-            addWorker.setCheckoutType(1);
-        }
         String phone = bind.edPhone.getText().toString();
         if(TextUtils.isEmpty(phone)){
             PopTip.show("账号/手机号不能为空");
             return;
         }
         addWorker.setUserName(phone);
+        String pw = bind.edPw.getText().toString();
+        if(TextUtils.isEmpty(pw)){
+            PopTip.show("请输入密码");
+            return;
+        }
         addWorker.setPassword("123456");
         addWorker.setpId(pid);
-        boolean unexpected = bind.checkboxUnexpected.isChecked();
-        if(!unexpected){
-            PopTip.show("请勾选意外险");
-            return;
-        }
-        boolean unboducheck = bind.checkboxUnbody.isChecked();
-        if(!unboducheck){
-            PopTip.show("请确认已经体检");
-            return;
-        }
         addWorker.setCreateTime(MyData.getData());
         addWorker.setImg(path);
         performApiCall(ApiClient.getClient().create(ApiService.class).addWorker(addWorker), new Consumer<Response>() {
@@ -488,7 +372,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
     }
 
     private void initAdapter(){
-
 // 设置适配器
         adapterYear = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
         adapterYear.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -510,8 +393,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         bind.spinnerDay.setSelection(days.indexOf(String.valueOf(currentDay)));
         adapterType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type);
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bind.spinnerType.setAdapter(adapterType);
-
         adapterTimeType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type_time);
         adapterTimeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bind.spTypeTime.setAdapter(adapterTimeType);

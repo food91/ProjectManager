@@ -85,7 +85,6 @@ public class ProjectManageFragment extends BaseFrament {
                     contractphone.add(contractlistdata.get(i).getContractNumber());
                 }
                 Set<String> set = new HashSet<>(contractphone);
-
                 ArrayList<String> uniquePhoneNumbers = new ArrayList<>(set);
                 intent.putStringArrayListExtra("project",project);
                 intent.putStringArrayListExtra("cname",contractname);
@@ -121,6 +120,7 @@ public class ProjectManageFragment extends BaseFrament {
                 R.id.nav_host_fragment_activity_porject_app_main);
         ManageViewModel viewModel = new ViewModelProvider(getActivity()).get(ManageViewModel.class);
          viewModel.search = projectlistdata.get(clickPosition).getid();
+        viewModel.projectname = projectlistdata.get(clickPosition).getProjectName();
         navController.navigate(R.id.action_startFragment_to_projectPersonnelFragment);
     }
 

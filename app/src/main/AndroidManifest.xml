@@ -27,6 +27,14 @@
         android:theme="@style/Theme.Porject"
         tools:targetApi="31">
         <activity
+            android:name=".projectmain.SuperWorkerInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
+            android:name=".projectmain.ProjectWorkManageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PorjectNoActionBar" />
+        <activity
             android:name=".home.ProjectScheduleActivity"
             android:exported="false"
             android:theme="@style/Theme.PorjectNoActionBarRed" />
@@ -133,7 +141,7 @@
             android:exported="false"
             android:theme="@style/Theme.PorjectNoActionBar" />
         <activity
-            android:name=".contractor.WorkerInfoActivity"
+            android:name=".home.WorkerInfoActivity"
             android:exported="false"
             android:theme="@style/Theme.PorjectNoActionBar" />
         <activity

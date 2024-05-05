@@ -126,25 +126,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="82dp"
-                android:layout_height="wrap_content"
-                android:text="选择分组*："/>
-            <TextView
-                android:id="@+id/tv_choose_grounp"
-                android:layout_width="200dp"
-                android:layout_height="31dp"
-                android:background="@drawable/rounded_gray_border"
-                android:text="请选择"
-                android:gravity="center"
-                />
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -197,24 +179,7 @@
                 android:gravity="start"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="82dp"
-                android:layout_height="wrap_content"
-                android:text="籍贯："/>
-            <EditText
-                android:id="@+id/ed_home"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
 
-                />
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -259,8 +224,7 @@
             <TextView
                 android:layout_width="82dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
-
+                android:gravity="center_vertical|start"
                 android:text="身份证号："/>
             <FrameLayout
                 android:layout_width="200dp"
@@ -274,38 +238,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 />
-                <com.xk.base.ui.XTextView
-                    android:id="@+id/tv_sorce_query"
-                    android:text="信誉查询"
-                    android:background="#ff0000"
-                    app:cornerRadius = "5dp"
-                    android:layout_width="70dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="end|center"
-                    android:textSize="12dp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    />
             </FrameLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="82dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="工资*："/>
-            <Spinner
-                android:id="@+id/spinner_type"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_gray_border"
-                android:gravity="center"
-                />
-        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_type_final"
             android:layout_width="match_parent"
@@ -379,6 +314,14 @@
                 android:background="@drawable/rounded_gray_border"
                 />
         </LinearLayout>
+        <Spinner
+            android:id="@+id/spinner_recordtype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+        </Spinner>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -443,27 +386,7 @@
                 android:background="@drawable/rounded_gray_border"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/checkbox_check_auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:text="自动位置签到 退"
-               />
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/checkbox_check_in"
-                android:layout_width="wrap_content"
-                android:text="手动签到 退"
-                android:layout_marginStart="34dp"
-                android:layout_height="wrap_content" />
 
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -491,138 +414,23 @@
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:text="密码*："/>
-            <com.xk.base.ui.XTextView
-                android:id="@+id/send_phone"
+            <EditText
+                android:id="@+id/ed_pw"
                 android:layout_width="214dp"
                 android:layout_height="27dp"
                 app:cornerRadius = "5dp"
                 android:padding="2dp"
+                android:layout_gravity="bottom"
                 android:textColor="#333333"
-                android:background="@drawable/rounded_gray_border"
                 android:gravity="center"
-                android:text="发送到手机"
                 />
-        </LinearLayout>
-        <CheckBox
-            android:id="@+id/checkbox_unexpected"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="意外险       2323年1月1日-2302年2月2日"
-            />
-        <CheckBox
-            android:id="@+id/checkbox_unbody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="已体检       2323年1月1日-2302年2月2日"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="140dp"
-                android:layout_height="34dp"
-                android:background="#1e98d7"
-                android:textSize="13dp"
-                android:layout_marginStart="11dp"
-                android:gravity="center"
-                android:text="该员工综合分：85分"
-                android:textColor="@color/white"
-                />
-            <TextView
-                android:layout_width="140dp"
-                android:layout_height="34dp"
-                android:padding="2dp"
-                android:textSize="13dp"
-                android:background="#e88721"
-                android:gravity="center"
-                android:layout_marginStart="9dp"
-                android:text="查看该员工历史评定详情"
-                android:textColor="@color/white"
-                />
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="兼职"
-
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="14dp"
-            android:orientation="horizontal">
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为收料员"/>
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为发料员"/>
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为记工员"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="14dp"
-            android:orientation="horizontal">
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为收料员"/>
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为发料员"/>
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为记工员"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="14dp"
-            android:orientation="horizontal">
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为收料员"/>
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为发料员"/>
-            <CheckBox
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="设为记工员"/>
         </LinearLayout>
 
         <com.xk.base.ui.XTextView
             android:id="@+id/tv_addworker"
             android:layout_width="140dp"
             android:layout_height="30dp"
-            android:text="保   存"
+            android:text="提 交"
             app:cornerRadius = "5dp"
             android:textColor="@color/orange"
             android:layout_marginTop="34dp"

@@ -1,6 +1,5 @@
 package com.xk.porject.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.kongzue.dialogx.dialogs.BottomMenu;
 import com.kongzue.dialogx.dialogs.InputDialog;
-import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.kongzue.dialogx.dialogs.WaitDialog;
-import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialogx.interfaces.OnInputDialogButtonClickListener;
 import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
 import com.xk.base.data.AddGoupData;
@@ -28,7 +25,6 @@ import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.adapter.ExpandableListAdapter;
 
-import com.xk.porject.contractor.WorkerInfoActivity;
 import com.xk.porject.databinding.ActivityWorkManageBinding;
 import com.xk.porject.viewmodel.WorkManageViewModel;
 
@@ -41,7 +37,7 @@ import io.reactivex.functions.Consumer;
 public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageBinding> {
 
 
-     GroupInfo.Data data = new GroupInfo.Data();
+    GroupInfo.Data data = new GroupInfo.Data();
     List<GroupInfo.Group> path;
     GroupInfo.Group postionDatum=new GroupInfo.Group();
     GroupInfo.Data deletelist;
@@ -82,7 +78,7 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
             }
         });
         viewModel.getProjectlist();
-    //    viewModel.getGroupList();
+        //    viewModel.getGroupList();
     }
     @Override
     protected void initData() {
@@ -133,7 +129,7 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                         if (groupInfo.getCode() == 200) {
 
                             if (postionDatum != null&&!path.isEmpty()&&
-                            postionDatum.getid()==item.getid()) {
+                                    postionDatum.getid()==item.getid()) {
 
                             }else{
                                 postionDatum = item;
@@ -156,33 +152,33 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
 
     private void QueryGroupBack(){
         int queryid = 0;
-       if(path.size()-2<0){
-           queryid = 0;
-       }else{
-           queryid = path.size()-1;
-       }
-       String value = path.get(queryid).getGroupValue();
-       if(value.equals("-1")){
-           viewModel.getProjectlist();
-       }else {
-           performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(path.get(queryid).getGroupValue(),id),
-                   new Consumer<GroupInfo>() {
-                       @Override
-                       public void accept(GroupInfo groupInfo) throws Exception {
-                           data=groupInfo.getData();
-                           path.remove(path.size()-1);
-                           postionDatum = path.get(path.size()-1);
-                           setPath();
-                           adapter.setData(data);
-                       }
-                   }, new Consumer<Throwable>() {
-                       @Override
-                       public void accept(Throwable throwable) throws Exception {
-                           throwable.printStackTrace();
-                           WaitDialog.dismiss();
-                       }
-                   });
-       }
+        if(path.size()-2<0){
+            queryid = 0;
+        }else{
+            queryid = path.size()-1;
+        }
+        String value = path.get(queryid).getGroupValue();
+        if(value.equals("-1")){
+            viewModel.getProjectlist();
+        }else {
+            performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(path.get(queryid).getGroupValue(),id),
+                    new Consumer<GroupInfo>() {
+                        @Override
+                        public void accept(GroupInfo groupInfo) throws Exception {
+                            data=groupInfo.getData();
+                            path.remove(path.size()-1);
+                            postionDatum = path.get(path.size()-1);
+                            setPath();
+                            adapter.setData(data);
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            throwable.printStackTrace();
+                            WaitDialog.dismiss();
+                        }
+                    });
+        }
 
     }
 
@@ -367,20 +363,20 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
         ), new Consumer<Response>() {
             @Override
             public void accept(Response response) throws Exception {
-                    if(response.getCode()==200){
-                        data.getGroup().removeIf(new Predicate<GroupInfo.Group>() {
-                            @Override
-                            public boolean test(GroupInfo.Group group) {
-                                if(group.getid()==id){
-                                    return true;
-                                }
-                                return false;
+                if(response.getCode()==200){
+                    data.getGroup().removeIf(new Predicate<GroupInfo.Group>() {
+                        @Override
+                        public boolean test(GroupInfo.Group group) {
+                            if(group.getid()==id){
+                                return true;
                             }
-                        });
-                        adapter.notifyDataSetChanged();
-                    }else{
-                        PopTip.show(response.getMsg());
-                    }
+                            return false;
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                }else{
+                    PopTip.show(response.getMsg());
+                }
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -420,20 +416,20 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                            throwable.printStackTrace();
-                            PopTip.show("连接失败");
+                        throwable.printStackTrace();
+                        PopTip.show("连接失败");
                     }
                 });
     }
 
     private void deleteGroup(){
-       for(int i=0;i<deletelist.getGroup().size();i++){
-           if(deletelist.getGroup().get(i).getGroupValue().equals("-1")){
-               PopTip.show(deletelist.getGroup().get(i).getGroupName()+"不能删除，它是一个项目");
-               continue;
-           }
+        for(int i=0;i<deletelist.getGroup().size();i++){
+            if(deletelist.getGroup().get(i).getGroupValue().equals("-1")){
+                PopTip.show(deletelist.getGroup().get(i).getGroupName()+"不能删除，它是一个项目");
+                continue;
+            }
             httpdeleteGroup(deletelist.getGroup().get(i).getid()+"");
-       }
+        }
 
     }
 
