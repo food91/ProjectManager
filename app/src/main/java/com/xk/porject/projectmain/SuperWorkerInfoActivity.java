@@ -31,7 +31,6 @@ import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.utils.MyData;
 import com.xk.porject.R;
 import com.xk.porject.databinding.ActivitySuperworkerInfoBinding;
-import com.xk.porject.databinding.ActivityWorkerInfoBinding;
 import com.xk.porject.home.ChooseWorkerActivity;
 
 import java.io.File;
@@ -57,13 +56,15 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
     List<String> days = new ArrayList<>();
     List<String> type = new ArrayList<>();
     List<String> type_time = new ArrayList<>();
-    ArrayAdapter<String> adapterYear,adapterMonth,adapterDay,adapterTimeType,adapterType;
-    private int cid;
+
+    List<String> str_checkout =new ArrayList<>();
+    ArrayAdapter<String> adapterYear,adapterMonth,adapterDay,adapterTimeType,adapterType,adaptercheckout;
     private int pid;
 
 
     @Override
     protected void initData() {
+        pid = getIntent().getIntExtra("id",0);
         for (int i = Calendar.getInstance().get(Calendar.YEAR); i > Calendar.getInstance().get(Calendar.YEAR) - 10; i--) {
             years.add(String.valueOf(i));
         }
@@ -76,9 +77,17 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
         type.add("固定工资（记工）");
         type.add("计数工资（计件）");
         type.add("工资+计数（记工+计件）");
+        type.add("日工");
+        type.add("月薪");
+        type.add("年薪");
         type_time.add("月");
         type_time.add("日");
         type_time.add("年");
+        str_checkout.add("自动位置签到、退");
+        str_checkout.add("手动签到、退");
+        str_checkout.add("管理员签到签退");
+        str_checkout.add("管理员记工");
+        str_checkout.add("自动记工（日/月/年薪）");
     }
 
     private void upload(String s){
@@ -135,7 +144,6 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
                     @Override
                     public void selectedPhoto(String selectedPhotos) {
                         upload(selectedPhotos);
-                        Logger.d(selectedPhotos);
                     }
                 })
                 .setDialogDialogImplCallback(new DialogImplCallback<FullScreenDialog>() {
@@ -172,7 +180,29 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             }
         });
 
+        bind.spinnerRecordtype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0){
+                    bind.llTypeFinal.setVisibility(View.VISIBLE);
+                    bind.llTypeCount.setVisibility(View.GONE);
+                }else if(position==1){
+                    bind.llTypeFinal.setVisibility(View.GONE);
+                    bind.llTypeCount.setVisibility(View.VISIBLE);
+                }else if(position==2){
+                    bind.llTypeFinal.setVisibility(View.VISIBLE);
+                    bind.llTypeCount.setVisibility(View.VISIBLE);
+                }else{
+                    bind.llTypeFinal.setVisibility(View.VISIBLE);
+                    bind.llTypeCount.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         initAdapter();
    //     resaveData();
     }
@@ -219,6 +249,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
         String year = dateComponents[0];
         String month = dateComponents[1];
         String day = dateComponents[2];
+
         for(int i=0;i<adapterDay.getCount();i++){
             if(adapterDay.getItem(i).equals(day)){
                 bind.spinnerDay.setSelection(i);
@@ -293,6 +324,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             PopTip.show("请输入身份证号");
             return;
         }
+        addWorker.setWageType(bind.spinnerRecordtype.getSelectedIndex()+113);
         if(  bind.llTypeFinal.getVisibility()==View.VISIBLE){
             String money = bind.edTypeMoney.getText().toString();
             String mon = bind.edTypeDay.getText().toString();
@@ -303,6 +335,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             }
             addWorker.setWage(Integer.parseInt(money));
         }
+
         if(bind.llTypeCount.getVisibility()==View.VISIBLE){
             String money2 = bind.edTypeCountMoney.getText().toString();
             String count2 = bind.edTypeCountCount.getText().toString();
@@ -328,6 +361,34 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
         String year = bind.spinnerYear.getSelectedItem().toString();
         String rawMonth = bind.spinnerMon.getSelectedItem().toString();
         String rawDay = bind.spinnerDay.getSelectedItem().toString();
+        String selectedItem = (String) bind.spinnerRecordtype.getSelectedItem();
+        if(TextUtils.isEmpty(selectedItem)){
+            PopTip.show("请选择工资种类");
+            return;
+        }
+        addWorker.setWageType(bind.spinnerRecordtype.getSelectedIndex());
+        if(bind.llTypeFinal.getVisibility()==View.VISIBLE){
+            String money = bind.edTypeMoney.getText().toString();
+            String mon = bind.edTypeDay.getText().toString();
+            String select = bind.spTypeTime.getSelectedItem().toString();
+            if(TextUtils.isEmpty(money)||TextUtils.isEmpty(mon)||TextUtils.isEmpty(select)){
+                PopTip.show("固定工资输入项不能为空");
+                return;
+            }
+            addWorker.setWage(Integer.parseInt(money));
+            addWorker.setCoefficient(Double.parseDouble(mon));
+        }
+        if(bind.llTypeCount.getVisibility()==View.VISIBLE){
+            String money2 = bind.edTypeCountMoney.getText().toString();
+            String count2 = bind.edTypeCountCount.getText().toString();
+            String type2 = bind.edTypeCountName.getText().toString();
+            if(TextUtils.isEmpty(money2)||TextUtils.isEmpty(count2)||TextUtils.isEmpty(type2)){
+                PopTip.show("固定工资输入项不能为空");
+                return;
+            }
+            addWorker.setPieceworkWage(Integer.parseInt(money2));
+        }
+        addWorker.setCheckoutType(bind.spinnerSignType.getSelectedIndex());
         // 确保月份和日期是两位数，如果不是，在前面补零
         String month = (rawMonth.length() == 1) ? "0" + rawMonth : rawMonth;
         String day = (rawDay.length() == 1) ? "0" + rawDay : rawDay;
@@ -380,7 +441,9 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
         adapterMonth = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, months);
         adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bind.spinnerMon.setAdapter(adapterMonth);
-
+        adaptercheckout = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,str_checkout);
+        adaptercheckout.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bind.spinnerSignType.setAdapter(adaptercheckout);
         adapterDay = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, days);
         adapterDay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bind.spinnerDay.setAdapter(adapterDay);
@@ -393,6 +456,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
         bind.spinnerDay.setSelection(days.indexOf(String.valueOf(currentDay)));
         adapterType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type);
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bind.spinnerRecordtype.setAdapter(adapterType);
         adapterTimeType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type_time);
         adapterTimeType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bind.spTypeTime.setAdapter(adapterTimeType);

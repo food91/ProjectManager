@@ -12,6 +12,7 @@ navigationFragment = "2.7.7"
 navigationUi = "2.7.7"
 activity = "1.8.0"
 legacySupportV4 = "1.0.0"
+kotlin = "1.9.10"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,4 +31,5 @@ legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", ver
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

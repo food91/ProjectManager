@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
-
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt") // 使用这种方式应用 kotlin-kapt 插件
 }
 
 android {
@@ -38,8 +39,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding = true

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="#f2f2f2"
     android:padding="16dp">
@@ -40,8 +41,11 @@
         android:id="@+id/bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:background="#34db0c"
+        android:textColor="@color/black"
+        android:background="@drawable/button_background"
+        android:textSize="13dp"
         android:text="记工"
+        android:gravity="center"
         android:visibility="gone"
         />
 </LinearLayout>

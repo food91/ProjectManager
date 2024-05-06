@@ -34,7 +34,6 @@ public class PersonnelFragment extends Fragment {
         // Inflate the layout for this fragment
         fragmentProjectPersonnelBinding=FragmentPersonnelBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(getActivity()).get(ManageViewModel.class);
-
         fragmentProjectPersonnelBinding.tvPersonManage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

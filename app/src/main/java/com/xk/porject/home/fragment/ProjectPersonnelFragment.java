@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -39,11 +40,13 @@ public class ProjectPersonnelFragment extends BaseFrament {
         return new ProjectPersonnelFragment();
     }
     private ProjectPersonnelAdapter commonAdapter;
+
     private List<ProjectPersonnel> list;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentProjectPersonnelBinding.inflate(getLayoutInflater());
+        mViewModel = new ViewModelProvider(this).get(ProjectPersonnelViewModel.class);
         initdata();
         onclick();
         getProjectPersonData();

@@ -22,6 +22,7 @@ import com.xk.base.data.ResponseFindlist;
 import com.xk.base.data.ResponseLogin;
 import com.xk.base.data.ResponseProjectPostInfo;
 import com.xk.base.data.ResponseSafeQuestion;
+import com.xk.base.data.ResponseWorker;
 import com.xk.base.data.StockData;
 import com.xk.base.data.WithdrawaData;
 
@@ -53,6 +54,8 @@ public interface ApiService {
     public Observable<GroupInfo> getgroup(@Path("value") String value, @Path("projectid") int id);
     @GET("/project/group/group/work/{id}")
     public Observable<GroupInfo> getgroupWork(@Path("id") int value);
+    @GET("/project/supervisor/find/project/{id}")
+    public Observable<ResponseWorker> getProjectWork(@Path("id") int value);
     @GET("/project/group/remove/{id}/{name}")
     public Observable<Response> Rename(@Path("id") int id,@Path("name") String targatname);
     @GET("/project/group/remove/{value}")
@@ -67,6 +70,11 @@ public interface ApiService {
 
     @DELETE("/project/stock/{ids}")
     public Observable<Response> deleteStock(@Path("id")int ids);
+
+    @DELETE("/project/supervisor/{id}")
+    public Observable<Response> deleteWorker(@Path("id")String id);
+    @DELETE("/project/supervisor/{id}")
+    public Observable<Response> setGroupManage(@Path("id")int id);
     @GET("/project/group/move/{id}/{value}")
     public Observable<Response> moveGroup(@Path("id") int id, @Path("value") String value);
     @Multipart

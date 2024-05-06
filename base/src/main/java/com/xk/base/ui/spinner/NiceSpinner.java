@@ -143,10 +143,12 @@ public class NiceSpinner extends AppCompatTextView {
     private void init(Context context, AttributeSet attrs) {
         Resources resources = getResources();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NiceSpinner);
-        int defaultPadding = resources.getDimensionPixelSize(R.dimen.one_and_a_half_grid_unit);
         setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
-        setPadding(resources.getDimensionPixelSize(R.dimen.three_grid_unit), defaultPadding, defaultPadding,
-                defaultPadding);
+        int padStartDp = typedArray.getDimensionPixelSize(R.styleable.NiceSpinner_padstart, 2);
+        int padEndDp = typedArray.getDimensionPixelSize(R.styleable.NiceSpinner_padend, 2);
+        int padTopDp = typedArray.getDimensionPixelSize(R.styleable.NiceSpinner_padtop, 2);
+        int padBottomDp = typedArray.getDimensionPixelSize(R.styleable.NiceSpinner_padbottom, 2);
+        setPadding(padStartDp,padTopDp,padEndDp,padBottomDp);
         setClickable(true);
         backgroundSelector = typedArray.getResourceId(R.styleable.NiceSpinner_backgroundSelector, R.drawable.selector);
         setBackgroundResource(backgroundSelector);

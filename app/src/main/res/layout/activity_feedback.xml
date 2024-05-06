@@ -38,14 +38,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.xk.base.ui.XTextView
             android:id="@+id/tv_send"
             android:layout_width="60dp"
             android:layout_height="28dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
+            app:cornerRadius="5dp"
             android:text="发送"
             android:textColor="@color/orange"
+            android:background="@drawable/rounded_red_border"
             android:textSize="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +69,7 @@
         android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_toolbar">
 

@@ -2,6 +2,7 @@ package com.xk.porject.home.adaoter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xk.base.ui.XTextView;
 import com.xk.porject.R;
 import com.xk.porject.home.AttendanceActivity;
 import com.xk.porject.home.MyBillActivity;

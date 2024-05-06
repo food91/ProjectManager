@@ -35,13 +35,15 @@
             app:layout_constraintStart_toStartOf="parent"
             android:textColor="@color/white"
             />
-        <TextView
+        <com.xk.base.ui.XTextView
             android:id="@+id/bt_commit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btcommit"
+            app:cornerRadius="9dp"
             android:gravity="center"
-            android:textSize="13sp"
+            android:textColor="@color/white"
+            android:textSize="13dp"
             android:text="提材料"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -333,7 +335,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="3000 元/月"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+             />
+            <com.xk.base.ui.XTextView
+                android:id="@+id/tv_borrow"
+                android:layout_width="62dp"
+                android:layout_height="24dp"
+                app:cornerRadius="5dp"
+                android:background="#1e98d7"
+                android:textColor="@color/white"
+                android:text="借支"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:layout_marginEnd="31dp"
+                />
         </LinearLayout>
 
         <!-- 银行账号 -->
@@ -476,12 +490,17 @@
                 android:text="*************"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-            <TextView
+            <com.xk.base.ui.XTextView
                 android:id="@+id/tv_showpw"
                 android:text="显示密码"
+                android:textSize="11dp"
                 android:background="@drawable/rounded_red_border"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                app:cornerRadius="5dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:textColor="#ff3300"
                 />
         </LinearLayout>
         <CheckBox
@@ -489,12 +508,14 @@
             android:layout_height="wrap_content"
             android:text="我的劳务合同阅读尾部并确认"
             android:layout_gravity="center"
+            android:textSize="13dp"
             android:checked="true"
             />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="安全教育已经阅读并确认"
+            android:textSize="13dp"
             android:layout_gravity="center"
             android:checked="true"
             />

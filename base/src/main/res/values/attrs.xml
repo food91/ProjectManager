@@ -14,8 +14,12 @@
         <attr name="hideArrow" format="boolean" />
         <attr name="arrowDrawable" format="reference|color" />
         <attr name="dropDownListPaddingBottom" format="dimension" />
-        <attr name="backgroundSelector" format="integer" />
+        <attr name="backgroundSelector" format="reference" />
         <attr name="textTint" format="color" />
+        <attr name="padstart" format="dimension" />
+        <attr name="padend" format="dimension" />
+        <attr name="padtop" format="dimension" />
+        <attr name="padbottom" format="dimension" />
         <attr name="popupTextAlignment" />
         <attr name="entries" format="reference" />
     </declare-styleable>

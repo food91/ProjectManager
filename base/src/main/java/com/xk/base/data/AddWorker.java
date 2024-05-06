@@ -26,6 +26,7 @@ public class AddWorker {
     private long wage;
     private int wageType;
     private long pieceworkWage;
+    private double coefficient;
     private String founder;
     private long sex;
     private String updateTime;
@@ -77,6 +78,14 @@ public class AddWorker {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    public double getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(double coefficient) {
+        this.coefficient = coefficient;
     }
 
     public int getpId() {
