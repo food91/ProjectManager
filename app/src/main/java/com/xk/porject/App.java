@@ -15,6 +15,8 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 import com.tencent.mmkv.MMKV;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -22,6 +24,8 @@ public class App extends Application {
 
     public static Application instance =null;
     public static int  ID = 0;
+
+    public  static List<HashMap<String,String>> hashMapList;
 
 
 

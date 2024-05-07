@@ -32,6 +32,7 @@ import com.xk.base.utils.MyData;
 import com.xk.porject.R;
 import com.xk.porject.databinding.ActivitySuperworkerInfoBinding;
 import com.xk.porject.home.ChooseWorkerActivity;
+import com.xk.porject.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -366,7 +367,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             PopTip.show("请选择工资种类");
             return;
         }
-        addWorker.setWageType(bind.spinnerRecordtype.getSelectedIndex());
+        addWorker.setWageType(Utils.WORK_TYOE+bind.spinnerRecordtype.getSelectedIndex());
         if(bind.llTypeFinal.getVisibility()==View.VISIBLE){
             String money = bind.edTypeMoney.getText().toString();
             String mon = bind.edTypeDay.getText().toString();

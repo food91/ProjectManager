@@ -16,6 +16,7 @@ import com.xk.base.adapter.CommonAdapter;
 import com.xk.base.data.AddWorker;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.Response;
+import com.xk.base.data.ResponseFindProjectList;
 import com.xk.base.data.ResponseWorker;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
@@ -34,11 +35,11 @@ import java.util.List;
 import io.reactivex.functions.Consumer;
 
 public class ProjectWorkManageActivity extends BaseActivityPortrait<ActivityProjectmanageBinding> {
-     List<ResponseWorker.Data.Project>  data = new ArrayList<>();
-    CommonAdapter<ItemManageWorkerBinding,ResponseWorker.Data.Project> adapter  ;
+     List<ResponseFindProjectList.Data.Project>  data = new ArrayList<>();
+    CommonAdapter<ItemManageWorkerBinding,ResponseFindProjectList.Data.Project> adapter  ;
     List<GroupInfo.Group> path;
     GroupInfo.Group postionDatum=new GroupInfo.Group();
-    List<ResponseWorker.Data.Project>  deletelist;
+    List<ResponseFindProjectList.Data.Project>  deletelist;
     private int mode;
     private WorkManageViewModel viewModel;
 
@@ -61,39 +62,40 @@ public class ProjectWorkManageActivity extends BaseActivityPortrait<ActivityProj
     }
 
     private void m_setAdapter(){
-        adapter = new CommonAdapter<ItemManageWorkerBinding, ResponseWorker.Data.Project>(new ArrayList<>()) {
+        adapter = new CommonAdapter<ItemManageWorkerBinding,ResponseFindProjectList.Data.Project>(new ArrayList<>()) {
             @Override
-            protected void show(ItemManageWorkerBinding holder, int position, ResponseWorker.Data.Project project) {
-                    holder.tvName.setText(project.getName());
-                    if(project.getRank()==null){
+            protected void show(ItemManageWorkerBinding holder, int position, ResponseFindProjectList.Data.Project project) {
+                holder.tvName.setText(project.getName());
+                if(project.getRank()==null){
 
+                }else{
+                    if(project.getRank()==0){
+                        holder.ivRank.setVisibility(View.GONE);
                     }else{
-                        if(project.getRank()==0){
-                            holder.ivRank.setVisibility(View.GONE);
-                        }else{
-                            holder.ivRank.setVisibility(View.VISIBLE);
-                        }
-
+                        holder.ivRank.setVisibility(View.VISIBLE);
                     }
-                    holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if(isChecked){
-                                deletelist.add(project);
-                            }else {
-                                deletelist.remove(project);
-                            }
+
+                }
+                holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked){
+                            deletelist.add(project);
+                        }else {
+                            deletelist.remove(project);
                         }
-                    });
+                    }
+                });
             }
+
         };
         bind.rv.setAdapter(adapter);
     }
     private void QueryGroupWork(int id){
         performApiCall(ApiClient.getClient().create(ApiService.class).getProjectWork(id),
-                new Consumer<ResponseWorker>() {
+                new Consumer<ResponseFindProjectList>() {
             @Override
-            public void accept(ResponseWorker w) throws Exception {
+            public void accept(ResponseFindProjectList w) throws Exception {
                 if(w.getCode()==200){
                     data = w.getData().getProject();
                     adapter.setData(data);

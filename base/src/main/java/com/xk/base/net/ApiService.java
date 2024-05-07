@@ -7,6 +7,7 @@ import com.xk.base.data.AddContractData;
 import com.xk.base.data.AddGoupData;
 import com.xk.base.data.AddProjectData;
 import com.xk.base.data.AddWorker;
+import com.xk.base.data.DictCode;
 import com.xk.base.data.FeedData;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.JobInfomation;
@@ -16,7 +17,9 @@ import com.xk.base.data.PostSafeTest;
 import com.xk.base.data.PostScheduleData;
 import com.xk.base.data.ProjectPartyData;
 import com.xk.base.data.Response;
+import com.xk.base.data.ResponseAllWorkData;
 import com.xk.base.data.ResponseContractList;
+import com.xk.base.data.ResponseFindProjectList;
 import com.xk.base.data.ResponseFindWork;
 import com.xk.base.data.ResponseFindlist;
 import com.xk.base.data.ResponseLogin;
@@ -52,10 +55,14 @@ public interface ApiService {
     public Observable<GroupInfo> getEvaluation(@Path("id") String value);
     @GET("/project/group/find/{value}/{projectid}")
     public Observable<GroupInfo> getgroup(@Path("value") String value, @Path("projectid") int id);
+    @POST("/project/supervisor/all")
+    public Observable<ResponseAllWorkData> getAllWorker();
+    @GET("/project/supervisor/worker/type")
+    public Observable<DictCode> getWorkStateInfo();
     @GET("/project/group/group/work/{id}")
     public Observable<GroupInfo> getgroupWork(@Path("id") int value);
     @GET("/project/supervisor/find/project/{id}")
-    public Observable<ResponseWorker> getProjectWork(@Path("id") int value);
+    public Observable<ResponseFindProjectList> getProjectWork(@Path("id") int value);
     @GET("/project/group/remove/{id}/{name}")
     public Observable<Response> Rename(@Path("id") int id,@Path("name") String targatname);
     @GET("/project/group/remove/{value}")
@@ -103,11 +110,6 @@ public interface ApiService {
     public Observable<Response> PostProjectPartyData(@Body List<ProjectPartyData> data, @Path("type") int type,
                                                      @Path("verificat")String code
                                                      );
-    @GET("/project/supervisor/find/project/{id}")
-    public Observable<Response> getManageData(@Path("id") int id);
-    @GET("/project/supervisor/find/project/{id}")
-    public Observable<Response> getProjectDetail(@Path("id") int id);
-
     @GET("/project/contract/{ids}")
     public Observable<Response> deleteContract(@Path("ids") String ids);
     @GET("/project/projects/findlist/contract")
@@ -140,6 +142,9 @@ public interface ApiService {
 
     @GET("/project/wage/list")
     public Observable<Response> getWage();
+    @GET("/project/supervisor/wage")
+    public Observable<Response> postWage();
+
 
     @GET("/project/topic/list")
     public Observable<Response> gettestlist();

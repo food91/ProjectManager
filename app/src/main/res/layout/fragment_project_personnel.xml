@@ -69,6 +69,7 @@
             android:id="@+id/llProjectManagement"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginStart="4dp"
             android:orientation="horizontal"
             android:background="#ff0000"
             app:layout_constraintTop_toBottomOf="@id/clToolbar"
@@ -87,7 +88,7 @@
 
             <!-- 项目管理组标题 -->
             <TextView
-
+                android:id="@+id/tv_project_title"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"

@@ -11,6 +11,9 @@ public class Utils {
 
     public static final int WORK_STATE_ON_THE_JOB = 134;
     public static final int WORK_STATE_ON_OUT_THE_JOB = 135;
+    //固定113 计算114 固定+计数115
+    public static final int WORK_TYOE = 113;
+    public static final String workStateData = "workStateData";
 
     public static String formatDateWithDefaultTime(String originalDateString) {
         // 原始日期的格式（注意：MM是月份，mm是分钟）

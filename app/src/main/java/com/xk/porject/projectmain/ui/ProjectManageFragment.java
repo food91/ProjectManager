@@ -10,13 +10,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
 import com.kongzue.dialogx.dialogs.PopTip;
+import com.tencent.mmkv.MMKV;
 import com.xk.base.adapter.CommonAdapter;
+import com.xk.base.data.DictCode;
 import com.xk.base.data.ResponseContractList;
 import com.xk.base.data.ResponseFindlist;
 import com.xk.base.log.X;
@@ -26,6 +30,7 @@ import com.xk.porject.databinding.FragmentProjectmanageBinding;
 import com.xk.porject.databinding.ItemProjectlistBinding;
 import com.xk.porject.home.AddContractorActivity;
 import com.xk.porject.home.CreateProjectActivity;
+import com.xk.porject.utils.Utils;
 import com.xk.porject.viewmodel.ManageViewModel;
 import com.xk.porject.viewmodel.ProjectManageViewModel;
 
@@ -42,12 +47,14 @@ public class ProjectManageFragment extends BaseFrament {
     private List<ResponseFindlist.Datum> projectlistdata;
     private List<ResponseContractList.Datum> contractlistdata=new ArrayList<>();
     private ProjectManageViewModel contractorManageViewModel;
+
+    private ManageViewModel model;
     private int clickPosition=0;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         contractorManageViewModel =
                 new ViewModelProvider(this).get(ProjectManageViewModel.class);
-
+        model =  new ViewModelProvider(this).get(ManageViewModel.class);
         binding = FragmentProjectmanageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.tvBack.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +188,6 @@ public class ProjectManageFragment extends BaseFrament {
         if(contractlistdata.isEmpty()){
             return;
         }
-
         for(int i=0;i<contractlistdata.size();i++){
             if(contractlistdata.get(i).getProjectName().equals(projectlistdata.get(clickPosition).getProjectName())){
                 list.add(contractlistdata.get(i).getContractName());

@@ -4,30 +4,57 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.kongzue.dialogx.dialogs.PopTip;
+import com.tencent.mmkv.MMKV;
+import com.xk.base.adapter.CommonAdapter;
+import com.xk.base.data.DictCode;
+import com.xk.base.data.GroupInfo;
+import com.xk.base.data.ResponseFindProjectList;
 import com.xk.base.log.X;
+import com.xk.base.ui.BaseFrament;
+import com.xk.porject.App;
 import com.xk.porject.R;
+import com.xk.porject.adapter.MoreLVAdapter;
 import com.xk.porject.databinding.FragmentPersonnelBinding;
 import com.xk.porject.databinding.FragmentProjectPersonnelBinding;
+import com.xk.porject.databinding.ItemContractorGroupBinding;
+import com.xk.porject.databinding.ItemContractorGroupDetailBinding;
+import com.xk.porject.databinding.ItemProjectlistBinding;
+import com.xk.porject.databinding.ItemRpojectWorkerBinding;
 import com.xk.porject.home.WorkManageActivity;
 import com.xk.porject.projectmain.ProjectWorkManageActivity;
+import com.xk.porject.utils.Utils;
 import com.xk.porject.viewmodel.ManageViewModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PersonnelFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PersonnelFragment extends Fragment {
+public class PersonnelFragment extends BaseFrament {
 
     FragmentPersonnelBinding fragmentProjectPersonnelBinding;
     private int projectid;
     private ManageViewModel viewModel;
+    ResponseFindProjectList.Data list;
+    private MoreLVAdapter moreLVAdapter;
+    private CommonAdapter<ItemRpojectWorkerBinding, ResponseFindProjectList.Data.Project> commonAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,9 +85,35 @@ public class PersonnelFragment extends Fragment {
         super.onStart();
 
     }
+    List<HashMap<String,String>> hashMapList;
+    private List<String> spinner_string;
 
-    private void init(){
-          projectid = viewModel.search;
-          viewModel.getData(projectid);
+    private void setSpinner(List<DictCode.Data> dataList) {
+        spinner_string = new ArrayList<>();
+        hashMapList = new ArrayList<>();
+        for (int i = 0; i < dataList.size(); i++) {
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put(dataList.get(i).getDictCode() + "", dataList.get(i).getDictLabel());
+            hashMapList.add(hashMap);
+            spinner_string.add(dataList.get(i).getDictLabel());
+        }
+    }
+
+    private void init() {
+        projectid = viewModel.search;
+        viewModel.getGroupInfo().observe(getActivity(), new Observer<ResponseFindProjectList.Data>() {
+            @Override
+            public void onChanged(ResponseFindProjectList.Data data) {
+                viewModel.getWorkState();
+                list=data;
+            }
+        });
+        viewModel.workStateString.observe(getActivity(), new Observer<List<DictCode.Data>>() {
+            @Override
+            public void onChanged(List<DictCode.Data> data) {
+                setSpinner(data);
+            }
+        });
+        viewModel.getData(projectid);
     }
 }

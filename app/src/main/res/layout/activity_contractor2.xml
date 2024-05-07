@@ -122,6 +122,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:hint="请输入承包方名称"
+                android:textSize="13dp"
                 />
             <ImageView
                 android:id="@+id/iv_find_contract"
@@ -156,6 +158,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:inputType="number"
+                android:textSize="13dp"
+                android:hint="请输入承包方项目经理电话"
                 />
             <ImageView
                 android:id="@+id/iv_find_cphone"
@@ -184,6 +188,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:textSize="13dp"
+            android:hint="输入标段名称"
             />
     </LinearLayout>
     <LinearLayout
@@ -207,6 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:textSize="13dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -237,6 +244,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:textSize="13dp"
             />
     </LinearLayout>
 

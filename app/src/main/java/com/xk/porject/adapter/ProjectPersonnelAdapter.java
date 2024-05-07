@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xk.base.data.ResponseAllWorkData;
 import com.xk.porject.data.ProjectPersonnel;
 import com.xk.porject.databinding.ProjectpersonnerlItemBinding;
 
@@ -13,13 +14,19 @@ import com.xk.porject.databinding.ProjectpersonnerlItemBinding;
 import java.util.List;
 public class ProjectPersonnelAdapter extends RecyclerView.Adapter<ProjectPersonnelAdapter.ViewHolder> {
 
-    private List<ProjectPersonnel> personnelList; // 数据源
+    private List<ResponseAllWorkData.Data.Project> personnelList;
     private OnBindDataListener onBindDataListener;
 
     // 构造函数
-    public ProjectPersonnelAdapter(List<ProjectPersonnel> personnelList,OnBindDataListener onBindDataListener) {
+    public ProjectPersonnelAdapter(List<ResponseAllWorkData.Data.Project> personnelList,
+                                   OnBindDataListener onBindDataListener) {
         this.personnelList = personnelList;
         this.onBindDataListener=onBindDataListener;
+    }
+
+    public void setData(List<ResponseAllWorkData.Data.Project> data){
+        this.personnelList = data;
+        notifyDataSetChanged();
     }
 
     // 创建新视图（由布局管理器调用）

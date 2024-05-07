@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_all"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_path"
             />
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"

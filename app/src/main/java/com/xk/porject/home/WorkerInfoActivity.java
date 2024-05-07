@@ -37,6 +37,7 @@ import com.xk.porject.R;
 import com.xk.porject.databinding.ActivityWorkerInfoBinding;
 import com.xk.porject.home.ChooseWorkerActivity;
 import com.xk.porject.home.WorkManageActivity;
+import com.xk.porject.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -78,7 +79,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
                     bind.tvChooseGrounp.setTextColor(ResourcesCompat.getColor(getResources(),
                             R.color.purple_500, null));
                 }
-
             }
         }
     };
@@ -397,7 +397,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             PopTip.show("请选择工资种类");
             return;
         }
-        addWorker.setWageType(bind.spinnerType.getSelectedItemPosition());
+        addWorker.setWageType(Utils.WORK_TYOE+bind.spinnerType.getSelectedItemPosition());
         if(  bind.llTypeFinal.getVisibility()==View.VISIBLE){
             String money = bind.edTypeMoney.getText().toString();
             String mon = bind.edTypeDay.getText().toString();

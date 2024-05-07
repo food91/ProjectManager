@@ -89,7 +89,7 @@
                 android:textSize="15sp"
                 android:textColor="#ff0000"
                 android:layout_marginStart="4dp"
-                android:text="项目方管理组(3人)" />
+                android:text="项目方人员" />
 
             <!-- 技工按钮 -->
 
@@ -116,6 +116,7 @@
         <LinearLayout
             android:id="@+id/llContractorManagement"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="30dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/rvProjectPersonnel"
@@ -148,6 +149,7 @@
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:background="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/llContractorManagement"
             app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +160,7 @@
             android:id="@+id/rvContractorPersonnel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/view2"
             android:layout_marginTop="4dp" />
 

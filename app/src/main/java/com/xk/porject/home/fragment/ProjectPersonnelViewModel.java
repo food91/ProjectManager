@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.xk.base.data.GroupInfo;
+import com.xk.base.data.Response;
+import com.xk.base.data.ResponseAllWorkData;
+import com.xk.base.data.WageRequest;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.utils.BaseViewModel;
@@ -17,34 +20,45 @@ import io.reactivex.functions.Consumer;
 
 public class ProjectPersonnelViewModel extends BaseViewModel {
 
-    // 使用 MutableLiveData 而不是 LiveData，因为我们需要在 ViewModel 内部更新数据
-    private MutableLiveData<GroupInfo.Data> groupInfo = new MutableLiveData<>();
 
-    // 这是一个 LiveData 对象，用于外部观察数据变化
-    public LiveData<GroupInfo.Data> getGroupInfo() {
-        return groupInfo;
+    private MutableLiveData<List<ResponseAllWorkData.Data.Project>> dataInfo = new MutableLiveData<>();
+
+
+    public LiveData<List<ResponseAllWorkData.Data.Project>> getDataInfo() {
+        return dataInfo;
     }
 
-    private void getGroup(int id) {
-        executeNetworkRequest(
-                ApiClient.getClient().create(ApiService.class).getgroupWork(id),
-                new Consumer<GroupInfo>() {
-                    @Override
-                    public void accept(GroupInfo groupInfoResponse) throws Exception {
-                        if(groupInfoResponse.getCode()==200){
-                            groupInfo.setValue(groupInfoResponse.getData());
-                        }else {
-                            PopTip.show(groupInfoResponse.getMsg());
-                        }
-                    }
-                },
-                new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        throwable.printStackTrace();
-                        // 可以在这里处理错误，例如通过设置一个错误消息
-                    }
-                }
-        );
+    public void PostWage(WageRequest wageRequest){
+        executeNetworkRequest(ApiClient.getClient().create(ApiService.class).postWage(), new Consumer<Response>() {
+            @Override
+            public void accept(Response response) throws Exception {
+
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
+        });
     }
+
+    public void init(){
+        executeNetworkRequest(ApiClient.getClient().create(ApiService.class).getAllWorker(), new Consumer<ResponseAllWorkData>() {
+            @Override
+            public void accept(ResponseAllWorkData response) throws Exception {
+                    if(response.getCode()==200){
+                        dataInfo.postValue(response.getData().getProject());
+                    }else{
+                        PopTip.show(response.getMsg());
+                    }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                    throwable.printStackTrace();
+            }
+        });
+    }
+
+
 }

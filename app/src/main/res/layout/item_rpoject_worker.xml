@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background=" #f2f2f2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <ImageView
+        android:id="@+id/tv_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        />
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="25dp"
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="39dp"
+        android:textSize="13dp"
+        android:textColor="#666666"
+        />
+
+    <TextView
+        android:id="@+id/tv_state_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="32dp"
+        android:textSize="14dp"
+        android:textColor="#ff0000"
+        />
+
+    <ImageView
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="197dp"
+        android:layout_marginTop="58dp"
+        android:src="@drawable/manage_phone"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="64dp"
+        android:textSize="13dp"
+        android:textColor="#333333"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,9 +76,14 @@ public class RegisterContractorActivity extends BaseActivityPortrait<ActivityCon
         ProjectPartyData  projectPartyData =new ProjectPartyData();
         projectPartyData.setCompany(name);
         projectPartyData.setAdminPhone(phone);
+        String code = bind.edCode.getText().toString();
+        if(TextUtils.isEmpty(code)){
+            PopTip.show("验证码不能为空");
+            return;
+        }
         list.add(projectPartyData);
         ApiClient.getClient().create(ApiService.class).PostProjectPartyData(
-                list, Identity.CONTRACTOR_PARTY_ID,Identity.CODE
+                list, Identity.CONTRACTOR_PARTY_ID,code
         ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response>() {
