@@ -1,32 +1,22 @@
 package com.xk.porject.projectmain;
 
-import android.adservices.topics.Topic;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.kongzue.dialogx.dialogs.PopTip;
-import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.xk.base.adapter.CommonAdapter;
-import com.xk.base.data.AddWorker;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.Response;
 import com.xk.base.data.ResponseFindProjectList;
-import com.xk.base.data.ResponseWorker;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
-import com.xk.porject.adapter.ExpandableListAdapter;
 import com.xk.porject.databinding.ActivityProjectmanageBinding;
-import com.xk.porject.databinding.ActivityWorkManageBinding;
 import com.xk.porject.databinding.ItemManageWorkerBinding;
-import com.xk.porject.databinding.ItemWorkmanageBinding;
-import com.xk.porject.home.WorkerInfoActivity;
 import com.xk.porject.viewmodel.WorkManageViewModel;
 
 import java.util.ArrayList;
@@ -52,7 +42,6 @@ public class ProjectWorkManageActivity extends BaseActivityPortrait<ActivityProj
         bind.rv.setLayoutManager(new LinearLayoutManager(this));
         m_setAdapter();
         viewModel  = new ViewModelProvider(this).get(WorkManageViewModel.class);
-        QueryGroupWork(id);
         String name = getIntent().getStringExtra("projectname");
         bind.tvPath.setText(name);
     }
@@ -91,6 +80,13 @@ public class ProjectWorkManageActivity extends BaseActivityPortrait<ActivityProj
         };
         bind.rv.setAdapter(adapter);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        QueryGroupWork(id);
+    }
+
     private void QueryGroupWork(int id){
         performApiCall(ApiClient.getClient().create(ApiService.class).getProjectWork(id),
                 new Consumer<ResponseFindProjectList>() {
@@ -151,7 +147,7 @@ public class ProjectWorkManageActivity extends BaseActivityPortrait<ActivityProj
 
     private void setManager(){
         if(deletelist.isEmpty()){
-            PopTip.show("请选择删除人员");
+            PopTip.show("请选择人员");
             return;
         }
         if(deletelist.size()>1){
@@ -163,6 +159,7 @@ public class ProjectWorkManageActivity extends BaseActivityPortrait<ActivityProj
                     @Override
                     public void accept(Response response) throws Exception {
                         PopTip.show(response.getMsg());
+                        QueryGroupWork(id);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

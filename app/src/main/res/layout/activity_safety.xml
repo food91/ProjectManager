@@ -146,7 +146,25 @@
                 >
 
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/tv_score_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="845dp"
+                android:text="该题目分值为"
+                />
+            <EditText
+                android:id="@+id/ed_input_score2"
+                android:layout_width="180dp"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_score_2"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="100dp"
+                />
             <LinearLayout
 
                 android:layout_marginTop="881dp"
@@ -202,6 +220,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 />
             <EditText
+                android:id="@+id/ed_test2"
                 android:hint="输入题目内容"
                 android:layout_width="300dp"
                 android:layout_height="125dp"
@@ -288,6 +307,7 @@
             <EditText
                 android:id="@+id/ed_input_score"
                 android:layout_width="180dp"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 app:layout_constraintBaseline_toBaselineOf="@id/tv_score_1"
                 app:layout_constraintStart_toStartOf="parent"

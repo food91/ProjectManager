@@ -2,10 +2,8 @@ package com.xk.porject.home.fragment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.kongzue.dialogx.dialogs.PopTip;
-import com.xk.base.data.GroupInfo;
 import com.xk.base.data.Response;
 import com.xk.base.data.ResponseAllWorkData;
 import com.xk.base.data.WageRequest;
@@ -13,7 +11,6 @@ import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.utils.BaseViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.functions.Consumer;

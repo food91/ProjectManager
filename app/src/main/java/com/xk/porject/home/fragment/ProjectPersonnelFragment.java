@@ -16,21 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kongzue.dialogx.datepicker.CalendarDialog;
 import com.kongzue.dialogx.datepicker.interfaces.OnDateSelected;
 import com.kongzue.dialogx.dialogs.CustomDialog;
 import com.kongzue.dialogx.dialogs.PopTip;
-import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.interfaces.OnBindView;
-import com.tencent.mmkv.MMKV;
-import com.xk.base.data.DictCode;
-import com.xk.base.data.GroupInfo;
 import com.xk.base.data.ResponseAllWorkData;
-import com.xk.base.data.WageRequest;
-import com.xk.base.net.ApiClient;
-import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseFrament;
 import com.xk.base.ui.XTextView;
 import com.xk.porject.R;
@@ -42,13 +33,7 @@ import com.xk.porject.home.WorkManageActivity;
 import com.xk.porject.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class ProjectPersonnelFragment extends BaseFrament {
 

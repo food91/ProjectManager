@@ -20,6 +20,7 @@ import com.xk.base.data.AddGoupData;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.Response;
 import com.xk.base.data.ResponseFindlist;
+import com.xk.base.log.X;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
@@ -66,6 +67,7 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                         ResponseFindlist.Datum item = responseFindlist.getData().get(i);
                         GroupInfo.Group group1 =new GroupInfo.Group();
                         group1.setid(0);
+                        group1.setPId(item.getid());
                         group1.setGroupValue("-1");
                         group1.setGroupName(item.getProjectName());
                         group.add(group1);
@@ -105,14 +107,16 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
                 holder.title.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        QueryGroup(id,item);
+                        QueryGroup(item.getPId(),item);
                     }
                 });
             }
 
             @Override
             public void showWork(@NonNull ExpandableListAdapter.ViewHolder holder, GroupInfo.Worker item, int position) {
-
+                X.L(item.getName());
+                holder.title.setText(item.getName());
+                holder.checkBox.setChecked(false);
             }
 
         });
@@ -122,7 +126,7 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
 
 
     private void QueryGroup(int id,GroupInfo.Group item){
-        performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(item.getid()+"",id),
+        performApiCall(ApiClient.getClient().create(ApiService.class).getProjectGroup(item.getid()+"",id),
                 new Consumer<GroupInfo>() {
                     @Override
                     public void accept(GroupInfo groupInfo) throws Exception {
@@ -161,7 +165,7 @@ public class WorkManageActivity extends BaseActivityPortrait<ActivityWorkManageB
         if(value.equals("-1")){
             viewModel.getProjectlist();
         }else {
-            performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(path.get(queryid).getGroupValue(),id),
+            performApiCall(ApiClient.getClient().create(ApiService.class).getProjectGroup(path.get(queryid).getGroupValue(),id),
                     new Consumer<GroupInfo>() {
                         @Override
                         public void accept(GroupInfo groupInfo) throws Exception {

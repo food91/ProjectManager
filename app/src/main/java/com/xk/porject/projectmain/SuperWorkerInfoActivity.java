@@ -1,18 +1,9 @@
 package com.xk.porject.projectmain;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -29,9 +20,7 @@ import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.utils.MyData;
-import com.xk.porject.R;
 import com.xk.porject.databinding.ActivitySuperworkerInfoBinding;
-import com.xk.porject.home.ChooseWorkerActivity;
 import com.xk.porject.utils.Utils;
 
 import java.io.File;
@@ -219,9 +208,9 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
         bind.image2.setVisibility(View.VISIBLE);
         Glide.with(c).load(path).centerCrop().
                 into(bind.image2);
-        groupid = addWorker2.getGroupId();
-        pid = addWorker2.getpId();
-        bind.edWorkType.setText(addWorker2.getWageType());
+        groupid = Integer.parseInt(addWorker2.getGroupId());
+        pid = Integer.parseInt(addWorker2.getPId());
+        bind.edWorkType.setText(addWorker2.getWageType()+"");
         bind.edName.setText(addWorker2.getName());
         String sex ="";
         if(addWorker2.getSex()==0){
@@ -282,7 +271,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             PopTip.show("请上传图片");
             return;
         }
-        addWorker.setGroupId(groupid);
+        addWorker.setGroupId(groupid+"");
         String str_work = bind.edWorkType.getText().toString();
         if(TextUtils.isEmpty(str_work)){
             PopTip.show("请选择工种");
@@ -359,6 +348,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             return;
         }
         addWorker.setBankDeposit(bankDeposit);
+        addWorker.setPartjob(new ArrayList<>());
         String year = bind.spinnerYear.getSelectedItem().toString();
         String rawMonth = bind.spinnerMon.getSelectedItem().toString();
         String rawDay = bind.spinnerDay.getSelectedItem().toString();
@@ -377,6 +367,10 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
                 return;
             }
             addWorker.setWage(Integer.parseInt(money));
+            if(Double.parseDouble(mon)<0||Double.parseDouble(mon)>9.9){
+                PopTip.show("工资系数只能在0到9.9之间");
+                return;
+            }
             addWorker.setCoefficient(Double.parseDouble(mon));
         }
         if(bind.llTypeCount.getVisibility()==View.VISIBLE){
@@ -410,7 +404,7 @@ public class SuperWorkerInfoActivity extends BaseActivityPortrait<ActivitySuperw
             return;
         }
         addWorker.setPassword("123456");
-        addWorker.setpId(pid);
+        addWorker.setPId(pid+"");
         addWorker.setCreateTime(MyData.getData());
         addWorker.setImg(path);
         performApiCall(ApiClient.getClient().create(ApiService.class).addWorker(addWorker), new Consumer<Response>() {

@@ -54,6 +54,9 @@ public abstract class CommonAdapter<V extends ViewBinding,T> extends RecyclerVie
 
     @Override
     public int getItemCount() {
+        if(data==null||data.isEmpty()){
+            return 0;
+        }
         return data.size();
     }
 

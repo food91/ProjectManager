@@ -38,7 +38,6 @@ public class ContractorManageFragment extends BaseFrament {
                              ViewGroup container, Bundle savedInstanceState) {
          contractorManageViewModel =
                 new ViewModelProvider(this).get(ContractorManageViewModel.class);
-
         binding = FragmentContractorManageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.tvSub.setOnClickListener(new View.OnClickListener() {
@@ -81,13 +80,11 @@ public class ContractorManageFragment extends BaseFrament {
         contractorManageViewModel.getProjectListLiveData().observe(getViewLifecycleOwner(), responseFindlist -> {
                 // 更新适配器数据
                  projectlistdata = responseFindlist.getData();
-            X.L(projectlistdata.toString());
                 adapterProjectlist.setData(projectlistdata); // 假设getRows()返回Datum列表
         });
         contractorManageViewModel.getGroupListLiveData().observe(getViewLifecycleOwner(), GroupInfoListLiveData -> {
             // 更新适配器数据
 
-            adapterProjectlist.setData(projectlistdata); // 假设getRows()返回Datum列表
         });
 
     }

@@ -36,7 +36,7 @@ public class WorkManageViewModel extends BaseViewModel {
     }
 
     public void getGroupList(int id){
-        executeNetworkRequest(ApiClient.getClient().create(ApiService.class).getgroup("0",id),
+        executeNetworkRequest(ApiClient.getClient().create(ApiService.class).getProjectGroup("0",id),
                 new Consumer<GroupInfo>() {
                     @Override
                     public void accept(GroupInfo response) throws Exception {

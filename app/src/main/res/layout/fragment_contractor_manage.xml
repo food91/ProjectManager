@@ -104,8 +104,8 @@
         android:layout_width="20dp"
         android:layout_height="15dp"
         android:src="@drawable/back2"
-        android:layout_marginStart="260dp"
-        app:layout_constraintStart_toStartOf="parent"
+       android:layout_marginEnd="118dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="9dp"
         android:layout_marginBottom="9dp"
@@ -117,8 +117,9 @@
         android:text="收起"
         app:layout_constraintTop_toTopOf="@id/iv_back"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="285dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="13dp"
+        android:layout_marginEnd="84dp"
         />
     <View
         android:id="@+id/div"

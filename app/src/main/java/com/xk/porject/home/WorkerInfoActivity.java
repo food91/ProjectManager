@@ -1,9 +1,7 @@
 package com.xk.porject.home;
 
 import android.app.Activity;
-import android.app.Person;
 import android.content.Intent;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +22,6 @@ import com.kongzue.albumdialog.util.DialogImplCallback;
 import com.kongzue.albumdialog.util.SelectPhotoCallback;
 import com.kongzue.dialogx.dialogs.FullScreenDialog;
 import com.kongzue.dialogx.dialogs.PopTip;
-import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.orhanobut.logger.Logger;
 import com.tencent.mmkv.MMKV;
 import com.xk.base.data.AddWorker;
@@ -35,8 +32,6 @@ import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.base.utils.MyData;
 import com.xk.porject.R;
 import com.xk.porject.databinding.ActivityWorkerInfoBinding;
-import com.xk.porject.home.ChooseWorkerActivity;
-import com.xk.porject.home.WorkManageActivity;
 import com.xk.porject.utils.Utils;
 
 import java.io.File;
@@ -56,7 +51,7 @@ import okhttp3.RequestBody;
 public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoBinding> {
 
     private String path;
-    private int groupid=0;
+    private String groupid;
     List<String> years = new ArrayList<>();
     List<String> months = new ArrayList<>();
     List<String> days = new ArrayList<>();
@@ -72,7 +67,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             if(result.getResultCode()== Activity.RESULT_OK){
                 Intent data = result.getData();
                 if(data!=null){
-                    groupid = data.getIntExtra("id",0);
+                    groupid = data.getIntExtra("id",0)+"";
                     String name = data.getStringExtra("name");
                     pid = data.getIntExtra("pid",pid);
                     bind.tvChooseGrounp.setText(name);
@@ -267,9 +262,8 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         bind.image2.setVisibility(View.VISIBLE);
         Glide.with(c).load(path).centerCrop().
                 into(bind.image2);
-        bind.tvChooseGrounp.setText(addWorker2.getGroupName());
         groupid = addWorker2.getGroupId();
-        pid = addWorker2.getpId();
+        pid = Integer.parseInt(addWorker2.getPId());
         bind.edWorkType.setText(addWorker2.getWageType()+"");
         bind.edName.setText(addWorker2.getName());
         String sex ="";
@@ -283,7 +277,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         bind.edNation.setText(addWorker2.getFamilyName());
         bind.edAge.setText(addWorker2.getAge()+"");
         bind.edIdent.setText(addWorker2.getEmployId());
-        int select =addWorker2.getWageType();
+        int select = (int) addWorker2.getWageType();
         bind.spinnerType.setSelection(select);
         if(  bind.llTypeFinal.getVisibility()==View.VISIBLE){
             bind.edTypeMoney.setText(addWorker2.getWage()+"");
@@ -344,7 +338,6 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
             return;
         }
         addWorker.setGroupId(groupid);
-        addWorker.setGroupName(bind.tvChooseGrounp.getText().toString());
         String str_work = bind.edWorkType.getText().toString();
         if(TextUtils.isEmpty(str_work)){
             PopTip.show("请选择工种");
@@ -454,7 +447,7 @@ public class WorkerInfoActivity extends BaseActivityPortrait<ActivityWorkerInfoB
         }
         addWorker.setUserName(phone);
         addWorker.setPassword("123456");
-        addWorker.setpId(pid);
+        addWorker.setPId(pid+"");
         boolean unexpected = bind.checkboxUnexpected.isChecked();
         if(!unexpected){
             PopTip.show("请勾选意外险");

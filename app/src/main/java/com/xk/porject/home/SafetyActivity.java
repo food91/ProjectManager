@@ -20,8 +20,10 @@ import com.kongzue.dialogx.dialogs.PopTip;
 import com.xk.base.adapter.CommonAdapter;
 import com.xk.base.data.PostSafeTest;
 import com.xk.base.data.Response;
+import com.xk.base.data.ResponseExamResponse;
 import com.xk.base.data.ResponseProjectPostInfo;
 import com.xk.base.data.ResponseSafeQuestion;
+import com.xk.base.log.X;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
@@ -39,10 +41,30 @@ public class SafetyActivity extends BaseActivityPortrait<com.xk.porject.databind
     private List<testData> list_1;
     private List<testData> list2_2;
 
+    private int mode=-1;
+
 
     @Override
     protected void initPortraitView() {
+        mode = getIntent().getIntExtra("mode",-1);
+        X.L("mode=="+mode);
+        if(mode!=-1){
+        queryTest(mode);
+        }
+    }
 
+    private void queryTest(int id){
+        performApiCall(ApiClient.getClient().create(ApiService.class).getExamId(mode), new Consumer<ResponseExamResponse>() {
+            @Override
+            public void accept(ResponseExamResponse responseExamResponse) throws Exception {
+
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
+        });
     }
 
     @Override
@@ -80,38 +102,61 @@ public class SafetyActivity extends BaseActivityPortrait<com.xk.porject.databind
         String title = bind.edTitle.getText().toString();
         String test = bind.edTest.getText().toString();
         String score = bind.edInputScore.getText().toString();
-        if(!Utils.areAllStringsValid(time,title,test,score)){
+        String test2 = bind.edTest2.getText().toString();
+        String score2 = bind.edInputScore2.getText().toString();
+        if(!Utils.areAllStringsValid(time,title,test,score,test2,score2)){
             PopTip.show("输入不能有空");
             return;
         }
         PostSafeTest postSafeTest =new PostSafeTest();
+        postSafeTest.setScore(Integer.parseInt(score));
+        postSafeTest.setName(title);
+        postSafeTest.setScontent(test);
+        postSafeTest.setRemark(time);
         for(int i=0;i<list_1.size();i++){
             String text =list_1.get(i).tile.getText().toString();
             if(!Utils.areAllStringsValid(test)){
                 PopTip.show("输入不能有空");
                 return;
             }
-         postSafeTest.setSA(text);
+            if(i==0){
+                postSafeTest.setSA(text);
+            }else if(i==1){
+                postSafeTest.setSB(text);
+            }else if(i==2){
+                postSafeTest.setSC(text);
+            }else if(i==3){
+                postSafeTest.setSD(text);
+            }
+
          if(list_1.get(i).ischeck.isChecked()){
              postSafeTest.setSKey(i+"");
          }
         }
-        postSafeTest.setScore(Integer.parseInt(score));
-        postSafeTest.setName(title);
-        postSafeTest.setScontent(test);
-        postSafeTest.setRemark(time);
         List<PostSafeTest> postlist = new ArrayList<>();
         postlist.add(postSafeTest);
         PostSafeTest postSafeTest2= new PostSafeTest();
+        postSafeTest2.setScore(Integer.parseInt(score));
+        postSafeTest2.setName(title);
+        postSafeTest2.setScontent(test2);
+        postSafeTest2.setRemark(time);
         for(int i=0;i<list2_2.size();i++){
             String text =list2_2.get(i).tile.getText().toString();
             if(!Utils.areAllStringsValid(test)){
                 PopTip.show("输入不能有空");
                 return;
             }
-            postSafeTest.setSA(text);
+            if(i==0){
+                postSafeTest2.setSA(text);
+            }else if(i==1){
+                postSafeTest2.setSB(text);
+            }else if(i==2){
+                postSafeTest2.setSC(text);
+            }else if(i==3){
+                postSafeTest2.setSD(text);
+            }
             if(list2_2.get(i).ischeck.isChecked()){
-                postSafeTest.setSKey(i+"");
+                postSafeTest2.setSKey(i+"");
             }
         }
         postlist.add(postSafeTest2);
@@ -188,6 +233,7 @@ public class SafetyActivity extends BaseActivityPortrait<com.xk.porject.databind
             public void onClick(View v) {
                 Intent intent =new Intent(SafetyActivity.this, ExamBamkActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

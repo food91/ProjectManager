@@ -1,16 +1,10 @@
 package com.xk.porject.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.xk.base.data.DictCode;
-import com.xk.base.data.GroupInfo;
-import com.xk.base.data.Response;
 import com.xk.base.data.ResponseFindProjectList;
-import com.xk.base.data.ResponseFindlist;
-import com.xk.base.data.ResponseWorker;
-import com.xk.base.data.WithdrawaData;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.utils.BaseViewModel;

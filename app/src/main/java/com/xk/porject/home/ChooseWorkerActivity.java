@@ -24,6 +24,7 @@ import com.xk.base.data.AddGoupData;
 import com.xk.base.data.GroupInfo;
 import com.xk.base.data.Response;
 import com.xk.base.data.ResponseFindlist;
+import com.xk.base.log.X;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
@@ -38,7 +39,6 @@ import java.util.function.Predicate;
 import io.reactivex.functions.Consumer;
 
 public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWorkerBinding> {
-
 
     GroupInfo.Data data = new GroupInfo.Data();
     List<GroupInfo.Group> path;
@@ -99,13 +99,6 @@ public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWor
                 holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(mode==1){
-                            if(isChecked){
-                                showMessage(item,holder.checkBox);
-                            }
-
-                            return;
-                        }
                         if(isChecked){
                             deletelist.getGroup().add(item);
                         }else{
@@ -116,45 +109,26 @@ public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWor
                 holder.title.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        QueryGroup(id,item);
+                        QueryGroup(item.getPId(),item);
                     }
                 });
             }
 
             @Override
             public void showWork(@NonNull ExpandableListAdapter.ViewHolder holder, GroupInfo.Worker item, int position) {
-
+                X.L(item.getName());
+                holder.title.setText(item.getName());
+                holder.checkBox.setChecked(false);
             }
 
         });
         bind.rv.setAdapter(adapter);
     }
 
-    private void showMessage(GroupInfo.Group item, CheckBox checkBox){
-        MessageDialog.show("选择分组","你确定选择"+item.getGroupName(),"确定","取消")
-                .setOkButton(new OnDialogButtonClickListener<MessageDialog>() {
-                    @Override
-                    public boolean onClick(MessageDialog messageDialog, View view) {
-                        Intent returnIntent = new Intent();
-                            returnIntent.putExtra("id",item.getid());
-                             returnIntent.putExtra("name",item.getGroupName());
-                             returnIntent.putExtra("pid",item.getPId());
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();
-                        return false;
-                    }
-                }).setCancelButton(new OnDialogButtonClickListener<MessageDialog>() {
-                    @Override
-                    public boolean onClick(MessageDialog messageDialog, View view) {
-                        checkBox.setChecked(false);
-                        return false;
-                    }
-                })
-                .show();
-    }
+
 
     private void QueryGroup(int id,GroupInfo.Group item){
-        performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(item.getid()+"",id),
+        performApiCall(ApiClient.getClient().create(ApiService.class).getProjectGroup(item.getid()+"",id),
                 new Consumer<GroupInfo>() {
                     @Override
                     public void accept(GroupInfo groupInfo) throws Exception {
@@ -193,7 +167,9 @@ public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWor
         if(value.equals("-1")){
             viewModel.getProjectlist();
         }else {
-            performApiCall(ApiClient.getClient().create(ApiService.class).getgroup(path.get(queryid).getGroupValue(),id),
+            X.L("path=="+path.get(queryid).getGroupName());
+            performApiCall(ApiClient.getClient().create(ApiService.class).getProjectGroup(path.get(queryid).getGroupValue(),
+                            path.get(queryid).getPId()),
                     new Consumer<GroupInfo>() {
                         @Override
                         public void accept(GroupInfo groupInfo) throws Exception {
@@ -227,6 +203,20 @@ public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWor
             bind.tvPath.setText(stringBuffer.toString());
         }
 
+    }
+
+
+    private  void  addGourp(){
+        new InputDialog("添加分组", "请输入组名", "确定", "取消", "")
+                .setCancelable(false)
+                .setOkButton(new OnInputDialogButtonClickListener<InputDialog>() {
+                    @Override
+                    public boolean onClick(InputDialog baseDialog, View v, String inputStr) {
+                        httpAddGroup(inputStr);
+                        return false;
+                    }
+                })
+                .show();
     }
 
     private void httpAddGroup(String name){
@@ -265,18 +255,12 @@ public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWor
                 QueryGroupBack();
             }
         });
+
+
         bind.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-        bind.tvChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mode==1){
-                    PopTip.show("单击组名中的选择即可选择分组");
-                }
             }
         });
     }
@@ -436,4 +420,5 @@ public class ChooseWorkerActivity extends BaseActivityPortrait<ActivityChooseWor
             }
         });
     }
+
 }

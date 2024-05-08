@@ -16,13 +16,12 @@ public class ContractorManageViewModel extends BaseViewModel {
     private MutableLiveData<ResponseFindlist> projectListLiveData = new MutableLiveData<>();
     private MutableLiveData<GroupInfo> GroupInfoListLiveData = new MutableLiveData<>();
 
-    public void initdata(){
-          getProjectlist();
-           getGroupList();
-        }
+    public void initdata() {
+        getProjectlist();
+    }
 
         public void getProjectlist(){
-            executeNetworkRequest(ApiClient.getClient().create(ApiService.class).findlistproect(),
+            executeNetworkRequest(ApiClient.getClient().create(ApiService.class).findcontractlist(),
                     new Consumer<ResponseFindlist>() {
                         @Override
                         public void accept(ResponseFindlist response) throws Exception {

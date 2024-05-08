@@ -10,18 +10,22 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.kongzue.dialogx.dialogs.PopTip;
 import com.xk.base.adapter.CommonAdapter;
 import com.xk.base.data.Response;
+import com.xk.base.data.ResponseExamResponse;
 import com.xk.base.net.ApiClient;
 import com.xk.base.net.ApiService;
 import com.xk.base.ui.BaseActivityPortrait;
 import com.xk.porject.data.QuestionItem;
 import com.xk.porject.databinding.ActivityExamBamkBinding;
 import com.xk.porject.databinding.ItemExambanklBinding;
+import com.xk.porject.viewmodel.ExamViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +36,10 @@ import io.reactivex.functions.Consumer;
 
 public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBinding> {
 
-    CommonAdapter<ItemExambanklBinding, QuestionItem> commonAdapter;
-    List<QuestionItem> list;
+    private ExamViewModel examViewModel;
+    CommonAdapter<ItemExambanklBinding, ResponseExamResponse.Row> commonAdapter;
+    private ResponseExamResponse examResponse;
+
     private final List<String> popupFrequencyList=Arrays.asList("每日弹出", "每周弹出", "每月弹出", "不弹出");
     private final List<String> permissionLevelList=Arrays.asList("全部", "分包商及以下", "施工队及以下");
     private final List<String> topicList=Arrays.asList("安全教育", "劳动合同");
@@ -44,28 +50,6 @@ public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBindi
     @Override
     protected void initData() {
         date = getIntent().getStringExtra("date");
-        list = new ArrayList<>();
-        // 添加一些示例数据
-        list.add(new QuestionItem("测试题名称 1", "编辑", "已发布", "无草稿", "2022-01-01"));
-        list.add(new QuestionItem("测试题名称 2", "未编辑", "未发布", "有草稿", "2022-01-02"));
-        list.add(new QuestionItem("测试题名称 3", "编辑中", "已发布", "有草稿", "2022-01-03"));
-        list.add(new QuestionItem("测试题名称 4", "未编辑", "未发布", "无草稿", "2022-01-04"));
-        list.add(new QuestionItem("测试题名称 5", "编辑", "已发布", "有草稿", "2022-01-05"));
-        performApiCall(ApiClient.getClient().create(ApiService.class).gettestlist(), new Consumer<Response>() {
-            @Override
-            public void accept(Response response) throws Exception {
-                if(response.getCode()==200){
-
-                }else{
-                    PopTip.show(response.getMsg());
-                }
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-
-            }
-        });
     }
 
     @Override
@@ -76,11 +60,11 @@ public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBindi
                 finish();
             }
         });
-        commonAdapter =new CommonAdapter<ItemExambanklBinding, QuestionItem>(list) {
+        commonAdapter =new CommonAdapter<ItemExambanklBinding, ResponseExamResponse.Row>(new ArrayList<>()) {
             @Override
-            protected void show(ItemExambanklBinding holder, int position, QuestionItem questionItem) {
-                holder.tvDate.setText(questionItem.getDate());
-                holder.tvQuestionName.setText(questionItem.getQuestionName());
+            protected void show(ItemExambanklBinding holder, int position, ResponseExamResponse.Row questionItem) {
+
+                holder.tvQuestionName.setText(questionItem.getExamName());
                 holder.spinnerOption1.attachDataSource(new ArrayList<>(popupFrequencyList));
                 holder.spinnerOption2.attachDataSource(new ArrayList<>(permissionLevelList));
                 holder.spinnerOption3.attachDataSource(new ArrayList<>(topicList));
@@ -88,17 +72,16 @@ public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBindi
                 holder.tvPublish.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(TextUtils.isEmpty(date)){
-                            PopTip.show("请选择试题截止时候后再发布");
-                            return;
-                        }
                        start();
                     }
                 });
                 holder.tvEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent intent =new Intent(c, SafetyActivity.class);
+                        intent.putExtra("mode",questionItem.getId());
+                        startActivity(intent);
+                        finish();
                     }
                 });
             }
@@ -127,6 +110,16 @@ public class ExamBamkActivity extends BaseActivityPortrait<ActivityExamBamkBindi
 
     @Override
     protected void initPortraitView() {
+        register();
+        examViewModel = new ViewModelProvider(this).get(ExamViewModel.class);
+        examViewModel.getExamBankData().observe(this, new Observer<ResponseExamResponse>() {
+            @Override
+            public void onChanged(ResponseExamResponse responseExamResponse) {
+                examResponse=responseExamResponse;
+                commonAdapter.setData(examResponse.getRows());
+            }
+        });
+        examViewModel.getExam();
         bind.rv.setLayoutManager(new LinearLayoutManager(this));
     }
 }
